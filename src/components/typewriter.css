@@ -1,0 +1,76 @@
+.typewriter {
+  display: grid;
+  align-self: center;
+  padding: 0 15px 30px;
+  text-align: center;
+  min-height: 95px;
+}
+.typewriter .writer {
+  font-size: 16px;
+  color: rgb(20, 9, 59);
+}
+.typewriter .writer .typewrite {
+  background: linear-gradient(
+    to right,
+    rgb(20, 9, 59),
+    rgb(20, 9, 59),
+    rgb(20, 9, 59)
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.typewriter .writer .blinking-cursor {
+  font-weight: 100;
+  font-size: 20px;
+  color: rgb(20, 9, 59);
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    color: rgb(20, 9, 59);
+  }
+  50% {
+    color: transparent;
+  }
+}
+
+@-moz-keyframes blink {
+  from,
+  to {
+    color: rgb(20, 9, 59);
+  }
+  50% {
+    color: transparent;
+  }
+}
+
+@-webkit-keyframes blink {
+  from,
+  to {
+    color: rgb(20, 9, 59);
+  }
+  50% {
+    color: transparent;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .typewriter {
+    width: 700px;
+    align-self: center;
+    justify-self: center;
+  }
+  .typewriter .writer {
+    font-size: 22px;
+  }
+
+  .typewriter .writer .blinking-cursor {
+    font-size: 22px;
+  }
+}
