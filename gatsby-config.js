@@ -121,7 +121,7 @@ module.exports = {
         background_color: `#110f8b`,
         theme_color: `#110f8b`,
         display: `minimal-ui`,
-        icon: `/logos/maskable-icon.png`,
+        icon: `src/images/maskable-icon.png`,
       },
     },
     {
