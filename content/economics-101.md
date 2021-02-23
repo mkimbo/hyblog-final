@@ -1,6 +1,6 @@
 ---
 title: 'Economics & Governance'
-cover: '1.jpg'
+cover: 'blog1.jpg'
 category: 'economics'
 tags:
   - economics
