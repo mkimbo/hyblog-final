@@ -67,7 +67,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: 'blue',
+        color: '#fff',
         showSpinner: false,
       },
     },
@@ -77,7 +77,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-scroll-reveal`,
       options: {
-        threshold: 0.05,
+        threshold: 0.07,
         rootMargin: '100px 0px',
       },
     },

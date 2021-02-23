@@ -154,7 +154,7 @@ const Header = ({ siteTitle }) => {
               <ListItemText color="primary">Information</ListItemText>
             </ListItem>
           </Link>
-          <a href="www.hyreads.com" alt="Link to Hyreads Home Page">
+          <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
             <ListItem button>
               <ListItemIcon>
                 <HomeIcon />

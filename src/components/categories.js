@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 const CategoryList = ({ tags }) => {
   const classes = useStyles()
+  const cat = []
   return (
     <StaticQuery
       query={graphql`
@@ -38,11 +39,14 @@ const CategoryList = ({ tags }) => {
       `}
       render={(data) => (
         <div className={classes.categoryList}>
-          {data.allMarkdownRemark.edges.map((post) => (
+          {data.allMarkdownRemark.edges.map((post) => {
+            cat.push(post.node.frontmatter.category)
+            return null
+          })}
+          {Array.from(new Set(cat)).map((category) => (
             <Link
-              to={`/categories/${post.node.frontmatter.category
-                .replace(/\W+/g, '-')
-                .toLowerCase()}`}
+              to={`/categories/${category.replace(/\W+/g, '-').toLowerCase()}`}
+              key={category}
             >
               <Button
                 className={classes.button}
@@ -50,7 +54,7 @@ const CategoryList = ({ tags }) => {
                 color="primary"
                 size="small"
               >
-                {post.node.frontmatter.category}
+                {category}
               </Button>
             </Link>
           ))}

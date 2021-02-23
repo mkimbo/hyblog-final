@@ -45,7 +45,7 @@ const PostPreview = ({ postEdges }) => {
       {postEdges.map((post) => (
         <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
           <Card className={classes.root} key={post.node.id} raised>
-            <Link to={`/blog${post.node.fields.slug}`}>
+            <Link to={`${post.node.fields.slug}`}>
               <CardActionArea>
                 <PostCover
                   className={classes.imagePreview}

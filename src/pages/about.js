@@ -106,7 +106,7 @@ const About = () => {
             <ListItemIcon>
               <StarIcon color="primary" />
             </ListItemIcon>
-            <ListItemText primary="Blog Features" />
+            <ListItemText primary="Hyreads Features" />
             {features ? (
               <ExpandMore color="primary" />
             ) : (

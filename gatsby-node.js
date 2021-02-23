@@ -109,7 +109,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const slug = edge.node.fields.slug
 
     createPage({
-      path: `/blog${slug}`,
+      path: slug,
       component: postPage,
       context: {
         slug: edge.node.fields.slug,
