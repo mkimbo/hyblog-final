@@ -25,6 +25,15 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     marginBottom: '20px',
   },
+  article: {
+    fontsize: '1.4rem',
+  },
+  title: {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+    textRendering: 'optimizelegibility',
+    fontSize: '1.62671rem',
+  },
 }))
 const Post = ({ pageContext, data }) => {
   const classes = useStyles()
@@ -51,9 +60,14 @@ const Post = ({ pageContext, data }) => {
             <PostBanner filename={post.cover} alt={post.title} />
           </div>
           <div className={classes.postBody}>
-            <Typography variant="h4">{post.title}</Typography>
+            <Typography className={classes.title} variant="h4">
+              {post.title}
+            </Typography>
             <PostInfo postNode={postNode} />
-            <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
+            <div
+              className={classes.article}
+              dangerouslySetInnerHTML={{ __html: postNode.html }}
+            />
             <PostTags tags={post.tags} />
             <ShareLinks postPath={slug} postNode={postNode} />
             <PostSuggestions
@@ -78,7 +92,7 @@ export const pageQuery = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
-      excerpt
+      excerpt(pruneLength: 150)
       frontmatter {
         title
         cover

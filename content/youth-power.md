@@ -1,7 +1,7 @@
 ---
 title: 'Youth: There is Power in Unity'
-cover: 'blog2.jpg'
-category: 'education'
+cover: 'blog1.jpg'
+category: 'Education'
 tags:
   - education
   - youth

@@ -2,11 +2,11 @@
     
 </div>
 
-# Awesome Blog
+# Hyblog
 
-A minimal styled and feature rich blog made with Gatsby and Material UI
+The Official Blog for Hybra Inc.
 
-[Blog Demo.](https://minimal-awesome-blog.netlify.app/)
+[Blog Demo.](https://hyblog.netlify.app/)
 
 This blog is based on the starter [Gatsby Material Starter](https://github.com/Vagr9K/gatsby-material-starter")
 
@@ -24,15 +24,15 @@ This blog was made with the JAMSTACK architecture using the following technologi
 Full feature list:
 
 - Blazing fast loading times thanks to pre-rendered HTML and automatic chunk loading of JS files
-- Automatic optimization of all image assets via `gatsby-image` for faster loading times
-- Email Subscription to Blog (in development)
+- Automatic optimization of all image assets for smooth loading effects and faster loading times
+- Push Notifications Subscription to BlogPosts (in development)
 - Loading progress for slow networks
 - Offline support
 - Disqus comments support
   - Notifications about new comments
   - comments moderation
 - Responsive design
-- Google Analytics support (in development)
+- Google Analytics support
 - SEO
 
 * Posts in Markdown
@@ -50,11 +50,9 @@ Full feature list:
   - LinkedIn share button
   - Telegram share button
 
-## NetlifyCMS - Coming Soon
+## NetlifyCMS
 
 - Sipmle and Easy to use Admin panel from Netlify CMS to add new posts and change basic website info
-
-## Theming
 
 # Author
 

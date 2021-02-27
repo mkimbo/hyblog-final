@@ -46,10 +46,10 @@ const Layout = ({ children }) => {
                   textAlign: 'center',
                 }}
               >
-                © {new Date().getFullYear()} Hyblog from
+                © {new Date().getFullYear()} Official blog from
                 {` `}
                 <a style={{ color: 'blue' }} href="https://www.hyreads.com">
-                  Hyreads
+                  Hybra
                 </a>
               </footer>
             </div>

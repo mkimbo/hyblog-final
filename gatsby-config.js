@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     title: `Hyblog`,
     siteUrl: `https://hyblog.netlify.app/`,
-    description: `Official Blog from Hyreads`,
+    description: `Official Blog from Hybra`,
     author: `JackMkimbo`,
   },
   plugins: [
@@ -31,15 +31,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-web-font-loader',
-      options: {
-        custom: {
-          families: ['FuturaLT, FuturaLT-Bold'],
-          urls: ['/fonts/fonts.css'],
-        },
       },
     },
     {
@@ -116,12 +107,12 @@ module.exports = {
       options: {
         name: `Hyblog`,
         short_name: `Hyblog`,
-        description: `Official Blog from Hyreads`,
+        description: `Official Blog from Hybra`,
         start_url: `/`,
         background_color: `#110f8b`,
         theme_color: `#110f8b`,
         display: `minimal-ui`,
-        icon: `src/images/maskable-icon.png`,
+        icon: `src/images/icon.png`,
       },
     },
     {

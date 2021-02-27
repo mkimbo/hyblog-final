@@ -1,20 +1,20 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import FuturaLT from './fonts/FuturaLT.ttf'
+import Montserrat from '@fontsource/montserrat'
+import Cardo from '@fontsource/cardo'
 
-const futura = {
-  fontFamily: 'FuturaLT',
-  src: `
-    url(${FuturaLT}) format('ttf')
-  `,
-}
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'FuturaLT, sans-serif',
+    fontFamily: 'Cardo, sans-serif',
+  },
+  palette: {
+    primary: {
+      main: '#0906a5',
+    },
   },
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [futura],
+        '@font-face': [Montserrat, Cardo],
       },
     },
   },

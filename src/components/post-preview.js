@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   excerpt: {
     textDecoration: 'underline',
     color: 'hsla(0, 0%, 0%, 0.8)',
+    fontsize: '1.1rem',
   },
   actionArea: {
     height: '90%',
@@ -32,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   title: {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+    textRendering: 'optimizelegibility',
+    fontSize: '1.62671rem',
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     },
@@ -43,8 +48,13 @@ const PostPreview = ({ postEdges }) => {
   return (
     <div>
       {postEdges.map((post) => (
-        <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
-          <Card className={classes.root} key={post.node.id} raised>
+        <div
+          data-sal="slide-up"
+          data-sal-easing="ease"
+          data-sal-duration="700"
+          key={post.node.id}
+        >
+          <Card className={classes.root} raised>
             <Link to={`${post.node.fields.slug}`}>
               <CardActionArea>
                 <PostCover
@@ -54,7 +64,7 @@ const PostPreview = ({ postEdges }) => {
                 />
                 <Typography
                   variant="h5"
-                  component="h3"
+                  component="h4"
                   color="primary"
                   className={classes.title}
                 >

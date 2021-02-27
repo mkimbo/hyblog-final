@@ -19,7 +19,10 @@ const PostTags = ({ tags }) => {
     <div className={classes.PostTags}>
       {tags &&
         tags.map((tag) => (
-          <Link to={`/tags/${tag.replace(/\W+/g, '-').toLowerCase()}`}>
+          <Link
+            key={tag}
+            to={`/tags/${tag.replace(/\W+/g, '-').toLowerCase()}`}
+          >
             <Button size="small" color="primary">
               #{tag}
             </Button>

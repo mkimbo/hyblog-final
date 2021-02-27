@@ -32,39 +32,39 @@ const SocialMedia = () => {
   const classes = useStyles()
   return (
     <div className={classes.SocialMedia}>
-      <Fab className={classes.fab}>
-        <a
-          href="https://facebook.com/Hyreads"
-          alt="Link to Hyreads Facebookaccount"
-        >
+      <a
+        href="https://facebook.com/Hyreads"
+        alt="Link to Hyreads Facebookaccount"
+      >
+        <Fab size="small" className={classes.fab}>
           <Facebook
             style={{ verticalAlign: 'middle' }}
             className={classes.facebook}
           />
-        </a>
-      </Fab>
-      <Fab className={classes.fab}>
-        <a
-          href="https://twitter.com/hyreads"
-          alt="Link to Hyreads Twitter account"
-        >
+        </Fab>
+      </a>
+      <a
+        href="https://twitter.com/hyreads"
+        alt="Link to Hyreads Twitter account"
+      >
+        <Fab size="small" className={classes.fab}>
           <Twitter
             style={{ verticalAlign: 'middle' }}
             className={classes.twitter}
           />
-        </a>
-      </Fab>
-      <Fab className={classes.fab}>
-        <a
-          href="https://instagram.com/hyreads"
-          alt="Link to Hyreads Instagram account"
-        >
+        </Fab>
+      </a>
+      <a
+        href="https://instagram.com/hyreads"
+        alt="Link to Hyreads Instagram account"
+      >
+        <Fab size="small" className={classes.fab}>
           <Instagram
             style={{ verticalAlign: 'middle' }}
             className={classes.instagram}
           />
-        </a>
-      </Fab>
+        </Fab>
+      </a>
     </div>
   )
 }

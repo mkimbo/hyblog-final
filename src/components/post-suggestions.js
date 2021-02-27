@@ -28,7 +28,7 @@ const PostSuggestions = ({ prevSlug, prevTitle, nextSlug, nextTitle }) => {
   const classes = useStyles()
   return (
     <div className={classes.postSuggestions}>
-      <Link to={`/blog${prevSlug}`}>
+      <Link to={`${prevSlug}`}>
         <Button
           variant="outlined"
           color="primary"
@@ -37,7 +37,7 @@ const PostSuggestions = ({ prevSlug, prevTitle, nextSlug, nextTitle }) => {
           {prevTitle}
         </Button>
       </Link>
-      <Link to={`/blog${nextSlug}`} className={classes.nextButton}>
+      <Link to={`${nextSlug}`} className={classes.nextButton}>
         <Button
           variant="outlined"
           color="primary"

@@ -2,7 +2,7 @@
 title: Youth Are The Present, Not Only The Future
 date: 2021-02-23T07:05:17.842Z
 cover: youth-today.jpg
-category: youth affairs
+category: Youth affairs
 tags:
   - society
   - youth

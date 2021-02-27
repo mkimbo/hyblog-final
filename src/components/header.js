@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
@@ -15,12 +15,14 @@ import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ClearIcon from '@material-ui/icons/Clear'
+import Collapse from '@material-ui/core/Collapse'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import HomeIcon from '@material-ui/icons/Home'
 import ListIcon from '@material-ui/icons/ViewList'
 import InfoIcon from '@material-ui/icons/Info'
+import Explore from '@material-ui/icons/Explore'
+import ChevronRight from '@material-ui/icons/ChevronRight'
 
 import SocialMedia from './social-media'
 
@@ -52,12 +54,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
+    width: '100vw',
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: '100vw',
     backgroundColor: '#eaecee',
+    [theme.breakpoints.up('md')]: {
+      width: drawerWidth,
+    },
   },
   drawerHeader: {
     display: 'flex',
@@ -65,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
+  },
+
+  linkText: {
+    fontFamily: 'Roboto',
+    color: 'hsla(0, 0%, 0%, 0.8)',
   },
   content: {
     flexGrow: 1,
@@ -75,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: -drawerWidth,
   },
+
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -86,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ siteTitle }) => {
   const classes = useStyles()
-
+  const [categories, setCategories] = useState(true)
   const [open, setOpen] = React.useState(false)
 
   function handleDrawerOpen() {
@@ -96,7 +107,24 @@ const Header = ({ siteTitle }) => {
   function handleDrawerClose() {
     setOpen(false)
   }
-
+  function handleClick(id) {
+    setCategories(!categories)
+  }
+  const cat = []
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            id
+            frontmatter {
+              category
+            }
+          }
+        }
+      }
+    }
+  `)
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -117,7 +145,7 @@ const Header = ({ siteTitle }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h4" color="inherit">
             {siteTitle}
           </Typography>
         </Toolbar>
@@ -141,25 +169,59 @@ const Header = ({ siteTitle }) => {
           <Link to="/">
             <ListItem button>
               <ListItemIcon>
-                <ListIcon />
+                <ListIcon color="primary" />
               </ListItemIcon>
-              <ListItemText color="primary">Hyblog</ListItemText>
+              <Typography className={classes.linkText}>Hyblog</Typography>
             </ListItem>
           </Link>
+          <ListItem
+            id="categories"
+            button
+            onClick={() => handleClick('categories')}
+          >
+            <ListItemIcon>
+              <Explore color="primary" />
+            </ListItemIcon>
+            <Typography className={classes.linkText}>Explore</Typography>
+          </ListItem>
+          <Collapse in={!categories} timeout="auto" unmountOnExit>
+            {data.allMarkdownRemark.edges.map((post) => {
+              cat.push(post.node.frontmatter.category)
+              return null
+            })}
+            {Array.from(new Set(cat)).map((category) => (
+              <Link
+                to={`/categories/${category
+                  .replace(/\W+/g, '-')
+                  .toLowerCase()}`}
+                key={category}
+                className={classes.categories}
+              >
+                <ListItem button>
+                  <ListItemIcon>
+                    <ChevronRight />
+                  </ListItemIcon>
+                  <Typography variant="body" className={classes.linkText}>
+                    {category}
+                  </Typography>
+                </ListItem>
+              </Link>
+            ))}
+          </Collapse>
           <Link to="/about">
             <ListItem button>
               <ListItemIcon>
-                <InfoIcon />
+                <InfoIcon color="primary" />
               </ListItemIcon>
-              <ListItemText color="primary">Information</ListItemText>
+              <Typography className={classes.linkText}>Information</Typography>
             </ListItem>
           </Link>
           <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
             <ListItem button>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon color="primary" />
               </ListItemIcon>
-              <ListItemText color="primary">Hyreads</ListItemText>
+              <Typography className={classes.linkText}>Hybra</Typography>
             </ListItem>
           </a>
         </List>

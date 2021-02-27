@@ -1,7 +1,7 @@
 ---
 title: 'Economics & Governance'
-cover: 'blog1.jpg'
-category: 'economics'
+cover: 'blog3.jpg'
+category: 'Economics'
 tags:
   - economics
   - governance

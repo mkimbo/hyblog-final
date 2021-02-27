@@ -1,13 +1,12 @@
 {
   "name": "hyblog",
   "private": true,
-  "description": "A Feature rich blog for Hyreads",
+  "description": "A Feature rich blog for Hybra",
   "version": "0.1.0",
   "author": "@JackMkimbo",
   "dependencies": {
+    "@fontsource/cardo": "^4.2.1",
     "@fontsource/montserrat": "^4.2.1",
-    "@fontsource/raleway": "^4.2.1",
-    "@fontsource/roboto": "^4.2.1",
     "@loadable/component": "^5.14.1",
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.2.0",
@@ -30,7 +29,6 @@
     "gatsby-plugin-sitemap": "^2.12.0",
     "gatsby-plugin-transition-link": "^1.20.5",
     "gatsby-plugin-twitter": "^2.10.0",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-remark-autolink-headers": "^2.11.0",
     "gatsby-remark-copy-linked-files": "^2.10.0",
     "gatsby-remark-images": "^3.11.0",
