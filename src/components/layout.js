@@ -13,6 +13,9 @@ import Header from './header'
 import './layout.css'
 import { ThemeProvider } from '@material-ui/core'
 import theme from '../Theme'
+import loadable from '@loadable/component'
+
+const ChatWidget = loadable(() => import('@papercups-io/chat-widget'))
 
 const Layout = ({ children }) => {
   return (
@@ -40,6 +43,26 @@ const Layout = ({ children }) => {
               }}
             >
               <main>{children}</main>
+              <ChatWidget
+                accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
+                title="Hyblog Service Center"
+                subtitle="Connect with us"
+                primaryColor="#110f8b"
+                greeting="Hi there! Send us a message and we'll get back to you as soon as we can."
+                newMessagePlaceholder="Start typing..."
+                showAgentAvailability={true}
+                requireEmailUpfront={false}
+                baseUrl="https://app.papercups.io"
+                // Optionally include data about your customer here to identify them
+                // customer={{
+                //   name: __CUSTOMER__.name,
+                //   email: __CUSTOMER__.email,
+                //   external_id: __CUSTOMER__.id,
+                //   metadata: {
+                //     plan: "premium"
+                //   }
+                // }}
+              />
               <footer
                 style={{
                   paddingTop: 10,

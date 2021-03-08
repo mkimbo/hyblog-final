@@ -4,6 +4,20 @@ const moment = require('moment')
 const config = {
   dateFromFormat: 'YYYY-MM-DD',
 }
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === 'build-html' || stage === 'develop-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: `/@papercups-io/chat-widget/`,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   let slug

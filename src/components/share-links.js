@@ -31,35 +31,35 @@ const ShareLinks = ({ postPath, postNode }) => {
   return (
     <div className={classes.SocialLinks}>
       <WhatsappShareButton
-        url={`https://hyblog.netlify.app${postPath}`}
+        url={`https://hyblog.info${postPath}`}
         title={postNode.frontmatter.title}
       >
         <WhatsappIcon round size={36} />
       </WhatsappShareButton>
       <TwitterShareButton
-        url={`https://hyblog.netlify.app${postPath}`}
+        url={`https://hyblog.info${postPath}`}
         title={postNode.frontmatter.title}
       >
         <TwitterIcon round size={36} />
       </TwitterShareButton>
       <FacebookShareButton
-        url={`https://hyblog.netlify.app${postPath}`}
+        url={`https://hyblog.info${postPath}`}
         quote={postNode.excerpt}
       >
         <FacebookIcon round size={36} />
       </FacebookShareButton>
       <LinkedinShareButton
-        url={`https://hyblog.netlify.app${postPath}`}
+        url={`https://hyblog.info${postPath}`}
         title={postNode.frontmatter.title}
         description={postNode.excerpt}
       >
         <LinkedinIcon round size={36} />
       </LinkedinShareButton>
-      <TelegramShareButton url={`https://hyblog.netlify.app${postPath}`}>
+      <TelegramShareButton url={`https://hyblog.info${postPath}`}>
         <TelegramIcon round size={36} />
       </TelegramShareButton>
       <RedditShareButton
-        url={`https://hyblog.netlify.app${postPath}`}
+        url={`https://hyblog.info${postPath}`}
         title={postNode.frontmatter.title}
       >
         <RedditIcon round size={36} />

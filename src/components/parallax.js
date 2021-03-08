@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import BackgroundImage from 'gatsby-background-image'
+import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 
 export default function Parallax(props) {
-  const { children } = props
   const [transform, setTransform] = useState(null)
   useEffect(() => {
     let windowScrollTop
@@ -36,8 +35,8 @@ export default function Parallax(props) {
       background: file(relativePath: { eq: "icon.png" }) {
         id
         childImageSharp {
-          fluid(maxWidth: 600, quality: 70) {
-            ...GatsbyImageSharpFluid
+          fixed(width: 300, height: 300, quality: 90) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
@@ -48,21 +47,21 @@ export default function Parallax(props) {
       style={{
         height: '90vh',
         transform: transform,
-        backgroundColor: '#110f8b',
+        backgroundColor: '#fff',
+        textAlign: 'center',
       }}
     >
-      <BackgroundImage fluid={data.background.childImageSharp.fluid}>
-        {children}
-      </BackgroundImage>
+      <div
+        style={{
+          paddingTop: '25px',
+        }}
+      >
+        <Img fixed={data.background.childImageSharp.fixed} />
+      </div>
     </div>
   )
 }
 
 Parallax.propTypes = {
   className: PropTypes.string,
-  filter: PropTypes.bool,
-  children: PropTypes.node,
-  style: PropTypes.string,
-  image: PropTypes.string,
-  small: PropTypes.bool,
 }

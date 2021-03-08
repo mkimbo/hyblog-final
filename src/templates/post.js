@@ -41,7 +41,7 @@ const Post = ({ pageContext, data }) => {
   const postNode = data.markdownRemark
   const post = postNode.frontmatter
   const disqusConfig = {
-    shortname: 'okblog-1', //your site shortname here
+    shortname: 'hyblog-1', //your site shortname here
     config: { identifier: slug, title: post.title },
   }
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-
+import { motion } from 'framer-motion'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 
 import clsx from 'clsx'
@@ -27,6 +27,25 @@ import ChevronRight from '@material-ui/icons/ChevronRight'
 import SocialMedia from './social-media'
 
 const drawerWidth = 400
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const listItemVariants = {
+  show: {
+    opacity: 1,
+  },
+  hidden: {
+    opacity: 0,
+  },
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -189,24 +208,32 @@ const Header = ({ siteTitle }) => {
               cat.push(post.node.frontmatter.category)
               return null
             })}
-            {Array.from(new Set(cat)).map((category) => (
-              <Link
-                to={`/categories/${category
-                  .replace(/\W+/g, '-')
-                  .toLowerCase()}`}
-                key={category}
-                className={classes.categories}
-              >
-                <ListItem button>
-                  <ListItemIcon>
-                    <ChevronRight />
-                  </ListItemIcon>
-                  <Typography variant="body" className={classes.linkText}>
-                    {category}
-                  </Typography>
-                </ListItem>
-              </Link>
-            ))}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+            >
+              {Array.from(new Set(cat)).map((category) => (
+                <Link
+                  to={`/categories/${category
+                    .replace(/\W+/g, '-')
+                    .toLowerCase()}`}
+                  key={category}
+                  className={classes.categories}
+                >
+                  <motion.div variants={listItemVariants}>
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ChevronRight />
+                      </ListItemIcon>
+                      <Typography variant="body" className={classes.linkText}>
+                        {category}
+                      </Typography>
+                    </ListItem>
+                  </motion.div>
+                </Link>
+              ))}
+            </motion.div>
           </Collapse>
           <Link to="/about">
             <ListItem button>
