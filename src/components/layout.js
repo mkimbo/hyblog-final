@@ -45,8 +45,8 @@ const Layout = ({ children }) => {
               <main>{children}</main>
               <ChatWidget
                 accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
-                title="Hyblog Service Center"
-                subtitle="Connect with us"
+                title="Customer Service Center"
+                subtitle="Connect with Hyblog"
                 primaryColor="#110f8b"
                 greeting="Hi there! Send us a message and we'll get back to you as soon as we can."
                 newMessagePlaceholder="Start typing..."

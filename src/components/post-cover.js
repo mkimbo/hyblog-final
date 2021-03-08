@@ -14,7 +14,7 @@ const PostCover = ({ filename, alt }) => (
               name
               childImageSharp {
                 fluid(maxHeight: 500) {
-                  tracedSVG
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

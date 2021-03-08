@@ -47,7 +47,7 @@ export default function Parallax(props) {
       style={{
         height: '90vh',
         transform: transform,
-        backgroundColor: '#fff',
+        backgroundColor: '#f7f9fc',
         textAlign: 'center',
       }}
     >
