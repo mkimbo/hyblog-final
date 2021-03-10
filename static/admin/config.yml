@@ -30,3 +30,27 @@ collections:
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Details', name: 'details', widget: 'text' }
+      - label: 'About Hyreads'
+        name: 'about_hyreads'
+        file: 'site/information/about-hyreads.json'
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Details', name: 'details', widget: 'text' }
+          - label: 'Features'
+            name: 'features'
+            widget: 'list'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Caption', name: 'caption', widget: 'string' }
+              - { label: 'Details', name: 'details', widget: 'text' }
+      - label: 'Frequently Asked Questions'
+        name: 'faqs'
+        file: 'site/information/faqs.json'
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - label: 'Questions'
+            name: 'questions'
+            widget: 'list'
+            fields:
+              - { label: 'Question', name: 'question', widget: 'string' }
+              - { label: 'Answer', name: 'answer', widget: 'text' }
