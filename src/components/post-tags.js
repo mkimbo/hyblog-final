@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
+    margin: '7px',
   },
 }))
 const PostTags = ({ tags }) => {

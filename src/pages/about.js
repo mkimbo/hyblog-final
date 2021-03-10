@@ -25,6 +25,8 @@ import { Card, CardHeader, Avatar, IconButton } from '@material-ui/core'
 
 import aboutHyblog from '../../site/information/about-hyblog.json'
 import aboutHyreads from '../../site/information/about-hyreads.json'
+import faqsPage from '../../site/information/faqs.json'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,152 +84,128 @@ const About = () => {
           padding: `0px 1.0875rem 1.45rem`,
         }}
       >
-        <Grid container spacing={3} justify="center" align="center">
+        <Grid container spacing={3} justify="center" >
           <Grid item xs={12}>
-            <Card raised>
+            <Card raised align="center">
               <Typography variant="h4">{aboutHyblog.title}</Typography>
-              <Typography variant="body">{aboutHyblog.details}</Typography>
+              <Typography variant="body1">{aboutHyblog.details}</Typography>
             </Card>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} align="center">
             <div style={{ maxWidth: `100px`, marginBottom: `1.45rem` }}>
               <Image />
             </div>
           </Grid>
-        </Grid>
-        <Grid item xs={12} justify="center" align="center">
-          <Card raised>
-            <Typography variant="h4">{aboutHyreads.title}</Typography>
-            <Typography variant="body">{aboutHyreads.details}</Typography>
-          </Card>
-        </Grid>
-        <Card raised>
-          <List component="nav" className={classes.root}>
-            <ListItem
-              id="features"
-              button
-              onClick={() => handleClick('features')}
-            >
-              <ListItemIcon>
-                <StarIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="Hyreads Features" />
-              {features ? (
-                <ExpandMore color="primary" />
-              ) : (
-                <ExpandLess color="primary" />
-              )}
-            </ListItem>
-            <Collapse in={!features} timeout="auto" unmountOnExit>
-              {aboutHyreads.features.map((feature) => {
-                return (
+
+          <Grid item xs={12} justify="center">
+            <Card raised>
+            <div align="center">
+              <Typography variant="h4">{aboutHyreads.title}</Typography>
+              <Typography variant="body1">{aboutHyreads.details}</Typography>
+              </div>
+              <Divider />
+              <List component="nav" className={classes.root}>
+                <ListItem
+                  id="features"
+                  button
+                  onClick={() => handleClick('features')}
+                >
+                  <ListItemIcon>
+                    <StarIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="Hyreads Features" />
+                  {features ? (
+                    <ExpandMore color="primary" />
+                  ) : (
+                    <ExpandLess color="primary" />
+                  )}
+                </ListItem>
+                <Collapse in={!features} timeout="auto" unmountOnExit>
+                  {aboutHyreads.features.map((feature) => {
+                    return (
+                      <Accordion
+                        expanded={expanded === feature.title}
+                        onChange={handleChange(feature.title)}
+                        key={feature.caption}
+                      >
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls={feature.title}
+                          id={feature.title}
+                        >
+                          <Typography className={classes.heading}>
+                            {feature.title}
+                          </Typography>
+                          <Typography className={classes.secondaryHeading}>
+                            {feature.caption}
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Typography className={classes.description}>
+                            {feature.details}
+                          </Typography>
+                        </AccordionDetails>
+                      </Accordion>
+                    )
+                  })}
+                </Collapse>
+              </List>
+            </Card>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <div style={{ maxWidth: `100px`, marginBottom: `1.45rem` }}>
+              <Image />
+            </div>
+          </Grid>
+          <Grid item xs={12} justify="center" >
+            <Card raised>
+            <div align="center">
+              <Typography variant="h4">{faqsPage.title}</Typography>
+              </div>
+              <Divider />
+              <List component="nav" className={classes.root}>
+                <ListItem button onClick={() => handleClick('faqs')}>
+                  <ListItemIcon>
+                    <InfoIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="Frequently Asked Questions" />
+                  {faqs ? (
+                    <ExpandMore color="primary" />
+                  ) : (
+                    <ExpandLess color="primary" />
+                  )}
+                </ListItem>
+                <Collapse in={!faqs} timeout="auto" unmountOnExit>
+                  {faqsPage.questions.map((question) => {
+                    return (
                   <Accordion
-                    expanded={expanded === feature.title}
-                    onChange={handleChange(feature.title)}
-                    id={feature.caption}
+                    expanded={expanded === question.question}
+                    onChange={handleChange(question.question)}
+                    key={question.question}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls={feature.title}
-                      id={feature.title}
+                      aria-controls={question.question}
+                      id={question.question}
                     >
-                      <Typography className={classes.heading}>
-                        {feature.title}
-                      </Typography>
-                      <Typography className={classes.secondaryHeading}>
-                        {feature.caption}
+                      <Typography className={classes.faqHeading}>
+                        {question.question}
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.description}>
-                        {feature.details}
+                        {question.answer}
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
-                )
-              })}
-            </Collapse>
-            <ListItem button onClick={() => handleClick('faqs')}>
-              <ListItemIcon>
-                <InfoIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="FAQs" />
-              {faqs ? (
-                <ExpandMore color="primary" />
-              ) : (
-                <ExpandLess color="primary" />
-              )}
-            </ListItem>
-            <Collapse in={!faqs} timeout="auto" unmountOnExit>
-              <Accordion
-                expanded={expanded === 'panel6'}
-                onChange={handleChange('panel6')}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel6bh-content"
-                  id="panel6bh-header"
-                >
-                  <Typography className={classes.faqHeading}>
-                    What is Hyreads?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography className={classes.description}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti, voluptatum iste repellendus similique, error dicta
-                    tenetur ducimus tempore assumenda odit dolorem! Tempore
-                    sequi recusandae iusto minus eaque. Sit, obcaecati soluta.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === 'panel7'}
-                onChange={handleChange('panel7')}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel7bh-content"
-                  id="panel7bh-header"
-                >
-                  <Typography className={classes.faqHeading}>
-                    How do I share my ideas?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography className={classes.description}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti, voluptatum iste repellendus similique, error dicta
-                    tenetur ducimus tempore assumenda odit dolorem! Tempore
-                    sequi recusandae iusto minus eaque. Sit, obcaecati soluta.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion
-                expanded={expanded === 'panel8'}
-                onChange={handleChange('panel8')}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel8bh-content"
-                  id="panel8bh-header"
-                >
-                  <Typography className={classes.faqHeading}>
-                    How about Hyblog?
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography className={classes.description}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti, voluptatum iste repellendus similique, error dicta
-                    tenetur ducimus tempore assumenda odit dolorem! Tempore
-                    sequi recusandae iusto minus eaque. Sit, obcaecati soluta.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </Collapse>
-          </List>
-        </Card>
+                    )
+                  }
+                  )}
+                </Collapse>
+              </List>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     </Layout>
   )

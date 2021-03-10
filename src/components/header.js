@@ -23,6 +23,7 @@ import ListIcon from '@material-ui/icons/ViewList'
 import InfoIcon from '@material-ui/icons/Info'
 import Explore from '@material-ui/icons/Explore'
 import ChevronRight from '@material-ui/icons/ChevronRight'
+import { FaBloggerB } from 'react-icons/fa'
 
 import SocialMedia from './social-media'
 
@@ -188,7 +189,7 @@ const Header = ({ siteTitle }) => {
           <Link to="/">
             <ListItem button>
               <ListItemIcon>
-                <ListIcon color="primary" />
+                <FaBloggerB color="#0906a5" style={{fontSize: '1.5rem'}} />
               </ListItemIcon>
               <Typography className={classes.linkText}>Hyblog</Typography>
             </ListItem>
@@ -243,6 +244,14 @@ const Header = ({ siteTitle }) => {
               <Typography className={classes.linkText}>Information</Typography>
             </ListItem>
           </Link>
+          <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
+            <ListItem button>
+              <ListItemIcon>
+                <ListIcon color="primary" />
+              </ListItemIcon>
+              <Typography className={classes.linkText}>Hyreads</Typography>
+            </ListItem>
+          </a>
           <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
             <ListItem button>
               <ListItemIcon>

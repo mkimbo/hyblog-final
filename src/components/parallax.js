@@ -69,9 +69,9 @@ export default function Parallax(props) {
               },
             },
             particles: {
-              color: { value: '#110f8b' },
+              color: { value: '#e6e6f7' },
               links: {
-                color: '#110f8b',
+                color: '#c5c5d6',
                 distance: 100,
                 enable: true,
                 opacity: 1,
