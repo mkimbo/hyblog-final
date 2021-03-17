@@ -1,38 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Particles from 'react-tsparticles'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 
 export default function Parallax(props) {
-  const [transform, setTransform] = useState(null)
   useEffect(() => {
-    let windowScrollTop
-    if (window.innerWidth >= 768) {
-      windowScrollTop = window.pageYOffset / 2
-    } else {
-      windowScrollTop = 0
-    }
-    window.onload = setTransform('translate3d(0,' + windowScrollTop + 'px,0)')
-  }, [])
-
-  useEffect(() => {
-    const resetTransform = () => {
-      var windowScrollTop = window.pageYOffset / 2
-      setTransform('translate3d(0,' + windowScrollTop + 'px,0)')
-    }
-    if (window.innerWidth >= 768) {
-      window.addEventListener('scroll', resetTransform)
-    }
-    return function cleanup() {
-      if (window.innerWidth >= 768) {
-        window.removeEventListener('scroll', resetTransform)
+    function debounce(func, wait = 5, immediate = true) {
+      let timeout
+      return function () {
+        const context = this
+        const args = arguments
+        const later = function () {
+          timeout = null
+          if (!immediate) func.apply(context, args)
+        }
+        const callNow = immediate && !timeout
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+        if (callNow) func.apply(context, args)
       }
     }
-  })
+    function parallax() {
+      var scrolled = window.pageYOffset
+      var parallax = document.querySelector('.parallax')
+      // You can adjust the 0.4 to change the speed
+      var coords = scrolled * 0.5 + 'px'
+      parallax.style.transform = 'translateY(' + coords + ')'
+    }
+    window.addEventListener('scroll', debounce(parallax))
+    return () => window.removeEventListener('scroll', debounce(parallax))
+  }, [])
 
   const data = useStaticQuery(graphql`
-    query parallaxImage {
+    query parallaxvanilla {
       background: file(relativePath: { eq: "icon.png" }) {
         id
         childImageSharp {
@@ -47,7 +48,6 @@ export default function Parallax(props) {
     <div
       style={{
         height: '90vh',
-        transform: transform,
         backgroundColor: '#f7f9fc',
         textAlign: 'center',
         position: 'relative',
@@ -57,9 +57,10 @@ export default function Parallax(props) {
         style={{
           height: '100%',
         }}
+        className="parallax"
       >
         <Particles
-          height="90vh"
+          height="100vh"
           params={{
             fpsLimit: 60,
             interactivity: {
@@ -85,23 +86,7 @@ export default function Parallax(props) {
                 value: 1,
                 random: true,
               },
-              shape: {
-                character: {
-                  fill: false,
-                  font: 'Verdana',
-                  style: '',
-                  value: '*',
-                  weight: '400',
-                },
-                image: {
-                  height: 100,
-                  replace_color: true,
-                  src: 'images/github.svg',
-                  width: 100,
-                },
-                polygon: { nb_sides: 5 },
-                type: 'circle',
-              },
+
               stroke: { color: '#ffffff', width: 3 },
               size: {
                 value: 10,

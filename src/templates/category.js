@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostPreview from '../components/post-preview'
-import Parallax from '../components/parallax'
+import Parallax from '../components/vanillaParallax'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'

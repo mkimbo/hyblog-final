@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     textRendering: 'optimizelegibility',
     fontSize: '1.62671rem',
+    margin: '8px 0px',
   },
 }))
 const Post = ({ pageContext, data }) => {
@@ -57,12 +58,13 @@ const Post = ({ pageContext, data }) => {
       >
         <Grid>
           <div className={classes.postBanner}>
-            <PostBanner filename={post.cover} alt={post.title} />
-          </div>
-          <div className={classes.postBody}>
             <Typography className={classes.title} variant="h4">
               {post.title}
             </Typography>
+
+            <PostBanner filename={post.cover} alt={post.title} />
+          </div>
+          <div className={classes.postBody}>
             <PostInfo postNode={postNode} />
             <div
               className={classes.article}

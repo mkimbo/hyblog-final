@@ -24,7 +24,9 @@ A notification system is also in development that will enable readers to subscri
 To get the best of this blog, we recommend our readers to install the blog on their devices for easy access at all times. The application is also very small in size and wont take much of your data or storage space on your devices.
 When new posts are released the blog auto updates itself if there is an internet connection. Alternatively, a user can also manually reload it like any installed application to get the latest content.
 
-Below are the few installation steps for each platform
+There is also a comment section under each post where you can share your thoughts and opinions on that article. It requires to login before you can comment but you dont need to create an account as you can easily login using either your Google, Facebook or Twitter account with just a click of a button.
+
+Below are the few installation steps of this blog site for each platform
 
 ## Android Chrome
 

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Parallax from '../components/parallax'
+import Parallax from '../components/vanillaParallax'
 import PostPreview from '../components/post-preview'
 import { Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'

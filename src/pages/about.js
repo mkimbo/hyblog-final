@@ -21,12 +21,11 @@ import StarIcon from '@material-ui/icons/Star'
 import InfoIcon from '@material-ui/icons/Info'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
-import { Card, CardHeader, Avatar, IconButton } from '@material-ui/core'
+import { Card } from '@material-ui/core'
 
 import aboutHyblog from '../../site/information/about-hyblog.json'
 import aboutHyreads from '../../site/information/about-hyreads.json'
 import faqsPage from '../../site/information/faqs.json'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  infoCard: {
+    padding: '5px',
   },
 }))
 const About = () => {
@@ -84,11 +86,14 @@ const About = () => {
           padding: `0px 1.0875rem 1.45rem`,
         }}
       >
-        <Grid container spacing={3} justify="center" >
-          <Grid item xs={12}>
-            <Card raised align="center">
+        <Grid container spacing={3} justify="center">
+          <Grid item xs={12} style={{ marginTop: `8px` }}>
+            <Card raised align="center" className={classes.infoCard}>
               <Typography variant="h4">{aboutHyblog.title}</Typography>
-              <Typography variant="body1">{aboutHyblog.details}</Typography>
+              <Divider />
+              <Typography align="left" variant="body1">
+                {aboutHyblog.details}
+              </Typography>
             </Card>
           </Grid>
           <Grid item xs={12} align="center">
@@ -98,10 +103,10 @@ const About = () => {
           </Grid>
 
           <Grid item xs={12} justify="center">
-            <Card raised>
-            <div align="center">
-              <Typography variant="h4">{aboutHyreads.title}</Typography>
-              <Typography variant="body1">{aboutHyreads.details}</Typography>
+            <Card raised className={classes.infoCard}>
+              <div align="center">
+                <Typography variant="h4">{aboutHyreads.title}</Typography>
+                <Typography variant="body1">{aboutHyreads.details}</Typography>
               </div>
               <Divider />
               <List component="nav" className={classes.root}>
@@ -157,10 +162,10 @@ const About = () => {
               <Image />
             </div>
           </Grid>
-          <Grid item xs={12} justify="center" >
-            <Card raised>
-            <div align="center">
-              <Typography variant="h4">{faqsPage.title}</Typography>
+          <Grid item xs={12} justify="center">
+            <Card raised className={classes.infoCard}>
+              <div align="center">
+                <Typography variant="h4">{faqsPage.title}</Typography>
               </div>
               <Divider />
               <List component="nav" className={classes.root}>
@@ -178,29 +183,28 @@ const About = () => {
                 <Collapse in={!faqs} timeout="auto" unmountOnExit>
                   {faqsPage.questions.map((question) => {
                     return (
-                  <Accordion
-                    expanded={expanded === question.question}
-                    onChange={handleChange(question.question)}
-                    key={question.question}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls={question.question}
-                      id={question.question}
-                    >
-                      <Typography className={classes.faqHeading}>
-                        {question.question}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography className={classes.description}>
-                        {question.answer}
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
+                      <Accordion
+                        expanded={expanded === question.question}
+                        onChange={handleChange(question.question)}
+                        key={question.question}
+                      >
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls={question.question}
+                          id={question.question}
+                        >
+                          <Typography className={classes.faqHeading}>
+                            {question.question}
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Typography className={classes.description}>
+                            {question.answer}
+                          </Typography>
+                        </AccordionDetails>
+                      </Accordion>
                     )
-                  }
-                  )}
+                  })}
                 </Collapse>
               </List>
             </Card>
