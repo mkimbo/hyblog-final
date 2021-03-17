@@ -1,6 +1,6 @@
 ---
 title: Youth Are The Present, Not Only The Future
-date: 2021-02-23T07:05:17.842Z
+date: 2021-03-10
 cover: youth-today.jpg
 category: Youth affairs
 tags:
@@ -23,3 +23,5 @@ As Kenyan youth, we should never doubt the influence of our own voices and power
 We also need to understand that youth are not a homogenous group – not all youth are the same, want the same, or have the same opportunities. That is why investing in young people, in all their diversity is crucial. And we don’t have to wait for the society or the government to do this for us. We are the society, You and I. We must work hard to enable conditions under which young people can act on their own behalf, and on their own terms, rather than at the direction of others.
 
 In this Information era, we can embrace technology and inform ourselves, educate others, raise awareness, support and empower one another to prosperity. We can use the digital space to share and broadcast our intuitive and diverse ideas that will replace the underlying retrogressive ones and create a strong foundation for a better society. Getting involved in forums to discuss society problems and to find and propose solutions is the way to becoming agents of true change. The future of the society lies in tapping the potential that lies in youth, only then can we secure a world that will favor us tomorrow and for generations to come.
+
+_~ Opinionated Kenyan. A young kenyan, tired of the deteroriating state of affairs of our society, our country, speaking up and taking action for REAL CHANGE._

@@ -6,7 +6,7 @@ tags:
   - technology
   - society
 
-date: '2021-02-15'
+date: '2021-03-9'
 ---
 
 Technology is one of the defining features of humanity. It is ubiquitous in modern society and plays an important role in nearly everything that humans do. New technologies frequently spur my imagination, and PWA technology has definitely done so. PWA stands for **Progressive Web Application** and it defines a type of web application that aims to bridge the gap between applications accesed via a browser and those installed natively on user devices.

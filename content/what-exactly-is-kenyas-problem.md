@@ -1,6 +1,6 @@
 ---
-title: 'What exactly is Kenya's problem?'
-cover: 'blog4.jpg'
+title: What exactly is Kenya's problem?
+cover: 'kenya-problem.jpg'
 category: 'Politics'
 date: '2021-3-11'
 tags:
@@ -38,5 +38,4 @@ whatever problem there is, it lies outside politics. Which is why i premised thi
 
 We don't need to fix our politics.. we need to restructure our systems and reorder our world!!
 
-- Notes of The Grand philosopher.
-  _P.S: Am not a monarchist.. am not democrac.. am not a republican.. am a philosopher who wants to create a just society._
+_~ Notes of The Grand philosopher P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
