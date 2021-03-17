@@ -31,4 +31,7 @@ Such however wasn’t the pattern of events as it unraveled. The moment wasn’t
 
 The more the effort to pull together was fronted, the greater the drift that formed. Suffice to say no shared destiny, no identity no conceiving of a nation. Clearly we missed the moment. But the bare admission is not enough. How did we miss it? How differently could we have contextualized events? How different could it all have been? More importantly, how many such moments have we missed in the past? Why is it that, after five solid decades since the attainment of political independence, we are still battling with such basic questions as the very identity of the nation? Is there even a nation to speak of?
 
-_~ Notes of The Grand philosopher P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
+_~ Notes of The Grand philosopher_
+_P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
+
+_Download the full text of this BBI SERIES : CHAPTER 1 <a href="#">here</a>, you can also follow the series using the article suggestions below this article_

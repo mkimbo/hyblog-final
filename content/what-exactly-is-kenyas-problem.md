@@ -1,10 +1,10 @@
 ---
 title: What exactly is Kenya's problem?
 cover: 'kenya-problem.jpg'
-category: 'Politics'
+category: 'Society'
 date: '2021-3-11'
 tags:
-  - Governance
+  - Society
   - Politics
   - Leadership
 ---

@@ -4,8 +4,8 @@ date: 2021-03-10
 cover: youth-today.jpg
 category: Youth affairs
 tags:
-  - society
-  - youth
+  - Society
+  - Youth
 ---
 
 We can no longer afford to tolerate the cliché that youth represent the leaders of the future or the future. This widespread form of adultcentrism has been misused by those in authority and power to stereotype youth as "too young" or "inexperienced” to a point where it is trite and irritating. Time and again we have seen youth taking a stand and being the driving force in criticizing injustices like systemic corruption, inequality and pernicious dissolution of democracy all around the world. This is in addition to the fact that the growth of any society in all the social, political and economic spheres mostly depends on youth energy and ideas that renew, refresh and maintain progress. In reality, more youth have been risking their lives for a better society and world in general while most adults continue to be the silent, ignorant and arrogant majority.

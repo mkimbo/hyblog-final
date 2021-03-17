@@ -3,8 +3,8 @@ title: 'Getting the best of Hyblog'
 cover: 'blog2.jpg'
 category: 'Society'
 tags:
-  - technology
-  - society
+  - Technology
+  - Society
 
 date: '2021-03-9'
 ---
