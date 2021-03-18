@@ -24,28 +24,35 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-const PostSuggestions = ({ prevSlug, prevTitle, nextSlug, nextTitle }) => {
+const PostSuggestions = ({ prevEdge, nextEdge }) => {
   const classes = useStyles()
   return (
     <div className={classes.postSuggestions}>
-      <Link to={`${prevSlug}`}>
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={<ArrowBackIcon />}
+      {prevEdge && (
+        <Link to={`${prevEdge.node.fields.slug}`}>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<ArrowBackIcon />}
+          >
+            {prevEdge.node.frontmatter.title}
+          </Button>
+        </Link>
+      )}
+      {nextEdge && (
+        <Link
+          to={`${nextEdge.node.fields.slug}`}
+          className={classes.nextButton}
         >
-          {prevTitle}
-        </Button>
-      </Link>
-      <Link to={`${nextSlug}`} className={classes.nextButton}>
-        <Button
-          variant="outlined"
-          color="primary"
-          endIcon={<ArrowForwardIcon />}
-        >
-          {nextTitle}
-        </Button>
-      </Link>
+          <Button
+            variant="outlined"
+            color="primary"
+            endIcon={<ArrowForwardIcon />}
+          >
+            {nextEdge.node.frontmatter.title}
+          </Button>
+        </Link>
+      )}
     </div>
   )
 }

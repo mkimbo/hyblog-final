@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 const Post = ({ pageContext, data }) => {
   const classes = useStyles()
-  const { slug, nexttitle, nextslug, prevtitle, prevslug } = pageContext
+  const { slug, next, prev } = pageContext
+  console.log(pageContext)
   const postNode = data.markdownRemark
   const post = postNode.frontmatter
   const disqusConfig = {
@@ -72,12 +73,7 @@ const Post = ({ pageContext, data }) => {
             />
             <PostTags tags={post.tags} />
             <ShareLinks postPath={slug} postNode={postNode} />
-            <PostSuggestions
-              prevSlug={prevslug}
-              prevTitle={prevtitle}
-              nextSlug={nextslug}
-              nextTitle={nexttitle}
-            />
+            <PostSuggestions prevEdge={prev} nextEdge={next} />
           </div>
           <Divider />
           <DiscussionEmbed {...disqusConfig} />
