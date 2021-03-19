@@ -1,8 +1,8 @@
 ---
 title: 'BBI: A moment of nationhood'
+date: 2021-3-12
 cover: 'BBI.png'
 category: 'Politics'
-date: '2021-3-12'
 tags:
   - BBI
   - Politics
@@ -29,6 +29,9 @@ A moment of nationhood is a climactic event that combines in one pot, both the p
 The first ingredient is a story of struggle shared by the members of the given society. It is this story which does give meaning to existence and lend the nation its legitimacy. The second ingredient is the availability of statesmen of towering vision. Their guidance provides a map with which to navigate the endless maze of nation-building. The third ingredient is a stake to be won. This provides the motivation that makes the journey a worthy endeavor. Story, statesman and stake. We will examine these in turn to see the role each play in the creation of a moment of nationhood. More importantly, we will look at each in relation to the events of 9th March, in a bid to render the “handshake” and the events that followed it, in their proper context.
 
 _~ Notes of The Grand philosopher_
+
+**Email: grand_philosopher@hyblog.info**
+
 _P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
 
 _Download the full text of this BBI SERIES : CHAPTER 1 <a href="#">here</a>, you can also follow the series using the article suggestions below this article_
