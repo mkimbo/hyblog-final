@@ -25,3 +25,5 @@ We also need to understand that youth are not a homogenous group – not all you
 In this Information era, we can embrace technology and inform ourselves, educate others, raise awareness, support and empower one another to prosperity. We can use the digital space to share and broadcast our intuitive and diverse ideas that will replace the underlying retrogressive ones and create a strong foundation for a better society. Getting involved in forums to discuss society problems and to find and propose solutions is the way to becoming agents of true change. The future of the society lies in tapping the potential that lies in youth, only then can we secure a world that will favor us tomorrow and for generations to come.
 
 _~ Opinionated Kenyan. A young kenyan, tired of the deteroriating state of affairs of our society, our country, speaking up and taking action for REAL CHANGE._
+
+**Email: [opinionated_kenyan@hyblog.info](mailto:opinionated_kenyan@hyblog.info)**

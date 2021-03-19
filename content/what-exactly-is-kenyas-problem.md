@@ -40,6 +40,6 @@ We don't need to fix our politics.. we need to restructure our systems and reord
 
 _~ Notes of The Grand philosopher_
 
-**Email: grand_philosopher@hyblog.info**
+**Email: [grand_philosopher@hyblog.info](mailto:grand_philosopher@hyblog.info)**
 
 _P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
