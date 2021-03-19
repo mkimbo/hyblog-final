@@ -58,4 +58,4 @@ _~ Notes of The Grand philosopher_
 
 _P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
 
-_Download the full text of this BBI SERIES : CHAPTER 1 <a href="#">here</a>, you can also follow the series using the article suggestions below this article_
+_Download the full text of this BBI SERIES : CHAPTER 1 <a href="/assets/BBI-Fact-Fiction-or-Falacy-chapter-1.docx" download="BBI-FACT-FICTION-OR-FALACY-Chapter-1">here</a>, you can also follow the series using the article suggestions below this article_

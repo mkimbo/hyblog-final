@@ -38,4 +38,8 @@ whatever problem there is, it lies outside politics. Which is why i premised thi
 
 We don't need to fix our politics.. we need to restructure our systems and reorder our world!!
 
-_~ Notes of The Grand philosopher P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
+_~ Notes of The Grand philosopher_
+
+**Email: grand_philosopher@hyblog.info**
+
+_P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
