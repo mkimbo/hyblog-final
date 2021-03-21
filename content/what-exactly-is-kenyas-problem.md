@@ -1,5 +1,5 @@
 ---
-title: What exactly is Kenya's problem?
+title: What Exactly Is Kenya's Problem?
 cover: 'kenya-problem.jpg'
 category: 'Society'
 date: '2021-3-11'

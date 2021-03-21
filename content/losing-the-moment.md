@@ -1,5 +1,5 @@
 ---
-title: 'BBI: Losing the moment Part 1'
+title: 'BBI Part 3: Losing the moment'
 date: 2021-3-14
 cover: 'BBI.png'
 category: 'Politics'

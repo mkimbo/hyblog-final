@@ -1,5 +1,5 @@
 ---
-title: 'BBI: A moment of nationhood'
+title: 'BBI Part 1: A moment of nationhood'
 date: 2021-3-12
 cover: 'BBI.png'
 category: 'Politics'

@@ -1,5 +1,5 @@
 ---
-title: 'BBI: The making of the moment'
+title: 'BBI Part 2: The making of the moment'
 date: 2021-3-13
 cover: 'BBI.png'
 category: 'Politics'
