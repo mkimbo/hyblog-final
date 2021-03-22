@@ -1,7 +1,7 @@
 const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|tags|categories)).*$/
 const config = {
   dateFromFormat: 'YYYY-MM-DD',
-  siteGATrackingID: 'UA-47311644-4',
+  siteGATrackingID: 'UA-188439956-1',
 }
 module.exports = {
   siteMetadata: {
@@ -53,6 +53,15 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-autolink-headers',
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          config.siteGATrackingID, // Google Analytics / GA
         ],
       },
     },
