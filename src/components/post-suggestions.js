@@ -30,18 +30,7 @@ const PostSuggestions = ({ prevEdge, nextEdge }) => {
   const classes = useStyles()
   return (
     <div className={classes.postSuggestions}>
-      {prevEdge && (
-        <Link to={`${prevEdge.node.fields.slug}`}>
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<ArrowBackIcon />}
-          >
-            {prevEdge.node.frontmatter.title}
-          </Button>
-        </Link>
-      )}
-      {nextEdge && (
+    {nextEdge && (
         <Link
           to={`${nextEdge.node.fields.slug}`}
           className={classes.nextButton}
@@ -55,6 +44,18 @@ const PostSuggestions = ({ prevEdge, nextEdge }) => {
           </Button>
         </Link>
       )}
+      {prevEdge && (
+        <Link to={`${prevEdge.node.fields.slug}`}>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<ArrowBackIcon />}
+          >
+            {prevEdge.node.frontmatter.title}
+          </Button>
+        </Link>
+      )}
+      
     </div>
   )
 }
