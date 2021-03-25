@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   nextButton: {
+    float: 'right !important',
+    marginLeft: 'auto',
     [theme.breakpoints.down('sm')]: {
       marginTop: '5px',
       marginLeft: 'auto',
