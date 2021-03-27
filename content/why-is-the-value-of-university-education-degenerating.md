@@ -49,4 +49,5 @@ Yours Truly
 Grand Philosoher.
 
 You can send your queries to the Grand Philosopher through the emails [grand_philosopher@hyblog.info](mailto:grand_philosopher@hyblog.info) or [info@hyreads.com](mailto:info@hyreads.com).<br>
-To engage is to educate; to educate is to enlighten; to enlighten is to empower. Let’s engage for a better world and Just Society.
+
+To engage is to educate; to educate is to enlighten; to enlighten is to empower. Let’s engage for a better world and Just Society. You can also get in touch via twitter **[@GrandPhilosospher](https://twitter.com/GranPhilosopher)**

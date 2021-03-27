@@ -37,3 +37,5 @@ It is thus out of a sense of duty that I light the torch of revolution, and draw
 _~ Notes of The Grand philosopher_
 
 **Email: [grand_philosopher@hyblog.info](mailto:grand_philosopher@hyblog.info)**
+
+**Twitter: [@GrandPhilosospher](https://twitter.com/GranPhilosopher)\***

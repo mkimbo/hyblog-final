@@ -42,4 +42,6 @@ _~ Notes of The Grand philosopher_
 
 **Email: [grand_philosopher@hyblog.info](mailto:grand_philosopher@hyblog.info)**
 
+**Twitter: [@GrandPhilosospher](https://twitter.com/GranPhilosopher)**
+
 _P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._

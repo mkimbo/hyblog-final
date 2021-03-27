@@ -35,6 +35,8 @@ _~ Notes of The Grand philosopher_
 
 **Email: [grand_philosopher@hyblog.info](mailto:grand_philosopher@hyblog.info)**
 
+**Twitter: [@GrandPhilosospher](https://twitter.com/GranPhilosopher)**
+
 _P.S: Am not a monarchist.. am not a democrat.. am not a republican.. am a philosopher who wants to create a just society._
 
 _Download the full text of this BBI : FACT FICTION OR FALACY CHAPTER 1 <a href="/assets/BBI-Fact-Fiction-or-Falacy-chapter-1.docx" download="BBI-FACT-FICTION-OR-FALACY-Chapter-1">here</a>, you can also follow the series using the article suggestions below this article_
