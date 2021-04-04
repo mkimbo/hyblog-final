@@ -22,7 +22,7 @@ export default function Index({ data }) {
   )
 
   const classes = useStyles()
-  const pageTitle = 'Hyblog'
+  const pageTitle = 'HyBlog'
   return (
     <TopLayout>
       <SEO />
