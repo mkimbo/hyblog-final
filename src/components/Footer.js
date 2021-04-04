@@ -1,89 +1,89 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link as InternalLink } from "gatsby";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import DarkModeButton from "./DarkModeButton";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import { IconButton } from "@material-ui/core";
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { Link as InternalLink } from 'gatsby'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
+import DarkModeButton from './DarkModeButton'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import { FaFacebookF, FaTwitter } from 'react-icons/fa'
+import { IconButton } from '@material-ui/core'
 
 function Copyright() {
   return (
     <React.Fragment>
       <InternalLink
         to={`/`}
-        style={{ fontFamily: "Roboto, sans-serif", textDecoration: "none" }}
+        style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
       >
         <Typography
           color="primary"
-          style={{ fontFamily: "Roboto, sans-serif", textDecoration: "none" }}
+          style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
         >
-          {"© "}HyBlog {new Date().getFullYear()}
+          {'© '}HyBlog {new Date().getFullYear()}
         </Typography>
       </InternalLink>
-      {" Official Blog From Hybra"}
+      {' Official Blog From Hybra'}
     </React.Fragment>
-  );
+  )
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
     backgroundColor: theme.palette.background.paper,
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: 'Roboto, sans-serif',
   },
   container: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
-    display: "flex",
+    display: 'flex',
   },
   iconsWrapper: {
     height: 120,
   },
   icons: {
-    display: "flex",
+    display: 'flex',
   },
   icon: {
     width: 40,
     height: 40,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: theme.spacing(1),
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.info.dark,
     },
   },
   list: {
     margin: 0,
-    listStyle: "none",
+    listStyle: 'none',
     padding: 0,
-    fontFamily: "Roboto, sans-serif",
-    textDecoration: "none",
+    fontFamily: 'Roboto, sans-serif',
+    textDecoration: 'none',
   },
   listItem: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: 'Roboto, sans-serif',
   },
   roboFonts: {
-    fontFamily: "Roboto, sans-serif",
-    textDecoration: "none",
+    fontFamily: 'Roboto, sans-serif',
+    textDecoration: 'none',
   },
   cardoFonts: {
-    fontFamily: "Cardo, sans-serif",
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "underline",
+    fontFamily: 'Cardo, sans-serif',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
-}));
+}))
 
 export default function Footer() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Paper elevation={3} component="footer" className={classes.root}>
@@ -113,7 +113,7 @@ export default function Footer() {
               <li className={classes.listItem}>
                 <InternalLink
                   color="primary"
-                  to={`/#emailSubscribe`}
+                  to={`#emailSubscribe`}
                   className={classes.cardoFonts}
                 >
                   <Typography color="primary" className={classes.cardoFonts}>
@@ -238,5 +238,5 @@ export default function Footer() {
         </Grid>
       </Container>
     </Paper>
-  );
+  )
 }

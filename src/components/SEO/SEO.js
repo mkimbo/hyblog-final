@@ -1,8 +1,8 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
-import SchemaOrg from "./SchemaOrg";
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { StaticQuery, graphql } from 'gatsby'
+import PropTypes from 'prop-types'
+import SchemaOrg from './SchemaOrg'
 
 const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
   <StaticQuery
@@ -31,16 +31,16 @@ const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
       }
     `}
     render={({ site: { siteMetadata: seo } }) => {
-      const postMeta = blog ? blog : null;
+      const postMeta = blog ? blog : null
 
-      const title = isBlogPost ? postMeta.title : seo.title;
-      const description = postMeta ? postMeta.summary : seo.description;
+      const title = isBlogPost ? postMeta.title || postMeta.question : seo.title
+      const description = isBlogPost ? postMeta.summary : seo.description
       const image = postImage
         ? `${seo.siteUrl}${postImage}`
-        : `${seo.siteUrl}${seo.image}`;
-      const url = postMeta ? `${seo.siteUrl}/${postMeta.slug}/` : seo.siteUrl;
-      const datePublished = isBlogPost ? postMeta.date : false;
-      console.log(blog);
+        : `${seo.siteUrl}${seo.image}`
+      const url = postMeta ? `${seo.siteUrl}/${postMeta.slug}/` : seo.siteUrl
+      const datePublished = isBlogPost ? postMeta.date : false
+      console.log(blog)
       return (
         <React.Fragment>
           <Helmet>
@@ -78,22 +78,22 @@ const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
             defaultTitle={seo.title}
           />
         </React.Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 SEO.propTypes = {
   isBlogPost: PropTypes.bool,
   postTitle: PropTypes.string,
   postImage: PropTypes.string,
-};
+}
 
 SEO.defaultProps = {
   isBlogPost: false,
   postTitle: null,
   postImage: null,
   blog: null,
-};
+}
 
-export default SEO;
+export default SEO

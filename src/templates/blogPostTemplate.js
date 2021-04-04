@@ -1,31 +1,31 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { makeStyles } from "@material-ui/core/styles";
-import { DiscussionEmbed } from "disqus-react";
+import React from 'react'
+import { graphql } from 'gatsby'
+import { makeStyles } from '@material-ui/core/styles'
+import { DiscussionEmbed } from 'disqus-react'
 
-import TopLayout from "../components/TopLayout";
-import { Container, Grid } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
+import TopLayout from '../components/TopLayout'
+import { Container, Grid } from '@material-ui/core'
+import Divider from '@material-ui/core/Divider'
 
-import MainArticleImage from "../components/MainArticleImage";
-import SEO from "../components/SEO/SEO";
-import MainArticleContent from "../components/MainArticleContent";
-import Sidebar from "../components/SideBar";
+import MainArticleImage from '../components/MainArticleImage'
+import SEO from '../components/SEO/SEO'
+import MainArticleContent from '../components/MainArticleContent'
+import Sidebar from '../components/SideBar'
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
   },
-}));
+}))
 export default function BlogPostTemplate({ data, pageContext }) {
-  const classes = useStyles();
-  const postNode = data.flamelinkBlogPostContent;
-  const pageViews = data.pageViews.totalCount;
-  const pageTitle = postNode.title;
+  const classes = useStyles()
+  const postNode = data.flamelinkBlogPostContent
+  const pageViews = data.pageViews.totalCount
+  const pageTitle = postNode.title
   const disqusConfig = {
-    shortname: "hyblog-1", //your site shortname here
+    shortname: 'hyblog-1', //your site shortname here
     config: { identifier: postNode.slug, title: postNode.title },
-  };
+  }
 
   return (
     <TopLayout>
@@ -54,13 +54,19 @@ export default function BlogPostTemplate({ data, pageContext }) {
         <DiscussionEmbed {...disqusConfig} />
       </Container>
     </TopLayout>
-  );
+  )
 }
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!, $viewer: String!) {
     flamelinkBlogPostContent(slug: { eq: $slug }) {
       title
+      date
+      author
+      summary
+      category
+      tags
+      slug
       coverImage {
         localFile {
           childImageSharp {
@@ -70,11 +76,6 @@ export const pageQuery = graphql`
           }
         }
       }
-      date
-      author
-      category
-      tags
-      slug
       articleText {
         content
         fields {
@@ -88,4 +89,4 @@ export const pageQuery = graphql`
       totalCount
     }
   }
-`;
+`

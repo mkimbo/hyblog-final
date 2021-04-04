@@ -62,6 +62,12 @@ export const pageQuery = graphql`
     flamelinkQuestionAnswerContent(slug: { eq: $slug }) {
       question
       questioner
+      date
+      category
+      summary
+      tags
+      slug
+      author
       coverImage {
         localFile {
           childImageSharp {
@@ -71,11 +77,6 @@ export const pageQuery = graphql`
           }
         }
       }
-      date
-      category
-      tags
-      slug
-      author
       articleText {
         content
         fields {
