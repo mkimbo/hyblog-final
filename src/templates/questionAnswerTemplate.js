@@ -76,7 +76,7 @@ export const pageQuery = graphql`
       tags
       slug
       author
-      articeText {
+      articleText {
         content
         fields {
           readingTime {
