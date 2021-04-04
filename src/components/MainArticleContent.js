@@ -7,6 +7,8 @@ import Divider from '@material-ui/core/Divider'
 import ProTip from '../components/ProTip'
 import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
+import { Button } from '@material-ui/core'
+import { Link } from 'gatsby'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -18,17 +20,25 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Cardo, sans-serif',
     fontsize: '1.4rem',
   },
+  category: {
+    textDecoration: 'none',
+  },
 }))
 
 export default function MainArticleContent({ postNode, title, pageViews }) {
   const classes = useStyles()
   return (
     <Grid item xs={12} md={8}>
-      <Typography variant="h5" gutterBottom className={classes.title}>
-        {title}{' '}
-        <em style={{ fontSize: 'smaller', fontFamily: 'Cardo, sans-serif' }}>
-          {`by ${postNode.author}`}
-        </em>
+      <Link
+        to={`/${postNode.category.replace(/\W+/g, '-').toLowerCase()}`}
+        className={classes.category}
+      >
+        <Button variant="contained" size="small" color="primary">
+          {postNode.category}
+        </Button>
+      </Link>
+      <Typography variant="h4" gutterBottom className={classes.title}>
+        {title}
       </Typography>
       <ArticleMeta postNode={postNode} pageViews={pageViews} />
       <Divider />

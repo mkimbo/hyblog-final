@@ -109,8 +109,8 @@ export default function Sidebar() {
               </Avatar>
             }
             title={
-              <Typography className={classes.roboFonts} variant="h4">
-                Hyblog
+              <Typography variant="h5" id="emailSubscribe">
+                Hyblog Newsletter
               </Typography>
             }
           />

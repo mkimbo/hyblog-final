@@ -15,10 +15,15 @@ import { ModalContext } from '../context/modal/modal'
 import ModalSignIn from './ModalSignIn'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+  },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     fontFamily: 'Roboto, sans-serif',
     background: '#1489cc',
+    width: '100vw',
   },
   toolbarTitle: {
     flex: 1,
@@ -28,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   toolbarSecondary: {
     justifyContent: 'space-between',
     overflowX: 'auto',
+    width: '100vw',
   },
   toolbarLink: {
     padding: theme.spacing(1),
@@ -100,7 +106,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
-      <React.Fragment>
+      <React.Fragment className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <Link to={'/'} className={classes.toolbarTitle}>
             <Typography

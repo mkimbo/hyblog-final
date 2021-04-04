@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     backgroundColor: theme.palette.background.paper,
     fontFamily: 'Roboto, sans-serif',
+    width: '100vw',
+    marginTop: '10px',
   },
   container: {
     marginTop: theme.spacing(8),

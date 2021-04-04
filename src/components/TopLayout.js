@@ -44,7 +44,7 @@ export default function TopLayout(props) {
                   content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
               </Helmet>
-              <Container maxWidth="lg">
+              <Grid container>
                 <Header title="HyBlog" />
                 <Grid container>
                   <main>{props.children}</main>
@@ -74,7 +74,7 @@ export default function TopLayout(props) {
                   description="Play with the lights here for ease of reading! (A work in Progress)"
                 />
                 <ScrollToTop />
-              </Container>
+              </Grid>
             </React.Fragment>
           </DispatchContext.Provider>
         </ModalContextProvider>
