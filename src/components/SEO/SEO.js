@@ -40,7 +40,7 @@ const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
         : `${seo.siteUrl}${seo.image}`
       const url = postMeta ? `${seo.siteUrl}/${postMeta.slug}/` : seo.siteUrl
       const datePublished = isBlogPost ? postMeta.date : false
-      console.log(blog)
+      const author = isBlogPost ? postMeta.author : seo.author
       return (
         <React.Fragment>
           <Helmet>
@@ -73,7 +73,7 @@ const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
             description={description}
             datePublished={datePublished}
             siteUrl={seo.siteUrl}
-            author={seo.author}
+            author={author}
             organization={seo.organization}
             defaultTitle={seo.title}
           />

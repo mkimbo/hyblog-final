@@ -16,7 +16,7 @@ module.exports = {
     siteUrl: 'https://hyblog.info',
     image: '/src/images/icon.png',
     author: {
-      name: 'Hyblog',
+      name: 'Hyblog Admin',
     },
     organization: {
       name: 'Hybra, Inc.',

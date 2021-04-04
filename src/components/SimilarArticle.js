@@ -6,9 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import icon from '../images/icon.png'
-import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     width: '100px',
-    height: '100%',
+    height: '100px',
     margin: '0px',
   },
   imageButton: {
     width: '100px',
-    height: '100%',
+    height: '100px',
     margin: '0px',
   },
 
@@ -71,6 +69,13 @@ export default function SimilarArticle({ blog }) {
       </div>
 
       <CardContent className={classes.cardBody}>
+        <Typography
+          className={classes.author}
+          component="h6"
+          color="textSecondary"
+        >
+          {blog.node.category}
+        </Typography>
         <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
           <Typography
             variant="body"
@@ -88,21 +93,6 @@ export default function SimilarArticle({ blog }) {
         >
           {`By ${blog.node.author}`}
         </Typography>
-        <div className={classes.tags}>
-          {blog.node.tags.map((tag, index) => {
-            return (
-              <Button
-                key={index}
-                variant="text"
-                color="inherit"
-                size="small"
-                startIcon={<LocalOfferIcon color="primary" />}
-              >
-                {tag}
-              </Button>
-            )
-          })}
-        </div>
       </CardContent>
     </Card>
   )
