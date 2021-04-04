@@ -1,138 +1,127 @@
-const path = require('path')
-const _ = require('lodash')
-const moment = require('moment')
+const path = require("path");
+const _ = require("lodash");
+const readingTime = require("reading-time");
 const config = {
-  dateFromFormat: 'YYYY-MM-DD',
-}
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html' || stage === 'develop-html') {
+  dateFromFormat: "YYYY-MM-DD",
+};
+
+exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
+  if (stage === "build-html") {
     actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: `/@papercups-io/chat-widget/`,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
+      externals: getConfig().externals.concat(function (
+        context,
+        request,
+        callback
+      ) {
+        const regex = /^@?firebase(\/(.+))?/;
+        if (regex.test(request)) {
+          return callback(null, `umd ${request}`);
+        }
+        callback();
+      }),
+    });
   }
-}
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-  let slug
-  if (node.internal.type === 'MarkdownRemark') {
-    const fileNode = getNode(node.parent)
-    const parsedFilePath = path.parse(fileNode.relativePath)
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.title)}`
-    } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
-      slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`
-    } else if (parsedFilePath.dir === '') {
-      slug = `/${parsedFilePath.name}/`
-    } else {
-      slug = `/${parsedFilePath.dir}/`
-    }
+};
 
-    if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
-      if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug'))
-        slug = `/${_.kebabCase(node.frontmatter.slug)}`
-      if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
-        const date = moment(node.frontmatter.date, config.dateFromFormat)
-        if (!date.isValid)
-          console.warn(`WARNING: Invalid date.`, node.frontmatter)
-
-        createNodeField({
-          node,
-          name: 'date',
-          value: date.toISOString(),
-        })
-      }
-    }
-    createNodeField({ node, name: 'slug', value: slug })
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions;
+  if (node.content != null) {
+    createNodeField({
+      node,
+      name: "readingTime",
+      value: readingTime(node.content),
+    });
   }
-}
-
+};
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
-  const postPage = path.resolve('src/templates/post.js')
-  const tagPage = path.resolve('src/templates/tag.js')
-  const categoryPage = path.resolve('src/templates/category.js')
+  const { createPage } = actions;
+  const postPage = path.resolve("src/templates/blogPostTemplate.js");
+  const questionPage = path.resolve("src/templates/questionAnswerTemplate.js");
+  const categoryPage = path.resolve("src/templates/categoryTemplate.js");
 
-  const markdownQueryResult = await graphql(
+  const CreatePagesQueryResult = await graphql(
     `
       {
-        allMarkdownRemark(sort: { order: ASC, fields: [frontmatter___date] }) {
+        allFlamelinkQuestionAnswerContent {
           edges {
             node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                tags
-                category
-                date
-              }
+              category
+              date
+              question
+              questioner
+              slug
+              summary
+            }
+          }
+        }
+        allFlamelinkBlogPostContent {
+          edges {
+            node {
+              title
+              slug
+              author
+              category
+              date
             }
           }
         }
       }
     `
-  )
+  );
 
-  if (markdownQueryResult.errors) {
-    console.error(markdownQueryResult.errors)
-    throw markdownQueryResult.errors
+  if (CreatePagesQueryResult.errors) {
+    console.error(CreatePagesQueryResult.errors);
+    throw CreatePagesQueryResult.errors;
   }
 
-  const tagSet = new Set()
-  const categorySet = new Set()
+  const categorySet = new Set();
 
-  const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges
+  const postsEdges =
+    CreatePagesQueryResult.data.allFlamelinkBlogPostContent.edges;
+  const questionsEdges =
+    CreatePagesQueryResult.data.allFlamelinkQuestionAnswerContent.edges;
 
   postsEdges.forEach((edge, index) => {
-    if (edge.node.frontmatter.tags) {
-      edge.node.frontmatter.tags.forEach((tag) => {
-        tagSet.add(tag)
-      })
+    if (edge.node.category) {
+      categorySet.add(edge.node.category);
     }
-
-    if (edge.node.frontmatter.category) {
-      categorySet.add(edge.node.frontmatter.category)
-    }
-    const slug = edge.node.fields.slug
+    const slug = edge.node.slug;
+    const viewer = `/${slug}`;
 
     createPage({
-      path: slug,
+      path: `/${slug}/`,
       component: postPage,
       context: {
-        slug: edge.node.fields.slug,
+        slug: edge.node.slug,
         next: index === postsEdges.length - 1 ? null : postsEdges[index + 1],
         prev: index === 0 ? null : postsEdges[index - 1],
+        viewer: viewer,
       },
-    })
-  })
+    });
+  });
 
-  tagSet.forEach((tag) => {
+  questionsEdges.forEach((edge, index) => {
+    const slug = edge.node.slug;
+    const viewer = `/${slug}`;
     createPage({
-      path: `/tags/${_.kebabCase(tag)}/`,
-      component: tagPage,
+      path: `/${slug}/`,
+      component: questionPage,
       context: {
-        tag,
+        slug: edge.node.slug,
+        next: index === postsEdges.length - 1 ? null : postsEdges[index + 1],
+        prev: index === 0 ? null : postsEdges[index - 1],
+        viewer: viewer,
       },
-    })
-  })
+    });
+  });
+
   categorySet.forEach((category) => {
     createPage({
-      path: `/categories/${_.kebabCase(category)}/`,
+      path: `${_.kebabCase(category)}/`,
       component: categoryPage,
       context: {
         category,
       },
-    })
-  })
-}
+    });
+  });
+};

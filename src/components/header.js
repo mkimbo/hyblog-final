@@ -1,278 +1,216 @@
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Link, graphql, useStaticQuery } from 'gatsby'
-
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import ClearIcon from '@material-ui/icons/Clear'
-import Collapse from '@material-ui/core/Collapse'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import HomeIcon from '@material-ui/icons/Home'
-import ListIcon from '@material-ui/icons/ViewList'
-import InfoIcon from '@material-ui/icons/Info'
-import Explore from '@material-ui/icons/Explore'
-import ChevronRight from '@material-ui/icons/ChevronRight'
-import { FaBloggerB } from 'react-icons/fa'
-
-import SocialMedia from './social-media'
-
-const drawerWidth = 400
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-}
-
-const listItemVariants = {
-  show: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
-  },
-}
+import React, { useState, useContext } from "react";
+import { Link, graphql, useStaticQuery, navigate } from "gatsby";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Avatar from "@material-ui/core/Avatar";
+import { AuthContext } from "../context/auth/auth";
+import { ModalContext } from "../context/modal/modal";
+import ModalSignIn from "./ModalSignIn";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
+  toolbar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    fontFamily: "Roboto, sans-serif",
+    background: "#1489cc",
   },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    background: '#110f8b',
+  toolbarTitle: {
+    flex: 1,
+    fontFamily: "Roboto, sans-serif",
+    textDecoration: "none",
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  toolbarSecondary: {
+    justifyContent: "space-between",
+    overflowX: "auto",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: '100vw',
+  toolbarLink: {
+    padding: theme.spacing(1),
     flexShrink: 0,
-  },
-  drawerPaper: {
-    width: '100vw',
-    backgroundColor: '#eaecee',
-    [theme.breakpoints.up('md')]: {
-      width: drawerWidth,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
     },
   },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
-  },
-
   linkText: {
-    fontFamily: 'Roboto',
-    color: 'hsla(0, 0%, 0%, 0.8)',
+    fontFamily: "Roboto, sans-serif",
+    fontsize: "1.5rem",
+    cursor: "pointer",
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
+  login: {
+    margin: "0px 5px",
+    fontFamily: "Roboto, sans-serif",
   },
-
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
+  menu: {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    textShadow: "0 2px 4px #000",
   },
-}))
+}));
 
-const Header = ({ siteTitle }) => {
-  const classes = useStyles()
-  const [categories, setCategories] = useState(true)
-  const [open, setOpen] = React.useState(false)
+export default function Header(props) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(false);
+  const { title } = props;
+  const cat = [];
+  const { state, signOut } = useContext(AuthContext);
+  console.log(state);
+  const {
+    handleOpenLoginModal,
+    openLoginModal,
+    handleCloseLoginModal,
+  } = useContext(ModalContext);
 
-  function handleDrawerOpen() {
-    setOpen(true)
-  }
+  const onClickDropdownMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  function handleDrawerClose() {
-    setOpen(false)
-  }
-  function handleClick(id) {
-    setCategories(!categories)
-  }
-  const cat = []
+  const onCloseDropdownMenu = () => {
+    setAnchorEl(false);
+  };
+  const Signout = () => {
+    signOut();
+    if (window.location.pathname !== "/") {
+      navigate("/");
+    }
+  };
+
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
+      allFlamelinkBlogPostContent {
         edges {
           node {
             id
-            frontmatter {
-              category
-            }
+            category
           }
         }
       }
     }
-  `)
+  `);
+  data.allFlamelinkBlogPostContent.edges.map((post) => {
+    cat.push(post.node.category);
+    return null;
+  });
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        elevation={0}
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h4" color="inherit">
-            {siteTitle}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            <ClearIcon color="primary" />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <Link to="/">
-            <ListItem button>
-              <ListItemIcon>
-                <FaBloggerB color="#0906a5" style={{fontSize: '1.5rem'}} />
-              </ListItemIcon>
-              <Typography className={classes.linkText}>Hyblog</Typography>
-            </ListItem>
-          </Link>
-          <ListItem
-            id="categories"
-            button
-            onClick={() => handleClick('categories')}
-          >
-            <ListItemIcon>
-              <Explore color="primary" />
-            </ListItemIcon>
-            <Typography className={classes.linkText}>Explore</Typography>
-          </ListItem>
-          <Collapse in={!categories} timeout="auto" unmountOnExit>
-            {data.allMarkdownRemark.edges.map((post) => {
-              cat.push(post.node.frontmatter.category)
-              return null
-            })}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
+    <React.Fragment>
+      <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
+      <React.Fragment>
+        <Toolbar className={classes.toolbar}>
+          <Link to={"/"} className={classes.toolbarTitle}>
+            <Typography
+              component="h2"
+              variant="h5"
+              align="left"
+              color="secondary"
+              noWrap
+              className={classes.toolbarTitle}
             >
-              {Array.from(new Set(cat)).map((category) => (
-                <Link
-                  to={`/categories/${category
-                    .replace(/\W+/g, '-')
-                    .toLowerCase()}`}
-                  key={category}
-                  className={classes.categories}
-                >
-                  <motion.div variants={listItemVariants}>
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ChevronRight />
-                      </ListItemIcon>
-                      <Typography variant="body" className={classes.linkText}>
-                        {category}
-                      </Typography>
-                    </ListItem>
-                  </motion.div>
-                </Link>
-              ))}
-            </motion.div>
-          </Collapse>
-          <Link to="/about">
-            <ListItem button>
-              <ListItemIcon>
-                <InfoIcon color="primary" />
-              </ListItemIcon>
-              <Typography className={classes.linkText}>Information</Typography>
-            </ListItem>
+              {title}
+            </Typography>
           </Link>
-          <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
-            <ListItem button>
-              <ListItemIcon>
-                <ListIcon color="primary" />
-              </ListItemIcon>
-              <Typography className={classes.linkText}>Hyreads</Typography>
-            </ListItem>
-          </a>
-          <a href="https://www.hyreads.com" alt="Link to Hyreads Home Page">
-            <ListItem button>
-              <ListItemIcon>
-                <HomeIcon color="primary" />
-              </ListItemIcon>
-              <Typography className={classes.linkText}>Hybra</Typography>
-            </ListItem>
-          </a>
-        </List>
-        <SocialMedia />
-      </Drawer>
-    </div>
-  )
+          <IconButton>
+            <SearchIcon color="secondary" />
+          </IconButton>
+          {state.isAuthenticated && !state.isLoading ? (
+            <>
+              <div
+                className={classes.menu}
+                onClick={onClickDropdownMenu}
+                onKeyDown={onClickDropdownMenu}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                role="button"
+              >
+                <Avatar src={state.user?.photoURL || "/broken-image.jpg"} />
+              </div>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                style={{ top: "6%" }}
+                open={Boolean(anchorEl)}
+                onClose={onCloseDropdownMenu}
+              >
+                <MenuItem>{state.user?.email}</MenuItem>
+                <MenuItem onClick={Signout}>Logout</MenuItem>
+              </Menu>
+            </>
+          ) : (
+            <Button
+              onClick={handleOpenLoginModal}
+              variant="outlined"
+              className={classes.login}
+              color="secondary"
+            >
+              Login
+            </Button>
+          )}
+        </Toolbar>
+        <Toolbar
+          component="nav"
+          variant="dense"
+          className={classes.toolbarSecondary}
+        >
+          <Link to={"#"} key="news" noWrap className={classes.toolbarLink}>
+            <Typography
+              variant="body2"
+              color="primary"
+              className={classes.linkText}
+            >
+              News
+            </Typography>
+          </Link>
+          <Link
+            to={"#"}
+            key="covid"
+            color="primary"
+            className={classes.toolbarLink}
+          >
+            <Typography
+              variant="body2"
+              color="primary"
+              className={classes.linkText}
+            >
+              Covid-19
+            </Typography>
+          </Link>
+          <Link to={"#"} key="poetry" noWrap className={classes.toolbarLink}>
+            <Typography
+              variant="body2"
+              color="primary"
+              className={classes.linkText}
+            >
+              Poetry
+            </Typography>
+          </Link>
+          {Array.from(new Set(cat)).map((category) => (
+            <Link
+              to={`/${category.replace(/\W+/g, "-").toLowerCase()}`}
+              key={category}
+              noWrap
+              className={classes.toolbarLink}
+            >
+              <Typography
+                variant="body2"
+                color="primary"
+                className={classes.linkText}
+              >
+                {category}
+              </Typography>
+            </Link>
+          ))}
+        </Toolbar>
+      </React.Fragment>
+    </React.Fragment>
+  );
 }
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+  sections: PropTypes.array,
+  title: PropTypes.string,
+};

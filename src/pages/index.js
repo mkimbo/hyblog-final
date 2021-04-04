@@ -1,90 +1,90 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import classNames from 'classnames'
-
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import Parallax from '../components/vanillaParallax'
-import PostPreview from '../components/post-preview'
-import { Typography } from '@material-ui/core'
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
+import TopLayout from '../components/TopLayout'
+import { Container, Grid } from '@material-ui/core'
 
+import MainFeaturedPost from '../components/MainFeaturedPost'
+import SEO from '../components/SEO/SEO'
+import Main from '../components/Main'
+import Sidebar from '../components/SideBar'
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    height: '90vh',
-    backgroundColor: 'rgba(17, 15, 139, 0.1)',
-  },
-  categories: {
-    textAlign: 'center',
-  },
-  header: {
-    textAlign: 'center',
-  },
-  headerText: {
-    fontFamily: 'Roboto',
-    color: 'hsla(0, 0%, 0%, 0.8)',
-  },
-  main: {
-    background: '#FFFFFF',
-    position: 'relative',
-    zIndex: '3',
-  },
-  mainRaised: {
-    margin: '-120px 75px 0px',
-    padding: '0 50px 10px',
-    background: 'rgba(234, 236, 238, 0.9)',
-    borderRadius: '6px',
-    boxShadow:
-      '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
-    [theme.breakpoints.down('md')]: {
-      margin: '-100px 5px 0px',
-      padding: '0 13px 5px',
-    },
+  mainGrid: {
+    marginTop: theme.spacing(3),
   },
 }))
+export default function Index({ data }) {
+  const posts = data.allFlamelinkBlogPostContent.edges
+  const questions = data.allFlamelinkQuestionAnswerContent.edges
+  const UsortedpostEdges = [...posts, ...questions]
+  const postEdges = UsortedpostEdges.slice().sort(
+    (a, b) => new Date(b.node.date) - new Date(a.node.date)
+  )
 
-const IndexPage = ({ data }) => {
-  const postEdges = data.allMarkdownRemark.edges
   const classes = useStyles()
+  const pageTitle = 'Hyblog'
   return (
-    <Layout>
-      <SEO title="Home" />
-
-      <Parallax>
-        <div className={classes.hero}></div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <Grid item xs={12} className={classes.header}>
-          <Typography variant="h4">Latest Posts</Typography>
+    <TopLayout>
+      <SEO />
+      <Container>
+        <MainFeaturedPost postEdges={postEdges} />
+        <Grid container spacing={5} className={classes.mainGrid}>
+          <Main postEdges={postEdges} title={pageTitle} />
+          <Sidebar />
         </Grid>
-        <PostPreview postEdges={postEdges} />
-      </div>
-    </Layout>
+      </Container>
+    </TopLayout>
   )
 }
 
-export default IndexPage
-
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark(
+    allFlamelinkBlogPostContent(
       limit: 2000
-      sort: { fields: [fields___date], order: DESC }
+      sort: { fields: [date], order: DESC }
     ) {
       edges {
         node {
-          excerpt(pruneLength: 150)
-          id
-          fields {
-            slug
-            date
+          title
+          slug
+          author
+          category
+          date
+          flamelink_id
+          summary
+          tags
+          coverImage {
+            localFile {
+              childImageSharp {
+                fluid(webpQuality: 10) {
+                  tracedSVG
+                  srcWebp
+                }
+              }
+            }
           }
-          frontmatter {
-            title
-            tags
-            cover
-            date
+        }
+      }
+    }
+    allFlamelinkQuestionAnswerContent {
+      edges {
+        node {
+          category
+          date
+          flamelink_id
+          question
+          questioner
+          slug
+          author
+          summary
+          coverImage {
+            localFile {
+              childImageSharp {
+                fluid {
+                  srcWebp
+                }
+              }
+            }
           }
         }
       }
