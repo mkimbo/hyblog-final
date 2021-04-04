@@ -1,34 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { CssBaseline, Grid, Container } from "@material-ui/core";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import loadable from "@loadable/component";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
+import { CssBaseline, Grid, Container } from '@material-ui/core'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import loadable from '@loadable/component'
 
-import initialTheme from "../context/theme";
-import { themeReducer, initialState } from "../context/themeReducer";
-import { DispatchContext } from "../context/DispatchContext";
-import { GlobalAuthProvider } from "../context/auth/auth";
-import { ModalContextProvider } from "../context/modal/modal";
-import Header from "./Header";
-import Footer from "./Footer";
-import ScrollToTop from "./ScrollToTop";
+import initialTheme from '../context/theme'
+import { themeReducer, initialState } from '../context/themeReducer'
+import { DispatchContext } from '../context/DispatchContext'
+import { GlobalAuthProvider } from '../context/auth/auth'
+import { ModalContextProvider } from '../context/modal/modal'
+import Header from './Header'
+import Footer from './Footer'
+import ScrollToTop from './ScrollToTop'
 
-const ChatWidget = loadable(() => import("@papercups-io/chat-widget"));
+const ChatWidget = loadable(() => import('@papercups-io/chat-widget'))
 
 export default function TopLayout(props) {
-  const [state, dispatch] = React.useReducer(themeReducer, initialState);
-  const { darkMode } = state;
+  const [state, dispatch] = React.useReducer(themeReducer, initialState)
+  const { darkMode } = state
   const theme = React.useMemo(() => {
     return createMuiTheme({
       ...initialTheme,
       palette: {
         primary: initialTheme.palette.primary,
         secondary: initialTheme.palette.secondary,
-        type: darkMode ? "dark" : "light",
+        type: darkMode ? 'dark' : 'light',
       },
-    });
-  }, [darkMode]);
+    })
+  }, [darkMode])
 
   return (
     <ThemeProvider theme={theme}>
@@ -80,9 +80,9 @@ export default function TopLayout(props) {
         </ModalContextProvider>
       </GlobalAuthProvider>
     </ThemeProvider>
-  );
+  )
 }
 
 TopLayout.propTypes = {
   children: PropTypes.node,
-};
+}

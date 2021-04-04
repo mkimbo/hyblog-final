@@ -1,85 +1,85 @@
-import React, { useState, useContext } from "react";
-import { Link, graphql, useStaticQuery, navigate } from "gatsby";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Avatar from "@material-ui/core/Avatar";
-import { AuthContext } from "../context/auth/auth";
-import { ModalContext } from "../context/modal/modal";
-import ModalSignIn from "./ModalSignIn";
+import React, { useState, useContext } from 'react'
+import { Link, graphql, useStaticQuery, navigate } from 'gatsby'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@material-ui/icons/Search'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import Avatar from '@material-ui/core/Avatar'
+import { AuthContext } from '../context/auth/auth'
+import { ModalContext } from '../context/modal/modal'
+import ModalSignIn from './ModalSignIn'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    fontFamily: "Roboto, sans-serif",
-    background: "#1489cc",
+    fontFamily: 'Roboto, sans-serif',
+    background: '#1489cc',
   },
   toolbarTitle: {
     flex: 1,
-    fontFamily: "Roboto, sans-serif",
-    textDecoration: "none",
+    fontFamily: 'Roboto, sans-serif',
+    textDecoration: 'none',
   },
   toolbarSecondary: {
-    justifyContent: "space-between",
-    overflowX: "auto",
+    justifyContent: 'space-between',
+    overflowX: 'auto',
   },
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "underline",
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
   linkText: {
-    fontFamily: "Roboto, sans-serif",
-    fontsize: "1.5rem",
-    cursor: "pointer",
+    fontFamily: 'Roboto, sans-serif',
+    fontsize: '1.5rem',
+    cursor: 'pointer',
   },
   login: {
-    margin: "0px 5px",
-    fontFamily: "Roboto, sans-serif",
+    margin: '0px 5px',
+    fontFamily: 'Roboto, sans-serif',
   },
   menu: {
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    textShadow: "0 2px 4px #000",
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    textShadow: '0 2px 4px #000',
   },
-}));
+}))
 
 export default function Header(props) {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(false);
-  const { title } = props;
-  const cat = [];
-  const { state, signOut } = useContext(AuthContext);
-  console.log(state);
+  const classes = useStyles()
+  const [anchorEl, setAnchorEl] = useState(false)
+  const { title } = props
+  const cat = []
+  const { state, signOut } = useContext(AuthContext)
+  console.log(state)
   const {
     handleOpenLoginModal,
     openLoginModal,
     handleCloseLoginModal,
-  } = useContext(ModalContext);
+  } = useContext(ModalContext)
 
   const onClickDropdownMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const onCloseDropdownMenu = () => {
-    setAnchorEl(false);
-  };
+    setAnchorEl(false)
+  }
   const Signout = () => {
-    signOut();
-    if (window.location.pathname !== "/") {
-      navigate("/");
+    signOut()
+    if (window.location.pathname !== '/') {
+      navigate('/')
     }
-  };
+  }
 
   const data = useStaticQuery(graphql`
     query {
@@ -92,17 +92,17 @@ export default function Header(props) {
         }
       }
     }
-  `);
+  `)
   data.allFlamelinkBlogPostContent.edges.map((post) => {
-    cat.push(post.node.category);
-    return null;
-  });
+    cat.push(post.node.category)
+    return null
+  })
   return (
     <React.Fragment>
       <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
       <React.Fragment>
         <Toolbar className={classes.toolbar}>
-          <Link to={"/"} className={classes.toolbarTitle}>
+          <Link to={'/'} className={classes.toolbarTitle}>
             <Typography
               component="h2"
               variant="h5"
@@ -127,12 +127,12 @@ export default function Header(props) {
                 aria-haspopup="true"
                 role="button"
               >
-                <Avatar src={state.user?.photoURL || "/broken-image.jpg"} />
+                <Avatar src={state.user?.photoURL || '/broken-image.jpg'} />
               </div>
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
-                style={{ top: "6%" }}
+                style={{ top: '6%' }}
                 open={Boolean(anchorEl)}
                 onClose={onCloseDropdownMenu}
               >
@@ -156,7 +156,7 @@ export default function Header(props) {
           variant="dense"
           className={classes.toolbarSecondary}
         >
-          <Link to={"#"} key="news" noWrap className={classes.toolbarLink}>
+          <Link to={'#'} key="news" noWrap className={classes.toolbarLink}>
             <Typography
               variant="body2"
               color="primary"
@@ -166,7 +166,7 @@ export default function Header(props) {
             </Typography>
           </Link>
           <Link
-            to={"#"}
+            to={'#'}
             key="covid"
             color="primary"
             className={classes.toolbarLink}
@@ -179,7 +179,7 @@ export default function Header(props) {
               Covid-19
             </Typography>
           </Link>
-          <Link to={"#"} key="poetry" noWrap className={classes.toolbarLink}>
+          <Link to={'#'} key="poetry" noWrap className={classes.toolbarLink}>
             <Typography
               variant="body2"
               color="primary"
@@ -190,7 +190,7 @@ export default function Header(props) {
           </Link>
           {Array.from(new Set(cat)).map((category) => (
             <Link
-              to={`/${category.replace(/\W+/g, "-").toLowerCase()}`}
+              to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
               key={category}
               noWrap
               className={classes.toolbarLink}
@@ -207,10 +207,10 @@ export default function Header(props) {
         </Toolbar>
       </React.Fragment>
     </React.Fragment>
-  );
+  )
 }
 
 Header.propTypes = {
   sections: PropTypes.array,
   title: PropTypes.string,
-};
+}
