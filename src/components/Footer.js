@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'
 import { IconButton } from '@material-ui/core'
+import '../styles/footer.css'
 
 function Copyright() {
   return (
@@ -18,7 +19,7 @@ function Copyright() {
         style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
       >
         <Typography
-          color="primary"
+          color="secondary"
           style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
         >
           {'© '}HyBlog {new Date().getFullYear()}
@@ -32,15 +33,15 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.background.paper,
     fontFamily: 'Roboto, sans-serif',
-    width: '100vw',
+    width: '100%',
     marginTop: '10px',
   },
   container: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
     display: 'flex',
+    textAlign: 'center',
   },
   iconsWrapper: {
     height: 120,
@@ -89,156 +90,185 @@ export default function Footer() {
   const classes = useStyles()
 
   return (
-    <Paper elevation={3} component="footer" className={classes.root}>
-      <Container className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography
-              variant="h6"
-              marked="left"
-              gutterBottom
-              className={classes.roboFonts}
-            >
-              Hyblog
-            </Typography>
-            <ul className={classes.list}>
-              <li className={classes.listItem}>
-                <InternalLink
-                  color="primary"
-                  to={`#`}
-                  className={classes.cardoFonts}
-                >
-                  <Typography color="primary" className={classes.cardoFonts}>
-                    Authors
-                  </Typography>
-                </InternalLink>
-              </li>
-              <li className={classes.listItem}>
-                <InternalLink
-                  color="primary"
-                  to={`#emailSubscribe`}
-                  className={classes.cardoFonts}
-                >
-                  <Typography color="primary" className={classes.cardoFonts}>
-                    Subscribe
-                  </Typography>
-                </InternalLink>
-              </li>
-            </ul>
-          </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography
-              variant="h6"
-              marked="left"
-              gutterBottom
-              className={classes.roboFonts}
-            >
-              About
-            </Typography>
-            <ul className={classes.list}>
-              <li className={classes.listItem}>
-                <Link href="#" className={classes.cardoFonts}>
-                  Hyblog
-                </Link>
-              </li>
-              <li className={classes.listItem}>
-                <Link href="https://hyreads.com" className={classes.cardoFonts}>
-                  Hybra
-                </Link>
-              </li>
-              <li className={classes.listItem}>
-                <Link href="https://hyreads.com" className={classes.cardoFonts}>
-                  Hyreads
-                </Link>
-              </li>
-            </ul>
-          </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography
-              variant="h6"
-              marked="left"
-              gutterBottom
-              className={classes.roboFonts}
-            >
-              Pages
-            </Typography>
-            <ul className={classes.list}>
-              <li className={classes.listItem}>
-                <InternalLink
-                  color="primary"
-                  to={`#`}
-                  className={classes.cardoFonts}
-                >
-                  <Typography color="primary" className={classes.cardoFonts}>
-                    News
-                  </Typography>
-                </InternalLink>
-              </li>
-              <li className={classes.listItem}>
-                <InternalLink
-                  color="primary"
-                  to={`#`}
-                  className={classes.cardoFonts}
-                >
-                  <Typography color="primary" className={classes.cardoFonts}>
-                    Q & A
-                  </Typography>
-                </InternalLink>
-              </li>
-              <li className={classes.listItem}>
-                <InternalLink
-                  color="primary"
-                  to={`#`}
-                  className={classes.cardoFonts}
-                >
-                  <Typography color="primary" className={classes.cardoFonts}>
-                    Photo Poetry
-                  </Typography>
-                </InternalLink>
-              </li>
-            </ul>
-          </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography
-              variant="h6"
-              marked="left"
-              gutterBottom
-              className={classes.roboFonts}
-            >
-              Dark
-            </Typography>
-            <DarkModeButton />
-          </Grid>
-          <Grid item xs={6} sm={4} md={3}>
-            <Grid
-              container
-              direction="column"
-              justify="flex-end"
-              className={classes.iconsWrapper}
-              spacing={2}
-            >
-              <Grid item className={classes.icons}>
-                <IconButton
-                  href="https://facebook.com/Hyreads"
-                  className={classes.icon}
-                  color="inherit"
-                >
-                  <FaFacebookF />
-                </IconButton>
-                <IconButton
-                  href="https://twitter.com/hyreads"
-                  className={classes.icon}
-                  color="inherit"
-                >
-                  <FaTwitter />
-                </IconButton>
-                <Copyright />
+    <div className="footer">
+      <Paper elevation={3} component="footer" className={classes.root}>
+        <Container className={classes.container}>
+          <Grid container spacing={5}>
+            <Grid item xs={6} sm={4} md={2}>
+              <Typography
+                variant="h6"
+                marked="left"
+                gutterBottom
+                className={classes.roboFonts}
+              >
+                Hyblog
+              </Typography>
+              <ul className={classes.list}>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="primary"
+                    to={`#`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Authors
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`#emailSubscribe`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Subscribe
+                    </Typography>
+                  </InternalLink>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={6} sm={4} md={2}>
+              <Typography
+                variant="h6"
+                marked="left"
+                gutterBottom
+                className={classes.roboFonts}
+              >
+                About
+              </Typography>
+              <ul className={classes.list}>
+                <li className={classes.listItem}>
+                  <Link
+                    color="secondary"
+                    href="#"
+                    className={classes.cardoFonts}
+                  >
+                    Hyblog
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link
+                    href="https://hyreads.com"
+                    className={classes.cardoFonts}
+                    color="secondary"
+                  >
+                    Hybra
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link
+                    href="https://hyreads.com"
+                    className={classes.cardoFonts}
+                    color="secondary"
+                  >
+                    Hyreads
+                  </Link>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={6} sm={4} md={2}>
+              <Typography
+                variant="h6"
+                marked="left"
+                gutterBottom
+                className={classes.roboFonts}
+              >
+                Pages
+              </Typography>
+              <ul className={classes.list}>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="primary"
+                    to={`#`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      News
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`#`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Q & A
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`#`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Photo Poetry
+                    </Typography>
+                  </InternalLink>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={6} sm={4} md={2}>
+              <Typography
+                variant="h6"
+                marked="left"
+                gutterBottom
+                className={classes.roboFonts}
+              >
+                Dark
+              </Typography>
+              <DarkModeButton />
+            </Grid>
+            <Grid item xs={6} sm={4} md={3}>
+              <Grid
+                container
+                direction="column"
+                justify="flex-end"
+                className={classes.iconsWrapper}
+                spacing={2}
+              >
+                <Grid item className={classes.icons}>
+                  <IconButton
+                    href="https://facebook.com/Hyreads"
+                    className={classes.icon}
+                    color="inherit"
+                  >
+                    <FaFacebookF />
+                  </IconButton>
+                  <IconButton
+                    href="https://twitter.com/hyreads"
+                    className={classes.icon}
+                    color="inherit"
+                  >
+                    <FaTwitter />
+                  </IconButton>
+                  <Copyright />
+                </Grid>
+                <Grid item></Grid>
               </Grid>
-              <Grid item></Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Paper>
+        </Container>
+      </Paper>
+    </div>
   )
 }

@@ -37,20 +37,18 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'auto',
     width: '100vw',
     paddingTop: '62px',
+    marginBottom: '3px',
+    background: '#1489cc',
   },
   toolbarLink: {
-    color: '#1489cc',
     padding: theme.spacing(1),
+    fontFamily: 'Roboto, sans-serif',
     flexShrink: 0,
+    color: '#ffffff',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
     },
-  },
-  linkText: {
-    fontFamily: 'Roboto, sans-serif',
-    fontsize: '1.5rem',
-    cursor: 'pointer',
   },
   login: {
     margin: '0px 5px',
@@ -170,26 +168,15 @@ export default function Header(props) {
             <Link
               to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
               key={category}
+              color="secondary"
               noWrap
               className={classes.toolbarLink}
             >
-              <Typography
-                variant="body2"
-                color="primary"
-                className={classes.linkText}
-              >
-                {category}
-              </Typography>
+              {category}
             </Link>
           ))}
           <Link to={'#'} key="news" noWrap className={classes.toolbarLink}>
-            <Typography
-              variant="body2"
-              color="primary"
-              className={classes.linkText}
-            >
-              News
-            </Typography>
+            News
           </Link>
           <Link
             to={'#'}
@@ -197,22 +184,10 @@ export default function Header(props) {
             color="primary"
             className={classes.toolbarLink}
           >
-            <Typography
-              variant="body2"
-              color="primary"
-              className={classes.linkText}
-            >
-              Covid-19
-            </Typography>
+            Covid-19
           </Link>
           <Link to={'#'} key="poetry" noWrap className={classes.toolbarLink}>
-            <Typography
-              variant="body2"
-              color="primary"
-              className={classes.linkText}
-            >
-              Poetry
-            </Typography>
+            Poetry
           </Link>
         </Toolbar>
       </React.Fragment>

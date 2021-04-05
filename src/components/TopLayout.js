@@ -48,7 +48,7 @@ export default function TopLayout(props) {
               <Header title="HyBlog" />
 
               <main>{props.children}</main>
-
+              <Footer />
               <ChatWidget
                 accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
                 title="Customer Service Center"
@@ -69,10 +69,7 @@ export default function TopLayout(props) {
                 //   }
                 // }}
               />
-              <Footer
-                title="Footer"
-                description="Play with the lights here for ease of reading! (A work in Progress)"
-              />
+
               <ScrollToTop />
             </Grid>
           </DispatchContext.Provider>
