@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
   },
   icons: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
   },
   icon: {
     width: 40,
@@ -231,10 +232,9 @@ export default function Footer() {
                 >
                   <FaTwitter />
                 </IconButton>
-              </Grid>
-              <Grid item>
                 <Copyright />
               </Grid>
+              <Grid item></Grid>
             </Grid>
           </Grid>
         </Grid>

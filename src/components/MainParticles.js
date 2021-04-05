@@ -50,6 +50,10 @@ export default function MainParticles(props) {
               detectsOn: 'canvas',
               events: {
                 resize: true,
+                onHover: {
+                  enable: true,
+                  mode: 'slow',
+                },
               },
             },
             particles: {

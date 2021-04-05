@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Roboto, sans-serif',
     background: '#1489cc',
     width: '100vw',
+    position: 'fixed',
+    zIndex: '10',
   },
   toolbarTitle: {
     flex: 1,
@@ -34,8 +36,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     overflowX: 'auto',
     width: '100vw',
+    paddingTop: '62px',
   },
   toolbarLink: {
+    color: '#1489cc',
     padding: theme.spacing(1),
     flexShrink: 0,
     textDecoration: 'none',
@@ -162,6 +166,22 @@ export default function Header(props) {
           variant="dense"
           className={classes.toolbarSecondary}
         >
+          {Array.from(new Set(cat)).map((category) => (
+            <Link
+              to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
+              key={category}
+              noWrap
+              className={classes.toolbarLink}
+            >
+              <Typography
+                variant="body2"
+                color="primary"
+                className={classes.linkText}
+              >
+                {category}
+              </Typography>
+            </Link>
+          ))}
           <Link to={'#'} key="news" noWrap className={classes.toolbarLink}>
             <Typography
               variant="body2"
@@ -194,22 +214,6 @@ export default function Header(props) {
               Poetry
             </Typography>
           </Link>
-          {Array.from(new Set(cat)).map((category) => (
-            <Link
-              to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
-              key={category}
-              noWrap
-              className={classes.toolbarLink}
-            >
-              <Typography
-                variant="body2"
-                color="primary"
-                className={classes.linkText}
-              >
-                {category}
-              </Typography>
-            </Link>
-          ))}
         </Toolbar>
       </React.Fragment>
     </React.Fragment>

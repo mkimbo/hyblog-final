@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     margin: '5px 0',
     boxShadow: 'none',
-    minHeight: '100px',
+    minHeight: '130px',
     borderBottom: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.down('xs')]: {
       margin: '3px 0',
@@ -29,13 +29,13 @@ const useStyles = makeStyles((theme) => ({
     margin: '1px 0',
   },
   media: {
-    width: '100px',
-    height: '100px',
+    width: '120px',
+    height: '120px',
     margin: '0px',
   },
   imageButton: {
-    width: '100px',
-    height: '100px',
+    width: '120px',
+    height: '130px',
     margin: '0px',
   },
 

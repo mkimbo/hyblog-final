@@ -37,45 +37,44 @@ export default function TopLayout(props) {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <DispatchContext.Provider value={dispatch}>
             <CssBaseline />
-            <React.Fragment>
+            <Grid maxWidth="lg">
               <Helmet>
                 <meta
                   name="viewport"
                   content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
               </Helmet>
-              <Grid container>
-                <Header title="HyBlog" />
-                <Grid container>
-                  <main>{props.children}</main>
-                </Grid>
-                <ChatWidget
-                  accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
-                  title="Customer Service Center"
-                  subtitle="Connect with Hyblog"
-                  primaryColor="#1489cc"
-                  greeting="Hi there! Send us a message and we'll get back to you as soon as we can."
-                  newMessagePlaceholder="Start typing..."
-                  showAgentAvailability={true}
-                  requireEmailUpfront={false}
-                  baseUrl="https://app.papercups.io"
-                  // Optionally include data about your customer here to identify them
-                  // customer={{
-                  //   name: __CUSTOMER__.name,
-                  //   email: __CUSTOMER__.email,
-                  //   external_id: __CUSTOMER__.id,
-                  //   metadata: {
-                  //     plan: "premium"
-                  //   }
-                  // }}
-                />
-                <Footer
-                  title="Footer"
-                  description="Play with the lights here for ease of reading! (A work in Progress)"
-                />
-                <ScrollToTop />
-              </Grid>
-            </React.Fragment>
+
+              <Header title="HyBlog" />
+
+              <main>{props.children}</main>
+
+              <ChatWidget
+                accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
+                title="Customer Service Center"
+                subtitle="Connect with Hyblog"
+                primaryColor="#1489cc"
+                greeting="Hi there! Send us a message and we'll get back to you as soon as we can."
+                newMessagePlaceholder="Start typing..."
+                showAgentAvailability={true}
+                requireEmailUpfront={false}
+                baseUrl="https://app.papercups.io"
+                // Optionally include data about your customer here to identify them
+                // customer={{
+                //   name: __CUSTOMER__.name,
+                //   email: __CUSTOMER__.email,
+                //   external_id: __CUSTOMER__.id,
+                //   metadata: {
+                //     plan: "premium"
+                //   }
+                // }}
+              />
+              <Footer
+                title="Footer"
+                description="Play with the lights here for ease of reading! (A work in Progress)"
+              />
+              <ScrollToTop />
+            </Grid>
           </DispatchContext.Provider>
         </ModalContextProvider>
       </GlobalAuthProvider>
