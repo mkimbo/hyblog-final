@@ -1,11 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { DiscussionEmbed } from 'disqus-react'
 
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
-import Divider from '@material-ui/core/Divider'
 
 import MainArticleImage from '../components/MainArticleImage'
 import SEO from '../components/SEO/SEO'
@@ -22,10 +20,6 @@ export default function BlogPostTemplate({ data, pageContext }) {
   const postNode = data.flamelinkBlogPostContent
   const pageViews = data.pageViews.totalCount
   const pageTitle = postNode.title
-  const disqusConfig = {
-    shortname: 'hyblog-1', //your site shortname here
-    config: { identifier: postNode.slug, title: postNode.title },
-  }
 
   return (
     <TopLayout>
@@ -49,9 +43,6 @@ export default function BlogPostTemplate({ data, pageContext }) {
           />
           <Sidebar />
         </Grid>
-
-        <Divider />
-        <DiscussionEmbed {...disqusConfig} />
       </Container>
     </TopLayout>
   )

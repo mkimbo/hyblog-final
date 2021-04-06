@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ProTip from '../components/ProTip'
+import { DiscussionEmbed } from 'disqus-react'
 import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
 import { Button } from '@material-ui/core'
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainArticleContent({ postNode, title, pageViews }) {
   const classes = useStyles()
+  const disqusConfig = {
+    shortname: 'hyblog-1', //your site shortname here
+    config: { identifier: postNode.slug, title: title },
+  }
   return (
     <Grid item xs={12} md={8}>
       <Link
@@ -49,12 +54,13 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
       />
       <ProTip />
       <Divider />
+      <DiscussionEmbed {...disqusConfig} />
+      <Divider />
       <RelatedReads
         category={postNode.category}
         tags={postNode.tags}
         currentArticleSlug={postNode.slug}
       />
-      <Divider />
     </Grid>
   )
 }
