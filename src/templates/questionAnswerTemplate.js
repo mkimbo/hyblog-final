@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 export default function QATemplate({ data, pageContext }) {
   const classes = useStyles()
   const postNode = data.flamelinkQuestionAnswerContent
-  const pageViews = data.pageViews.totalCount
+  const pageViews = data.pageViews ? data.pageViews.totalCount : 0
   const pageTitle = postNode.question
 
   return (

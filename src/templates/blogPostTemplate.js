@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BlogPostTemplate({ data, pageContext }) {
   const classes = useStyles()
   const postNode = data.flamelinkBlogPostContent
-  const pageViews = data.pageViews.totalCount
+  const pageViews = data.pageViews ? data.pageViews.totalCount : 0
   const pageTitle = postNode.title
 
   return (
