@@ -7,6 +7,9 @@ import SimilarArticle from './SimilarArticle'
 import { SimilarArticlesFactory } from './SimilarityFactory'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: '10px',
+  },
   similarArticles: {
     display: 'grid',
     alignItems: 'left',
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const RelatedReads = ({ articles }) => {
   const classes = useStyles()
   return (
-    <Grid xs={12}>
+    <Grid xs={12} className={classes.root}>
       <Typography variant="h5" gutterBottom>
         Similar Articles
       </Typography>
