@@ -63,8 +63,9 @@ export default function MainFeaturedPost(props) {
   const image = data.allFile.edges.find((n) =>
     n.node.absolutePath.includes(cover)
   )
-  const mainImage = image ? image.node.childImageSharp.fluid : null
-
+  const mainImage = image.node.childImageSharp
+    ? image.node.childImageSharp.fluid
+    : null
   return (
     <BackgroundImage fluid={mainImage}>
       <div className={classes.overlay} />

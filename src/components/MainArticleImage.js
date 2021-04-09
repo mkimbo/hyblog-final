@@ -53,7 +53,9 @@ export default function MainArticleImage({ post }) {
   const image = data.allFile.edges.find((n) =>
     n.node.absolutePath.includes(cover)
   )
-  const mainImage = image ? image.node.childImageSharp.fluid : null
+  const mainImage = image.node.childImageSharp
+    ? image.node.childImageSharp.fluid
+    : null
   return (
     <Card className={classes.mainArticleImage}>
       <Img fluid={mainImage} />
