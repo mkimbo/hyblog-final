@@ -6,7 +6,7 @@ const config = {
 }
 
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
-  if (stage === 'build-html') {
+  if (stage === 'build-html' || stage === 'develop-html') {
     actions.setWebpackConfig({
       externals: getConfig().externals.concat(function (
         context,

@@ -1,42 +1,44 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
+import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Hidden from '@material-ui/core/Hidden'
-import icon from '../images/icon.png'
 import { formatDistanceStrict } from 'date-fns'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    margin: '20px 0',
+    margin: '10px 0',
     boxShadow: 'none',
     alignItems: 'center',
     borderBottom: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.down('xs')]: {
       margin: '3px 0',
     },
+    '&:hover': {
+      boxShadow:
+        '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
+    },
   },
   media: {
     width: '220px',
-    height: '170px',
     [theme.breakpoints.down('xs')]: {
       width: '100px',
-      height: '80px',
+
       margin: '0px',
     },
   },
   imageButton: {
     width: '220px',
     height: '170px',
-    margin: '0 30px',
+    margin: '0 5px',
     [theme.breakpoints.down('xs')]: {
       width: '100px',
-      height: '80px',
-      margin: '0px 3px',
+      height: '100px',
+      margin: '5px 1px',
     },
   },
   continueReading: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardBody: {
     [theme.breakpoints.down('xs')]: {
-      margin: '10px 5px',
+      margin: '5px 0px',
     },
   },
   date: {
@@ -73,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ArticlePreview({ blog }) {
   const classes = useStyles()
   const startDate = new Date()
+  const cover = blog.node.coverImage[0].localFile.name
   const endDate = new Date(blog.node.date)
   const distanceInWords = formatDistanceStrict(endDate, startDate, {
     addSuffix: true,
@@ -80,30 +83,45 @@ export default function ArticlePreview({ blog }) {
     unit: 'month',
     unit: 'day',
   })
-
+  const data = useStaticQuery(graphql`
+    query {
+      allFile {
+        edges {
+          node {
+            absolutePath
+            childImageSharp {
+              fluid(maxWidth: 800, maxHeight: 500) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const image = data.allFile.edges.find((n) =>
+    n.node.absolutePath.includes(cover)
+  )
+  const mainImage = image.node.childImageSharp
+    ? image.node.childImageSharp.fluid
+    : null
   return (
     <Card className={classes.root}>
       <div className={classes.imageButton}>
-        <CardMedia
-          className={classes.media}
-          image={
-            blog.node.coverImage[0].localFile
-              ? blog.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-              : icon
-          }
-          title={blog.node.title}
-        />
+        <Img fluid={mainImage} className={classes.media} />
       </div>
 
       <CardContent className={classes.cardBody}>
-        <Typography
-          className={classes.date}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        >
-          {blog.node.category}
-        </Typography>
+        <Hidden xsDown>
+          <Typography
+            className={classes.date}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            {blog.node.category}
+          </Typography>
+        </Hidden>
         <Typography
           className={classes.date}
           variant="body2"

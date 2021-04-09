@@ -26,9 +26,9 @@ export default function Main({ postEdges, title }) {
   const myRef = useRef(null)
   const executeScroll = () => myRef.current.scrollIntoView()
   // for pagination
-  let totalPages = Math.ceil(postEdges.length / 5)
-  let LastPostIndex = pageNumber * 5
-  let FirstPostIndex = LastPostIndex - 5
+  let totalPages = Math.ceil(postEdges.length / 10)
+  let LastPostIndex = pageNumber * 10
+  let FirstPostIndex = LastPostIndex - 10
   const Posts = postEdges.slice(FirstPostIndex, LastPostIndex)
   return (
     <Grid item xs={12} md={8}>

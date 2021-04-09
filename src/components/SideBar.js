@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
@@ -29,6 +29,19 @@ const useStyles = makeStyles((theme) => ({
   roboFonts: {
     fontFamily: 'Roboto, sans-serif',
   },
+  category: {
+    fontFamily: 'Montserrat, sans-serif',
+    borderLeft: '4px solid #1489cc',
+    paddingLeft: '5px',
+  },
+  moreArticles: {
+    float: 'right',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+      color: '#1489cc',
+    },
+  },
 }))
 
 export default function Sidebar() {
@@ -39,10 +52,13 @@ export default function Sidebar() {
         edges {
           node {
             title
+            date
             author
+            category
             slug
             coverImage {
               localFile {
+                name
                 childImageSharp {
                   fluid(webpQuality: 10) {
                     tracedSVG
@@ -59,9 +75,12 @@ export default function Sidebar() {
           node {
             question
             slug
+            date
             author
+            category
             coverImage {
               localFile {
+                name
                 childImageSharp {
                   fluid {
                     srcWebp
@@ -85,8 +104,17 @@ export default function Sidebar() {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
   const Allviews = data.allPageViews.edges
-  const UsortedpostEdges = [...posts, ...questions]
-  const Viewedposts = UsortedpostEdges.map((post) => {
+  const Total = [...posts, ...questions]
+  const Politics = Total.filter(
+    (edge) => edge.node.category === 'Politics'
+  ).sort((a, b) => new Date(b.node.date) - new Date(a.node.date))
+  const Society = Total.filter((edge) => edge.node.category === 'Society').sort(
+    (a, b) => new Date(b.node.date) - new Date(a.node.date)
+  )
+  const Youth = Total.filter((edge) => edge.node.category === 'Youth').sort(
+    (a, b) => new Date(b.node.date) - new Date(a.node.date)
+  )
+  const Viewedposts = Total.map((post) => {
     const slugId = `/${post.node.slug}`
     const currentPageViews = Allviews.find(
       (filteredPageView) => filteredPageView.node.id === slugId
@@ -151,13 +179,49 @@ export default function Sidebar() {
           </CardActions>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.roboFonts} variant="h6">
-            Popular Articles
+          <Typography className={classes.category} variant="h6">
+            What people read
           </Typography>
 
-          {postEdges.slice(0, 6).map((post, index) => {
+          {postEdges.slice(0, 4).map((post, index) => {
             return <PopularArticle blog={post} key={index} />
           })}
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography className={classes.category} variant="h6">
+            Society
+          </Typography>
+
+          {Society.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/society`} className={classes.moreArticles}>
+            <Typography color="primary">more on society...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography className={classes.category} variant="h6">
+            Politics
+          </Typography>
+
+          {Politics.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/politics`} className={classes.moreArticles}>
+            <Typography color="primary">more on politics...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography className={classes.category} variant="h6">
+            Youth
+          </Typography>
+
+          {Youth.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/youth`} className={classes.moreArticles}>
+            <Typography color="primary">more on youth...</Typography>
+          </Link>
         </Card>
       </Paper>
     </Grid>

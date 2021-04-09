@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
-
+import Typography from '@material-ui/core/Typography'
 import MainArticleImage from '../components/MainArticleImage'
 import SEO from '../components/SEO/SEO'
 import MainArticleContent from '../components/MainArticleContent'
@@ -34,6 +34,9 @@ export default function QATemplate({ data, pageContext }) {
         pageTitle={pageTitle}
       />
       <Container>
+        <Typography variant="h4" gutterBottom className={classes.title}>
+          {pageTitle}
+        </Typography>
         <MainArticleImage post={postNode} />
         <Grid container spacing={5} className={classes.mainGrid}>
           <MainArticleContent
@@ -61,6 +64,7 @@ export const pageQuery = graphql`
       author
       coverImage {
         localFile {
+          name
           childImageSharp {
             fluid {
               srcWebp

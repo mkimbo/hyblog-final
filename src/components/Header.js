@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'grid',
     gridTemplateColumns: '1fr',
+    position: 'fixed',
+    width: '100%',
+    background: '#1489cc',
+    zIndex: '10',
   },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     fontFamily: 'Roboto, sans-serif',
-    background: '#1489cc',
-    width: '100vw',
-    position: 'fixed',
-    zIndex: '10',
   },
   toolbarTitle: {
     flex: 1,
@@ -35,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
   toolbarSecondary: {
     justifyContent: 'space-between',
     overflowX: 'auto',
-    width: '100vw',
-    paddingTop: '62px',
-    marginBottom: '3px',
-    background: '#1489cc',
   },
   toolbarLink: {
     padding: theme.spacing(1),
@@ -108,7 +104,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
-      <React.Fragment className={classes.root}>
+      <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <Link to={'/'} className={classes.toolbarTitle}>
             <Typography
@@ -190,7 +186,7 @@ export default function Header(props) {
             Poetry
           </Link>
         </Toolbar>
-      </React.Fragment>
+      </div>
     </React.Fragment>
   )
 }

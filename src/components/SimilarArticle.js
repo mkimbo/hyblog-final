@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import PropTypes from 'prop-types'
+import Img from 'gatsby-image'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
@@ -19,18 +20,8 @@ const useStyles = makeStyles((theme) => ({
       margin: '3px 0',
     },
   },
-  tags: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'left',
-    alignContent: 'center',
-    alignItems: 'center',
-    margin: '1px 0',
-  },
   media: {
     width: '120px',
-    height: '120px',
     margin: '0px',
   },
   imageButton: {
@@ -52,20 +43,34 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SimilarArticle({ blog }) {
+  const cover = blog.node.coverImage[0].localFile.name
   const classes = useStyles()
-
+  const data = useStaticQuery(graphql`
+    query {
+      allFile {
+        edges {
+          node {
+            absolutePath
+            childImageSharp {
+              fluid(maxWidth: 800, maxHeight: 500) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const image = data.allFile.edges.find((n) =>
+    n.node.absolutePath.includes(cover)
+  )
+  const mainImage = image.node.childImageSharp
+    ? image.node.childImageSharp.fluid
+    : null
   return (
     <Card className={classes.root}>
       <div className={classes.imageButton}>
-        <CardMedia
-          className={classes.media}
-          image={
-            blog.node.coverImage[0].localFile
-              ? blog.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-              : icon
-          }
-          title={blog.node.title}
-        />
+        <Img fluid={mainImage} className={classes.media} />
       </div>
 
       <CardContent className={classes.cardBody}>

@@ -56,6 +56,7 @@ export default (props) => (
               tags
               coverImage {
                 localFile {
+                  name
                   childImageSharp {
                     fluid(webpQuality: 10) {
                       tracedSVG
@@ -81,6 +82,7 @@ export default (props) => (
               summary
               coverImage {
                 localFile {
+                  name
                   childImageSharp {
                     fluid {
                       srcWebp

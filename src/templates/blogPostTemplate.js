@@ -4,11 +4,11 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
-
 import MainArticleImage from '../components/MainArticleImage'
 import SEO from '../components/SEO/SEO'
 import MainArticleContent from '../components/MainArticleContent'
 import Sidebar from '../components/SideBar'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -34,6 +34,9 @@ export default function BlogPostTemplate({ data, pageContext }) {
         pageTitle={pageTitle}
       />
       <Container>
+        <Typography variant="h4" gutterBottom className={classes.title}>
+          {pageTitle}
+        </Typography>
         <MainArticleImage post={postNode} />
         <Grid container spacing={5} className={classes.mainGrid}>
           <MainArticleContent
@@ -60,6 +63,7 @@ export const pageQuery = graphql`
       slug
       coverImage {
         localFile {
+          name
           childImageSharp {
             fluid {
               srcWebp

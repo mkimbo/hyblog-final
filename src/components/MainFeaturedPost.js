@@ -4,17 +4,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { graphql, useStaticQuery, Link } from 'gatsby'
+import BackgroundImage from 'gatsby-background-image'
+
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',
-    backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
   },
   overlay: {
     position: 'absolute',
@@ -22,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0,0,0,.3)',
+    backgroundColor: 'transparent',
   },
   mainFeaturedPostContent: {
     position: 'relative',
@@ -43,38 +40,33 @@ const useStyles = makeStyles((theme) => ({
 export default function MainFeaturedPost(props) {
   const classes = useStyles()
   const { postEdges } = props
-  const post = postEdges[14]
-  const mainImage = post.node.coverImage[0].localFile
-    ? post.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-    : 'https://source.unsplash.com/random'
+  const post = postEdges[postEdges.length - 2]
+  const cover = post.node.coverImage[0].localFile.name
+  const title = post.node.title ? post.node.title : post.node.question
+  const data = useStaticQuery(graphql`
+    query {
+      allFile {
+        edges {
+          node {
+            absolutePath
+            name
+            childImageSharp {
+              fluid(maxHeight: 500) {
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const image = data.allFile.edges.find((n) =>
+    n.node.absolutePath.includes(cover)
+  )
+  const mainImage = image ? image.node.childImageSharp.fluid : null
 
   return (
-    <Paper
-      className={classes.mainFeaturedPost}
-      style={{
-        backgroundImage: `url(${mainImage})`,
-      }}
-    >
-      {/* const mainImage = post.node.coverImage[0].localFile
-    ? post.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-    : "https://source.unsplash.com/random"; 
-     {
-        <Img
-          fluid={
-            post.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-          }
-          alt={post.node.title}
-        />
-      }*/}
-      {
-        <Img
-          fluid={
-            post.node.coverImage[0].localFile.childImageSharp.fluid.srcWebp
-          }
-          alt={post.node.title}
-        />
-      }
-
+    <BackgroundImage fluid={mainImage}>
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>
@@ -85,7 +77,7 @@ export default function MainFeaturedPost(props) {
               color="inherit"
               gutterBottom
             >
-              {post.node.title}
+              {title}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
               {post.node.summary}
@@ -98,7 +90,7 @@ export default function MainFeaturedPost(props) {
           </div>
         </Grid>
       </Grid>
-    </Paper>
+    </BackgroundImage>
   )
 }
 

@@ -1,19 +1,14 @@
 import React from 'react'
-import { Grid, Typography, Button } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import ShareLinks from './ShareLinks'
 import { format } from 'date-fns'
+import { Button } from '@material-ui/core'
+import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 
 const useStyles = makeStyles((theme) => ({
-  tags: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'left',
-    alignContent: 'center',
-    alignItems: 'center',
-    margin: '2px 0',
+  category: {
+    textDecoration: 'none',
   },
 }))
 function ArticleMeta({ pageViews, postNode }) {
@@ -23,26 +18,19 @@ function ArticleMeta({ pageViews, postNode }) {
   const datePublished = format(date, 'MMMM dd, yyyy')
   return (
     <Grid item align="left">
+      <Link
+        to={`/${postNode.category.replace(/\W+/g, '-').toLowerCase()}`}
+        className={classes.category}
+      >
+        <Button variant="contained" size="small" color="primary">
+          {postNode.category}
+        </Button>
+      </Link>
       <Typography>{timeToRead}</Typography>
-      <div className={classes.tags}>
-        {postNode.tags.map((tag, index) => {
-          return (
-            <Button
-              key={index}
-              variant="text"
-              color="inherit"
-              size="small"
-              startIcon={<LocalOfferIcon color="primary" />}
-            >
-              {tag}
-            </Button>
-          )
-        })}
-      </div>
       <Typography>{`Published on ${datePublished}`}</Typography>
       <Typography gutterBottom>{`by ${postNode.author}`}</Typography>
 
-      <em style={{ fontSize: 'smaller', fontFamily: 'Cardo, sans-serif' }}>
+      <em style={{ fontFamily: 'Cardo, sans-serif' }}>
         {`(viewed ${pageViews} times)`}
       </em>
       <ShareLinks postNode={postNode} />

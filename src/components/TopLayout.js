@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
-import { CssBaseline, Grid, Container } from '@material-ui/core'
+import { CssBaseline, Grid } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import loadable from '@loadable/component'
 
@@ -36,8 +36,8 @@ export default function TopLayout(props) {
         <ModalContextProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <DispatchContext.Provider value={dispatch}>
-            <CssBaseline />
             <Grid maxWidth="lg">
+              <CssBaseline />
               <Helmet>
                 <meta
                   name="viewport"
@@ -47,7 +47,9 @@ export default function TopLayout(props) {
 
               <Header title="HyBlog" />
 
-              <main>{props.children}</main>
+              <Grid maxWidth="lg" style={{ paddingTop: '120px' }}>
+                {props.children}
+              </Grid>
               <Footer />
               <ChatWidget
                 accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"
