@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import ProTip from '../components/ProTip'
-import { Grid, IconButton, Button } from '@material-ui/core'
+import ShareLinks from './ShareLinks'
+import { Grid, IconButton, Button, Typography } from '@material-ui/core'
 import { DiscussionEmbed } from 'disqus-react'
 import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Cardo, sans-serif',
     fontsize: '1.4rem',
   },
+  articleFooter: {
+    display: 'grid',
+    justifyContent: 'left',
+  },
   tags: {
     display: 'flex',
     flexDirection: 'row',
@@ -32,7 +37,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: '2px 0',
   },
-  likes: {
+  share: {
+    marginRight: '8px',
+  },
+
+  bottomLine: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'left',
@@ -41,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const StyledClaps = styled.div`
-  padding-top: 24px;
+  margin: 5px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,8 +59,8 @@ const StyledClaps = styled.div`
   button {
     outline: 0;
     background: white;
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px solid lightgrey;
     font-size: 2em;
@@ -121,27 +130,35 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
         className={classes.article}
         dangerouslySetInnerHTML={{ __html: postNode.articleText.content }}
       />
-      <div className={classes.tags}>
-        {postNode.tags.map((tag, index) => {
-          return (
-            <Button
-              key={index}
-              variant="text"
-              color="inherit"
-              size="small"
-              startIcon={<LocalOfferIcon color="primary" />}
-            >
-              {tag}
-            </Button>
-          )
-        })}
+      <div className={classes.articleFooter}>
+        <div className={classes.tags}>
+          {postNode.tags.map((tag, index) => {
+            return (
+              <Button
+                key={index}
+                variant="text"
+                color="inherit"
+                size="small"
+                startIcon={<LocalOfferIcon color="primary" />}
+              >
+                {tag}
+              </Button>
+            )
+          })}
+        </div>
       </div>
       <StyledClaps>
         <IconButton onClick={incrementClapsCounter}>
-          <ThumbUpIcon />
+          <ThumbUpIcon color="primary" />
         </IconButton>
-        <span>{clapsCounter} claps</span>
+        <Typography>{clapsCounter} likes</Typography>
       </StyledClaps>
+      <div className={classes.bottomLine}>
+        <Typography variant="h6" className={classes.share}>
+          Share
+        </Typography>
+        <ShareLinks postNode={postNode} />
+      </div>
       <ProTip />
       <Divider />
       <DiscussionEmbed {...disqusConfig} />

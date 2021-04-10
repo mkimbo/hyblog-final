@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: '2px 0',
   },
+  link: {
+    margin: '0 3px',
+  },
 }))
 const ShareLinks = ({ postNode }) => {
   const classes = useStyles()
@@ -34,22 +37,28 @@ const ShareLinks = ({ postNode }) => {
         <WhatsappShareButton
           url={`https://hyblog.info/${postNode.slug}`}
           title={postNode.title}
+          className={classes.link}
         >
           <WhatsappIcon size={36} />
         </WhatsappShareButton>
         <TwitterShareButton
           url={`https://hyblog.info/${postNode.slug}`}
           title={postNode.title}
+          className={classes.link}
         >
           <TwitterIcon size={36} />
         </TwitterShareButton>
         <FacebookShareButton
           url={`https://hyblog.info/${postNode.slug}`}
           quote={postNode.summary}
+          className={classes.link}
         >
           <FacebookIcon size={36} />
         </FacebookShareButton>
-        <TelegramShareButton url={`https://hyblog.info/${postNode.slug}`}>
+        <TelegramShareButton
+          url={`https://hyblog.info/${postNode.slug}`}
+          className={classes.link}
+        >
           <TelegramIcon size={36} />
         </TelegramShareButton>
       </div>
