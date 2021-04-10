@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import firebase from 'firebase'
+import 'firebase/firestore'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import ProTip from '../components/ProTip'
-import Button from '@material-ui/core/Button'
+import { Grid, IconButton, Button } from '@material-ui/core'
 import { DiscussionEmbed } from 'disqus-react'
 import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import styled from '@emotion/styled'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -29,7 +32,51 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: '2px 0',
   },
+  likes: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'left',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
 }))
+const StyledClaps = styled.div`
+  padding-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.8em;
+  position: relative;
+  button {
+    outline: 0;
+    background: white;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+    font-size: 2em;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  &::before {
+    content: '${(props) => '+' + props.newClaps}';
+    background: var(--carbon);
+    opacity: 0;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    left: 6px;
+    transition: opacity 0.2s 1s, top 0.2s 1s;
+  }
+  &:active::before {
+    opacity: 1;
+    top: -12px;
+    transition: opacity 0.2s, top 0.2s;
+  }
+`
 
 export default function MainArticleContent({ postNode, title, pageViews }) {
   const classes = useStyles()
@@ -37,6 +84,35 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
     shortname: 'hyblog-1', //your site shortname here
     config: { identifier: postNode.slug, title: title },
   }
+  const [clapsCounter, setClapsCounter] = useState(0)
+  const [newClaps, setNewClaps] = useState(0)
+
+  const incrementClapsCounter = () => {
+    setClapsCounter((prevState) => prevState + 1)
+    setNewClaps((prevState) => prevState + 1)
+
+    firebase
+      .firestore()
+      .collection('claps')
+      .doc(postNode.slug)
+      .set({ claps: clapsCounter + 1 }) // Be careful state is updated once outside the function
+      .catch((err) => console.log(err))
+  }
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('claps')
+      .doc(postNode.slug)
+      .get()
+      .then((res) => {
+        if (!res.data()) {
+          console.log('no matching document')
+        } else {
+          setClapsCounter(res.data().claps)
+        }
+      })
+      .catch((err) => console.log(err))
+  }, [])
   return (
     <Grid item xs={12} md={8}>
       <ArticleMeta postNode={postNode} pageViews={pageViews} />
@@ -60,6 +136,12 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
           )
         })}
       </div>
+      <StyledClaps>
+        <IconButton onClick={incrementClapsCounter}>
+          <ThumbUpIcon />
+        </IconButton>
+        <span>{clapsCounter} claps</span>
+      </StyledClaps>
       <ProTip />
       <Divider />
       <DiscussionEmbed {...disqusConfig} />

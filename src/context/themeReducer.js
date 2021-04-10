@@ -6,9 +6,7 @@
  *  export type Action = { type: 'TOGGLE_DARKMODE' };
  */
 
-export const initialState = {
-  darkMode: false,
-}
+export const initialState = false
 
 export const themeReducer = (state, action) => {
   switch (action.type) {
