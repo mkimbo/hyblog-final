@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
 const RelatedReads = ({ articles }) => {
   const classes = useStyles()
   return (
-    <Grid xs={12} className={classes.root}>
+    <Grid container className={classes.root}>
       <Typography variant="h5" gutterBottom>
         Similar Articles
       </Typography>
-      <Grid xs={12} className={classes.similarArticles}>
+      <Grid item xs={12} className={classes.similarArticles}>
         {articles.map((article, i) => (
-          <Grid item xs={12}>
-            <SimilarArticle blog={article.article} key={i} />
+          <Grid item xs={12} key={i}>
+            <SimilarArticle blog={article.article} />
           </Grid>
         ))}
       </Grid>

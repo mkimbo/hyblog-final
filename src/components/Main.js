@@ -24,7 +24,8 @@ export default function Main({ postEdges, title }) {
     executeScroll()
   }
   const myRef = useRef(null)
-  const executeScroll = () => myRef.current.scrollIntoView()
+  const executeScroll = () =>
+    myRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
   // for pagination
   let totalPages = Math.ceil(postEdges.length / 10)
   let LastPostIndex = pageNumber * 10

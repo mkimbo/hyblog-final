@@ -132,7 +132,6 @@ export default function ArticlePreview({ blog }) {
         </Typography>
         <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
           <Typography
-            variant="body"
             component="h4"
             color="textPrimary"
             className={classes.title}

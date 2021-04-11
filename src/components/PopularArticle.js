@@ -74,7 +74,6 @@ export default function PopularArticle({ blog }) {
       <CardContent className={classes.cardBody}>
         <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
           <Typography
-            variant="body"
             component="h5"
             color="textPrimary"
             className={classes.title}

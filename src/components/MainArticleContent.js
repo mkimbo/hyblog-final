@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import ProTip from '../components/ProTip'
 import ShareLinks from './ShareLinks'
-import { Grid, IconButton, Button, Typography } from '@material-ui/core'
+import { Grid, Button, Typography, Fab } from '@material-ui/core'
 import { DiscussionEmbed } from 'disqus-react'
 import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
@@ -40,7 +40,17 @@ const useStyles = makeStyles((theme) => ({
   share: {
     marginRight: '8px',
   },
-
+  fab: {
+    border: '1px #1489cc dashed',
+    marginRight: '8px',
+  },
+  likes: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'left',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
   bottomLine: {
     display: 'flex',
     flexDirection: 'row',
@@ -147,12 +157,20 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
           })}
         </div>
       </div>
-      <StyledClaps>
-        <IconButton onClick={incrementClapsCounter}>
-          <ThumbUpIcon color="primary" />
-        </IconButton>
+      <div className={classes.likes}>
+        <Fab
+          color="secondary"
+          aria-label="like"
+          onClick={incrementClapsCounter}
+          className={classes.fab}
+        >
+          <ThumbUpIcon
+            style={{ cursor: 'pointer', fontSize: '26px' }}
+            color="primary"
+          />
+        </Fab>
         <Typography>{clapsCounter} likes</Typography>
-      </StyledClaps>
+      </div>
       <div className={classes.bottomLine}>
         <Typography variant="h6" className={classes.share}>
           Share

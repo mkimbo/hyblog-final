@@ -36,7 +36,7 @@ export default function TopLayout(props) {
         <ModalContextProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <DispatchContext.Provider value={dispatch}>
-            <Grid maxWidth="lg">
+            <Grid>
               <CssBaseline />
               <Helmet>
                 <meta
@@ -47,9 +47,7 @@ export default function TopLayout(props) {
 
               <Header title="HyBlog" />
 
-              <Grid maxWidth="lg" style={{ paddingTop: '120px' }}>
-                {props.children}
-              </Grid>
+              <Grid style={{ paddingTop: '120px' }}>{props.children}</Grid>
               <Footer />
               <ChatWidget
                 accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"

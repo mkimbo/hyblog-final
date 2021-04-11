@@ -5,9 +5,7 @@ import Img from 'gatsby-image'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
-import icon from '../images/icon.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +81,6 @@ export default function SimilarArticle({ blog }) {
         </Typography>
         <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
           <Typography
-            variant="body"
             component="h5"
             color="textPrimary"
             className={classes.title}

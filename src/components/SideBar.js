@@ -114,6 +114,9 @@ export default function Sidebar() {
   const Youth = Total.filter((edge) => edge.node.category === 'Youth').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
+  const African = Total.filter(
+    (edge) => edge.node.category === 'Africanacity'
+  ).sort((a, b) => new Date(b.node.date) - new Date(a.node.date))
   const Viewedposts = Total.map((post) => {
     const slugId = `/${post.node.slug}`
     const currentPageViews = Allviews.find(
@@ -183,7 +186,7 @@ export default function Sidebar() {
             What people read
           </Typography>
 
-          {postEdges.slice(0, 4).map((post, index) => {
+          {postEdges.slice(0, 5).map((post, index) => {
             return <PopularArticle blog={post} key={index} />
           })}
         </Card>
@@ -201,6 +204,30 @@ export default function Sidebar() {
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
           <Typography className={classes.category} variant="h6">
+            Youth Section
+          </Typography>
+
+          {Youth.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/youth`} className={classes.moreArticles}>
+            <Typography color="primary">more on youth...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography className={classes.category} variant="h6">
+            African Affairs
+          </Typography>
+
+          {African.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/africanacity`} className={classes.moreArticles}>
+            <Typography color="primary">more african affairs...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography className={classes.category} variant="h6">
             Politics
           </Typography>
 
@@ -209,18 +236,6 @@ export default function Sidebar() {
           })}
           <Link to={`/politics`} className={classes.moreArticles}>
             <Typography color="primary">more on politics...</Typography>
-          </Link>
-        </Card>
-        <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
-            Youth
-          </Typography>
-
-          {Youth.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
-          })}
-          <Link to={`/youth`} className={classes.moreArticles}>
-            <Typography color="primary">more on youth...</Typography>
           </Link>
         </Card>
       </Paper>

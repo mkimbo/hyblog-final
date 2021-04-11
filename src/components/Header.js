@@ -64,7 +64,6 @@ export default function Header(props) {
   const { title } = props
   const cat = []
   const { state, signOut } = useContext(AuthContext)
-  console.log(state)
   const {
     handleOpenLoginModal,
     openLoginModal,
@@ -112,7 +111,6 @@ export default function Header(props) {
               variant="h5"
               align="left"
               color="secondary"
-              noWrap
               className={classes.toolbarTitle}
             >
               {title}
@@ -165,13 +163,12 @@ export default function Header(props) {
               to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
               key={category}
               color="secondary"
-              noWrap
               className={classes.toolbarLink}
             >
               {category}
             </Link>
           ))}
-          <Link to={'#'} key="news" noWrap className={classes.toolbarLink}>
+          <Link to={'#'} key="news" className={classes.toolbarLink}>
             News
           </Link>
           <Link
@@ -182,7 +179,7 @@ export default function Header(props) {
           >
             Covid-19
           </Link>
-          <Link to={'#'} key="poetry" noWrap className={classes.toolbarLink}>
+          <Link to={'#'} key="poetry" className={classes.toolbarLink}>
             Poetry
           </Link>
         </Toolbar>
