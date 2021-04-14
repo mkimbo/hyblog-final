@@ -66,30 +66,37 @@ export default function PopularArticle({ blog }) {
     ? image.node.childImageSharp.fluid
     : null
   return (
-    <Card className={classes.root}>
-      <div className={classes.imageButton}>
-        <Img fluid={mainImage} className={classes.media} />
-      </div>
+    <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
+      <Card
+        className={classes.root}
+        data-sal="slide-up"
+        data-sal-easing="ease"
+        data-sal-duration="700"
+      >
+        <div className={classes.imageButton}>
+          <Img fluid={mainImage} className={classes.media} />
+        </div>
 
-      <CardContent className={classes.cardBody}>
-        <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
+        <CardContent className={classes.cardBody}>
+          <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
+            <Typography
+              component="h5"
+              color="textPrimary"
+              className={classes.title}
+            >
+              {blog.node.title || blog.node.question}
+            </Typography>
+          </Link>
           <Typography
-            component="h5"
-            color="textPrimary"
-            className={classes.title}
+            className={classes.author}
+            component="h6"
+            color="textSecondary"
           >
-            {blog.node.title || blog.node.question}
+            {`By ${blog.node.author}`}
           </Typography>
-        </Link>
-        <Typography
-          className={classes.author}
-          component="h6"
-          color="textSecondary"
-        >
-          {`By ${blog.node.author}`}
-        </Typography>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 

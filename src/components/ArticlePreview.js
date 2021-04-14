@@ -79,8 +79,6 @@ export default function ArticlePreview({ blog }) {
   const endDate = new Date(blog.node.date)
   const distanceInWords = formatDistanceStrict(endDate, startDate, {
     addSuffix: true,
-    unit: 'year',
-    unit: 'month',
     unit: 'day',
   })
   const data = useStaticQuery(graphql`
@@ -106,75 +104,77 @@ export default function ArticlePreview({ blog }) {
     ? image.node.childImageSharp.fluid
     : null
   return (
-    <Card className={classes.root}>
-      <div className={classes.imageButton}>
-        <Img fluid={mainImage} className={classes.media} />
-      </div>
+    <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
+      <Card className={classes.root}>
+        <div className={classes.imageButton}>
+          <Img fluid={mainImage} className={classes.media} />
+        </div>
 
-      <CardContent className={classes.cardBody}>
-        <Hidden xsDown>
+        <CardContent className={classes.cardBody}>
+          <Hidden xsDown>
+            <Typography
+              className={classes.date}
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {blog.node.category}
+            </Typography>
+          </Hidden>
           <Typography
             className={classes.date}
             variant="body2"
             color="textSecondary"
             component="p"
           >
-            {blog.node.category}
+            {distanceInWords}
           </Typography>
-        </Hidden>
-        <Typography
-          className={classes.date}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        >
-          {distanceInWords}
-        </Typography>
-        <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
-          <Typography
-            component="h4"
-            color="textPrimary"
-            className={classes.title}
-          >
-            {blog.node.title || blog.node.question}
-          </Typography>
-        </Link>
-        <Typography
-          className={classes.author}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-          gutterBottom
-        >
-          {`By ${blog.node.author}`}
-        </Typography>
-        <Hidden xsDown>
-          <Typography
-            className={classes.excerpt}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            {blog.node.summary}
-          </Typography>
-
-          <Link
-            className={classes.continueReading}
-            to={`/${blog.node.slug}`}
-            variant="subtitle1"
-            color="textPrimary"
-          >
+          <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
             <Typography
-              variant="body"
+              component="h4"
               color="textPrimary"
               className={classes.title}
             >
-              Continue reading...
+              {blog.node.title || blog.node.question}
             </Typography>
           </Link>
-        </Hidden>
-      </CardContent>
-    </Card>
+          <Typography
+            className={classes.author}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {`By ${blog.node.author}`}
+          </Typography>
+          <Hidden xsDown>
+            <Typography
+              className={classes.excerpt}
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {blog.node.summary}
+            </Typography>
+
+            <Link
+              className={classes.continueReading}
+              to={`/${blog.node.slug}`}
+              variant="subtitle1"
+              color="textPrimary"
+            >
+              <Typography
+                variant="body"
+                color="textPrimary"
+                className={classes.title}
+              >
+                Continue reading...
+              </Typography>
+            </Link>
+          </Hidden>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 

@@ -65,6 +65,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-scroll-reveal`,
+      options: {
+        threshold: 0.05,
+        rootMargin: '100px 0px',
+      },
+    },
+    {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: `blue`,

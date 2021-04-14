@@ -12,7 +12,6 @@ import ArticleMeta from './ArticleMeta'
 import RelatedReads from './RelatedReads'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
-import styled from '@emotion/styled'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -59,43 +58,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }))
-const StyledClaps = styled.div`
-  margin: 5px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 0.8em;
-  position: relative;
-  button {
-    outline: 0;
-    background: white;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid lightgrey;
-    font-size: 2em;
-    margin-right: 8px;
-    cursor: pointer;
-  }
-  &::before {
-    content: '${(props) => '+' + props.newClaps}';
-    background: var(--carbon);
-    opacity: 0;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 3px;
-    position: absolute;
-    z-index: 1;
-    top: 3px;
-    left: 6px;
-    transition: opacity 0.2s 1s, top 0.2s 1s;
-  }
-  &:active::before {
-    opacity: 1;
-    top: -12px;
-    transition: opacity 0.2s, top 0.2s;
-  }
-`
 
 export default function MainArticleContent({ postNode, title, pageViews }) {
   const classes = useStyles()
