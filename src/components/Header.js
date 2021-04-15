@@ -171,14 +171,6 @@ export default function Header(props) {
           <Link to={'#'} key="news" className={classes.toolbarLink}>
             News
           </Link>
-          <Link
-            to={'#'}
-            key="covid"
-            color="primary"
-            className={classes.toolbarLink}
-          >
-            Covid-19
-          </Link>
           <Link to={'#'} key="poetry" className={classes.toolbarLink}>
             Poetry
           </Link>
