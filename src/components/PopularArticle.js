@@ -67,12 +67,7 @@ export default function PopularArticle({ blog }) {
     : null
   return (
     <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
-      <Card
-        className={classes.root}
-        data-sal="slide-up"
-        data-sal-easing="ease"
-        data-sal-duration="700"
-      >
+      <Card className={classes.root}>
         <div className={classes.imageButton}>
           <Img fluid={mainImage} className={classes.media} />
         </div>

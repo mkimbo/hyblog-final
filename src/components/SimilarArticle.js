@@ -12,20 +12,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     margin: '5px 0',
     boxShadow: 'none',
-    minHeight: '130px',
+    minHeight: '150px',
     borderBottom: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.down('xs')]: {
       margin: '3px 0',
     },
   },
   media: {
-    width: '120px',
-    margin: '0px',
+    width: '115px',
   },
   imageButton: {
     width: '120px',
     height: '130px',
-    margin: '0px',
+    padding: '20px 2px 20px 3px',
   },
 
   cardBody: {

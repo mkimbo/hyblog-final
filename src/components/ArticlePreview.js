@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   imageButton: {
     width: '220px',
     height: '170px',
-    margin: '0 5px',
+    margin: 'auto 5px',
     [theme.breakpoints.down('xs')]: {
       width: '100px',
       height: '100px',
