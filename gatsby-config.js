@@ -91,6 +91,17 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-firebase-messaging`,
+      options: {
+        config: {
+          apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+          appId: process.env.GATSBY_FIREBASE_APP_ID,
+          messagingSenderId: process.env.GATSBY_FIREBASE_MESSENGING_SENDER_ID,
+          projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+        },
+      },
+    },
+    {
       resolve: 'gatsby-source-flamelink',
       options: {
         firebaseConfig: {

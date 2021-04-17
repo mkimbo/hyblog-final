@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar'
 import { AuthContext } from '../context/auth/auth'
 import { ModalContext } from '../context/modal/modal'
 import ModalSignIn from './ModalSignIn'
+import Notifications from './Notifications'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,7 +120,8 @@ export default function Header(props) {
           <IconButton>
             <SearchIcon color="secondary" />
           </IconButton>
-          {state.isAuthenticated && !state.isLoading ? (
+          <Notifications />
+          {/*{state.isAuthenticated && !state.isLoading ? (
             <>
               <div
                 className={classes.menu}
@@ -151,7 +153,7 @@ export default function Header(props) {
             >
               Login
             </Button>
-          )}
+          )} */}
         </Toolbar>
         <Toolbar
           component="nav"

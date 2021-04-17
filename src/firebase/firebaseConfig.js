@@ -3,6 +3,7 @@ import 'firebase/app'
 import 'firebase/auth'
 import 'firebase/functions'
 import 'firebase/firestore'
+import 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,

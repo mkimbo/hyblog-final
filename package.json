@@ -38,6 +38,7 @@
     "gatsby-background-image": "^1.5.0",
     "gatsby-image": "^2.3.1",
     "gatsby-plugin-emotion": "^4.2.1",
+    "gatsby-plugin-firebase-messaging": "^1.1.0",
     "gatsby-plugin-google-analytics-reporter": "^1.1.1",
     "gatsby-plugin-google-gtag": "^3.1.0",
     "gatsby-plugin-manifest": "^3.2.0",
