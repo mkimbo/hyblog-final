@@ -3,7 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/messaging'
 import Button from '@material-ui/core/Button'
 import firebaseConfig from '../firebase/firebaseConfig'
-const app = firebase.app()
+const app = typeof window != 'undefined' ? firebase.app() : null
 // Add the public key generated from the console here.
 const messaging =
   typeof window != 'undefined'
