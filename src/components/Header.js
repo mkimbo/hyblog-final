@@ -120,8 +120,8 @@ export default function Header(props) {
           <IconButton>
             <SearchIcon color="secondary" />
           </IconButton>
-          <Notifications />
-          {/*{state.isAuthenticated && !state.isLoading ? (
+
+          {state.isAuthenticated && !state.isLoading ? (
             <>
               <div
                 className={classes.menu}
@@ -153,7 +153,8 @@ export default function Header(props) {
             >
               Login
             </Button>
-          )} */}
+          )}
+          {/* <Notifications />*/}
         </Toolbar>
         <Toolbar
           component="nav"

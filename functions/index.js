@@ -51,9 +51,7 @@ exports.sendNewPostNotification = functions.firestore
         title: postData.title ? postData.title : postData.question,
         body: postData.summary,
         icon: `https://hyblog.info/assets/icon.png`,
-        fcm_options: {
-          link: `https://hyblog.info/${postData.slug}/`,
-        },
+        click_action: `https://hyblog.info/${postData.slug}/`,
       },
     }
     // Send notifications to all tokens.
