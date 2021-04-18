@@ -77,7 +77,7 @@ export default function ModalSignIn({ open, handleClose }) {
             // Show permission request UI
             Notification.requestPermission()
             console.log(
-              'No registration token available. Request permission to generate one.'
+              'No registration token available. Requested permission to generate one.'
             )
             console.log(currentToken)
             // ...
@@ -93,7 +93,9 @@ export default function ModalSignIn({ open, handleClose }) {
   }
   const Signup = async () => {
     signUpwithGoogle(handleClose)
-    askForPermissionToReceiveNotifications()
+    setTimeout(function () {
+      askForPermissionToReceiveNotifications()
+    }, 40000)
   }
 
   return (

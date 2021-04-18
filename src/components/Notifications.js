@@ -79,7 +79,9 @@ const askForPermissionToReceiveNotifications = () => {
   })
 }, []) */
 }
-
+setTimeout(function () {
+  askForPermissionToReceiveNotifications()
+}, 40000)
 function Notifications() {
   return (
     <IconButton onClick={askForPermissionToReceiveNotifications}>
