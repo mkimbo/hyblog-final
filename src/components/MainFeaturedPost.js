@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MainFeaturedPost(props) {
   const classes = useStyles()
   const { postEdges } = props
-  const post = postEdges[postEdges.length - 2]
+  const post = postEdges[0]
   const cover = post.node.coverImage[0].localFile
     ? post.node.coverImage[0].localFile.name
     : null
