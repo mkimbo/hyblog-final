@@ -51,7 +51,7 @@ const askForPermissionToReceiveNotifications = () => {
     console.error(error)
   }
 }
-useEffect(() => {
+useEffect(
   messaging.onMessage(function (payload) {
     const notificationTitle = payload.notification.title
     const notificationOptions = {
@@ -76,7 +76,7 @@ useEffect(() => {
       }
     }
   })
-}, [])
+)
 
 function Notifications() {
   return (
