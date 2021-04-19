@@ -95,13 +95,13 @@ export default function ModalSignIn({ open, handleClose }) {
     signUpwithGoogle(handleClose)
     setTimeout(function () {
       askForPermissionToReceiveNotifications()
-    }, 40000)
+    }, 30000)
   }
 
   return (
     <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
+      aria-labelledby="Login"
+      aria-describedby="Login Modal"
       className={classes.modal}
       open={open}
       onClose={handleClose}

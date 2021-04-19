@@ -33,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat, sans-serif',
     borderLeft: '4px solid #1489cc',
     paddingLeft: '5px',
+    backgroundColor: '#1489cc',
+  },
+  categoryLink: {
+    padding: theme.spacing(1),
+    fontFamily: 'Roboto, sans-serif',
+    flexShrink: 0,
+    color: '#1489cc',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   moreArticles: {
     float: 'right',
@@ -104,6 +115,11 @@ export default function Sidebar() {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
   const Allviews = data.allPageViews.edges
+  const categoryList = []
+  data.allFlamelinkBlogPostContent.edges.map((post) => {
+    categoryList.push(post.node.category)
+    return null
+  })
   const Total = [...posts, ...questions]
   const Politics = Total.filter(
     (edge) => edge.node.category === 'Politics'
@@ -133,56 +149,31 @@ export default function Sidebar() {
     <Grid item xs={12} md={4} className={classes.sideGrid}>
       <Paper elevation={1}>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="hyblog" src={icon}>
-                H
-              </Avatar>
-            }
-            title={
-              <Typography variant="h5" id="emailSubscribe">
-                Hyblog Newsletter
-              </Typography>
-            }
-          />
-          <CardContent>
+          <Typography>
+            {Array.from(new Set(categoryList))
+              .slice(0, 4)
+              .map((category) => (
+                <Link
+                  to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
+                  key={category}
+                  color="primary"
+                  className={classes.categoryLink}
+                >
+                  {category}
+                </Link>
+              ))}
+          </Typography>
+
+          <Typography>
             <SubscriptionForm />
-          </CardContent>
-          <CardActions>
-            <div>
-              <Button
-                size="small"
-                className={classes.roboFonts}
-                color="primary"
-              >
-                News
-              </Button>
-              <Button
-                size="small"
-                className={classes.roboFonts}
-                color="primary"
-              >
-                Q & A
-              </Button>
-              <Button
-                size="small"
-                className={classes.roboFonts}
-                color="primary"
-              >
-                Poetry
-              </Button>
-              <Button
-                size="small"
-                className={classes.roboFonts}
-                color="primary"
-              >
-                Categories
-              </Button>
-            </div>
-          </CardActions>
+          </Typography>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
             What people read
           </Typography>
 
@@ -191,8 +182,12 @@ export default function Sidebar() {
           })}
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
-            Society
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
+            Society & Lifestyle
           </Typography>
 
           {Society.slice(0, 2).map((post, index) => {
@@ -203,8 +198,12 @@ export default function Sidebar() {
           </Link>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
-            Youth Section
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
+            Youth Check
           </Typography>
 
           {Youth.slice(0, 2).map((post, index) => {
@@ -215,7 +214,11 @@ export default function Sidebar() {
           </Link>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
             African Affairs
           </Typography>
 
@@ -227,8 +230,12 @@ export default function Sidebar() {
           </Link>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography className={classes.category} variant="h6">
-            Politics
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
+            Political Fever Pitch
           </Typography>
 
           {Politics.slice(0, 2).map((post, index) => {

@@ -15,7 +15,7 @@ const messaging =
         messagingSenderId: '534749721390',
       })
     : null
-const askForPermissionToReceiveNotifications = () => {
+export const askForPermissionToReceiveNotifications = () => {
   try {
     messaging
       .getToken({
@@ -23,7 +23,6 @@ const askForPermissionToReceiveNotifications = () => {
           'BMecJpNN4bvzeZT_Oc99N7qUpwzUO8iWR5nIM59aaxGAuf7iR7O7GTx3y0qg-MqszfT1bfT3TO4cLAQ698Pnpkc',
       })
       .then((currentToken) => {
-        console.log(currentToken)
         if (currentToken) {
           app
             .firestore()
@@ -35,11 +34,10 @@ const askForPermissionToReceiveNotifications = () => {
             .catch((err) => console.log(err))
         } else {
           // Show permission request UI
-          Notification.requestPermission()
           console.log(
             'No registration token available. Request permission to generate one.'
           )
-          console.log(currentToken)
+          Notification.requestPermission()
           // ...
         }
       })
@@ -51,9 +49,9 @@ const askForPermissionToReceiveNotifications = () => {
     console.error(error)
   }
 }
-{
-  /**useEffect(() => {
-  messaging.onMessage(function (payload) {
+
+if (typeof window !== 'undefined') {
+  firebase.messaging().onMessage(function (payload) {
     const notificationTitle = payload.notification.title
     const notificationOptions = {
       body: payload.notification.body,
@@ -77,11 +75,8 @@ const askForPermissionToReceiveNotifications = () => {
       }
     }
   })
-}, []) */
 }
-setTimeout(function () {
-  askForPermissionToReceiveNotifications()
-}, 40000)
+
 function Notifications() {
   return (
     <IconButton onClick={askForPermissionToReceiveNotifications}>

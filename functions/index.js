@@ -54,26 +54,35 @@ exports.sendNewPostNotification = functions.firestore
         click_action: `https://hyblog.info/${postData.slug}/`,
       },
     }
-    // Send notifications to all tokens.
-    const response = await admin.messaging().sendToDevice(tokens, payload)
-    // For each message check if there was an error.
     const tokensToRemove = []
-    response.results.forEach((result, index) => {
-      const error = result.error
-      if (error) {
-        functions.logger.error(
-          'Failure sending notification to',
-          tokens[index],
-          error
-        )
-        // Cleanup the tokens who are not registered anymore.
-        if (
-          error.code === 'messaging/invalid-registration-token' ||
-          error.code === 'messaging/registration-token-not-registered'
-        ) {
-          tokensToRemove.push(snapshot.docs[index].ref.delete())
+    // Send notifications to all tokens after 4 minutes.
+    setTimeout(function () {
+      tokens.forEach(async (token, index) => {
+        const response = await admin.messaging().sendToDevice(token, payload)
+        const errormsg = response.results[0].error
+          ? response.results[0].error.message
+          : null
+        const errorcode = response.results[0].error
+          ? response.results[0].error.code
+          : null
+        // For each message check if there was an error.
+        if (errorcode) {
+          functions.logger.error(
+            'Failure sending notification to',
+            tokens[index],
+            errorcode,
+            errormsg
+          )
+          // Cleanup the tokens who are not registered anymore.
+          if (
+            errorcode === 'messaging/invalid-registration-token' ||
+            errorcode === 'messaging/registration-token-not-registered'
+          ) {
+            tokensToRemove.push(snapshot.docs[index].ref.delete())
+          }
         }
-      }
-    })
+      })
+    }, 240000)
+
     return Promise.all(tokensToRemove)
   })
