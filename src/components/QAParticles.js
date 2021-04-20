@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import icon from '../images/icon.png'
+import QaIcon from '../images/qaIcon.png'
 import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
@@ -18,15 +18,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     height: '350px',
   },
+  content: {
+    backgroundColor: '#1489cc',
+  },
   overlay: {
     background: 'transparent',
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-  },
-  content: {
-    backgroundColor: '#1489cc',
   },
   mainParticlesContent: {
     position: 'relative',
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function MainParticles(props) {
+export default function QAParticles(props) {
   const classes = useStyles()
   const { title } = props
   return (
@@ -91,7 +91,7 @@ export default function MainParticles(props) {
           <Grid item md={12}>
             <div className={classes.mainParticlesContent}>
               <img
-                src={icon}
+                src={QaIcon}
                 style={{ maxWidth: '250px', maxHeight: '250px' }}
                 alt={title}
                 loading="lazy"
@@ -101,7 +101,7 @@ export default function MainParticles(props) {
                 color="secondary"
                 className={classes.content}
               >
-                {title}
+                with Grand Philosopher
               </Typography>
             </div>
           </Grid>
@@ -111,6 +111,6 @@ export default function MainParticles(props) {
   )
 }
 
-MainParticles.propTypes = {
+QAParticles.propTypes = {
   title: PropTypes.string,
 }

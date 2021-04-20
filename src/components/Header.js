@@ -178,6 +178,9 @@ export default function Header(props) {
           variant="dense"
           className={classes.toolbarSecondary}
         >
+          <Link to={'/qa'} className={classes.toolbarLink}>
+            Q & A
+          </Link>
           {Array.from(new Set(cat)).map((category) => (
             <Link
               to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}

@@ -9,7 +9,7 @@ import Fade from '@material-ui/core/Fade'
 import Button from '@material-ui/core/Button'
 import { AuthContext } from '../context/auth/auth'
 import { Typography } from '@material-ui/core'
-
+import { askForPermissionToReceiveNotifications } from '../components/Notifications'
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -45,57 +45,12 @@ const useStyles = makeStyles((theme) => ({
 export default function ModalSignIn({ open, handleClose }) {
   const classes = useStyles()
   const { signUpwithGoogle, onSignInWithFacebook } = useContext(AuthContext)
-  const app = typeof window != 'undefined' ? firebase.app() : null
-  // Add the public key generated from the console here.
-  const messaging =
-    typeof window != 'undefined'
-      ? app.messaging({
-          apiKey: 'AIzaSyBJug1i8t6s6BIwPbWyoDiwz3u1GMjmMP4',
-          projectId: 'hyblog',
-          messagingSenderId: '534749721390',
-        })
-      : null
-  const askForPermissionToReceiveNotifications = () => {
-    try {
-      messaging
-        .getToken({
-          vapidKey:
-            'BMecJpNN4bvzeZT_Oc99N7qUpwzUO8iWR5nIM59aaxGAuf7iR7O7GTx3y0qg-MqszfT1bfT3TO4cLAQ698Pnpkc',
-        })
-        .then((currentToken) => {
-          console.log(currentToken)
-          if (currentToken) {
-            app
-              .firestore()
-              .collection('subscriptions')
-              .doc(currentToken)
-              .set({
-                token: currentToken,
-              })
-              .catch((err) => console.log(err))
-          } else {
-            // Show permission request UI
-            Notification.requestPermission()
-            console.log(
-              'No registration token available. Requested permission to generate one.'
-            )
-            console.log(currentToken)
-            // ...
-          }
-        })
-        .catch((err) => {
-          console.log('An error occurred while retrieving token..', err)
-          // ...
-        })
-    } catch (error) {
-      console.error(error)
-    }
-  }
+
   const Signup = async () => {
     signUpwithGoogle(handleClose)
     setTimeout(function () {
       askForPermissionToReceiveNotifications()
-    }, 30000)
+    }, 25000)
   }
 
   return (

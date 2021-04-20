@@ -175,6 +175,20 @@ export default function Footer() {
               <ul className={classes.list}>
                 <li className={classes.listItem}>
                   <InternalLink
+                    color="secondary"
+                    to={`/qa`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Q & A
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
                     color="primary"
                     to={`#`}
                     className={classes.cardoFonts}
@@ -187,20 +201,7 @@ export default function Footer() {
                     </Typography>
                   </InternalLink>
                 </li>
-                <li className={classes.listItem}>
-                  <InternalLink
-                    color="secondary"
-                    to={`#`}
-                    className={classes.cardoFonts}
-                  >
-                    <Typography
-                      color="secondary"
-                      className={classes.cardoFonts}
-                    >
-                      Q & A
-                    </Typography>
-                  </InternalLink>
-                </li>
+
                 <li className={classes.listItem}>
                   <InternalLink
                     color="secondary"

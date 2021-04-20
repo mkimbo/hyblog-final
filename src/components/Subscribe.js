@@ -7,13 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import { askForPermissionToReceiveNotifications } from './Notifications'
-import {
-  Dialog,
-  CardActions,
-  CardContent,
-  DialogTitle,
-} from '@material-ui/core'
-import icon from '../images/icon.png'
+import { Dialog, CardContent } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   form: {

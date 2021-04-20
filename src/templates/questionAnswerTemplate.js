@@ -9,7 +9,7 @@ import MainArticleImage from '../components/MainArticleImage'
 import SEO from '../components/SEO/SEO'
 import MainArticleContent from '../components/MainArticleContent'
 import Sidebar from '../components/SideBar'
-
+import { askForPermissionToReceiveNotifications } from '../components/Notifications'
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -20,7 +20,9 @@ export default function QATemplate({ data, pageContext }) {
   const postNode = data.flamelinkQuestionAnswerContent
   const pageViews = data.pageViews ? data.pageViews.totalCount : 0
   const pageTitle = postNode.question
-
+  setTimeout(function () {
+    askForPermissionToReceiveNotifications()
+  }, 30000)
   return (
     <TopLayout>
       <SEO

@@ -12,10 +12,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     [theme.breakpoints.down('sm')]: {
+      display: 'grid',
       gridTemplateColumns: '1fr',
     },
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(1),
+    backgroundColor: '#f2f5fa',
   },
   media: {
     width: '100%',
@@ -64,7 +66,7 @@ export default function MainFeaturedPost(props) {
             absolutePath
             name
             childImageSharp {
-              fluid(maxHeight: 500) {
+              fluid(maxHeight: 400) {
                 ...GatsbyImageSharpFluid_tracedSVG
               }
             }
@@ -84,7 +86,7 @@ export default function MainFeaturedPost(props) {
       <Grid container className={classes.mainFeaturedPost}>
         <Grid item>
           <Typography variant="h6" color="secondary" className={classes.editor}>
-            Editor's Pick
+            Editor's pick
           </Typography>
           <div className={classes.mainFeaturedPostContent}>
             <Typography variant="h4" color="inherit" gutterBottom>

@@ -9,7 +9,7 @@ import SEO from '../components/SEO/SEO'
 import MainArticleContent from '../components/MainArticleContent'
 import Sidebar from '../components/SideBar'
 import Typography from '@material-ui/core/Typography'
-
+import { askForPermissionToReceiveNotifications } from '../components/Notifications'
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -20,7 +20,9 @@ export default function BlogPostTemplate({ data, pageContext }) {
   const postNode = data.flamelinkBlogPostContent
   const pageViews = data.pageViews ? data.pageViews.totalCount : 0
   const pageTitle = postNode.title
-
+  setTimeout(function () {
+    askForPermissionToReceiveNotifications()
+  }, 30000)
   return (
     <TopLayout>
       <SEO

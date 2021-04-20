@@ -33,7 +33,7 @@ export default function Main({ postEdges, title }) {
   const Posts = postEdges.slice(FirstPostIndex, LastPostIndex)
   return (
     <Grid item xs={12} md={8}>
-      <Typography variant="h6" gutterBottom ref={myRef}>
+      <Typography variant="h5" gutterBottom ref={myRef}>
         {`${title}`}
         <span>{pageNumber === 1 ? '' : ` page ${pageNumber}`}</span>
       </Typography>

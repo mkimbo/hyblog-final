@@ -201,6 +201,14 @@ export default function Sidebar(theme) {
             </List>
           </div>
           <div className={classes.pages}>
+            <Link to={`/qa`} color="primary" className={classes.categoryLink}>
+              <Chip
+                className={classes.categoryChip}
+                color="primary"
+                label="Q & A"
+                variant="outlined"
+              />
+            </Link>
             {Array.from(new Set(categoryList)).map((category) => (
               <Link
                 to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
