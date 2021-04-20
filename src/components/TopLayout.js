@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 import { CssBaseline, Grid } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import loadable from '@loadable/component'
-
+import Notifications from 'react-notify-toast'
 import initialTheme from '../context/theme'
 import { themeReducer, initialState } from '../context/themeReducer'
 import { DispatchContext } from '../context/DispatchContext'
@@ -47,7 +47,10 @@ export default function TopLayout(props) {
 
               <Header title="HyBlog" />
 
-              <Grid style={{ paddingTop: '120px' }}>{props.children}</Grid>
+              <Grid style={{ paddingTop: '120px' }}>
+                <Notifications />
+                {props.children}
+              </Grid>
               <Footer />
               <ChatWidget
                 accountId="58a54c91-ff8c-4b1f-b31b-3e2a9ad82b39"

@@ -34,7 +34,7 @@ export default function Main({ postEdges, title }) {
   return (
     <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom ref={myRef}>
-        {`Latest on ${title}`}
+        {`${title}`}
         <span>{pageNumber === 1 ? '' : ` page ${pageNumber}`}</span>
       </Typography>
       <Divider />

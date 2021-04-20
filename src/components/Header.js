@@ -13,7 +13,8 @@ import Avatar from '@material-ui/core/Avatar'
 import { AuthContext } from '../context/auth/auth'
 import { ModalContext } from '../context/modal/modal'
 import ModalSignIn from './ModalSignIn'
-import Notifications from './Notifications'
+import { notify } from 'react-notify-toast'
+import SubscriptionForm from './Subscribe'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,16 +23,24 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     width: '100%',
     background: '#1489cc',
+
     zIndex: '10',
   },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     fontFamily: 'Roboto, sans-serif',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   toolbarTitle: {
     flex: 1,
     fontFamily: 'Roboto, sans-serif',
     textDecoration: 'none',
+    textAlign: 'center',
+  },
+  title: {
+    textAlign: 'center',
+    fontFamily: 'Roboto, sans-serif',
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
@@ -56,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     textShadow: '0 2px 4px #000',
+    fontFamily: 'Roboto, sans-serif',
   },
 }))
 
@@ -63,6 +73,16 @@ export default function Header(props) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(false)
   const { title } = props
+  let myColor = {
+    background: '#ffffff',
+    text: '#1489cc',
+  }
+  const notifyNews = () => {
+    notify.show('News Section Coming Soon', 'custom', 5000, myColor)
+  }
+  const notifyPoetry = () => {
+    notify.show('Photo Poetry Coming Soon', 'custom', 5000, myColor)
+  }
   const cat = []
   const { state, signOut } = useContext(AuthContext)
   const {
@@ -106,21 +126,15 @@ export default function Header(props) {
       <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
+          <SubscriptionForm />
           <Link to={'/'} className={classes.toolbarTitle}>
-            <Typography
-              component="h2"
-              variant="h5"
-              align="left"
-              color="secondary"
-              className={classes.toolbarTitle}
-            >
+            <Typography component="h2" variant="h5" color="secondary">
               {title}
             </Typography>
           </Link>
           <IconButton>
             <SearchIcon color="secondary" />
           </IconButton>
-
           {state.isAuthenticated && !state.isLoading ? (
             <>
               <div
@@ -131,7 +145,10 @@ export default function Header(props) {
                 aria-haspopup="true"
                 role="button"
               >
-                <Avatar src={state.user?.photoURL || '/broken-image.jpg'} />
+                <Avatar
+                  variant="outlined"
+                  src={state.user?.photoURL || '/broken-image.jpg'}
+                />
               </div>
               <Menu
                 id="simple-menu"
@@ -150,11 +167,11 @@ export default function Header(props) {
               variant="outlined"
               className={classes.login}
               color="secondary"
+              size="small"
             >
               Login
             </Button>
           )}
-          {/* <Notifications />*/}
         </Toolbar>
         <Toolbar
           component="nav"
@@ -171,10 +188,20 @@ export default function Header(props) {
               {category}
             </Link>
           ))}
-          <Link to={'#'} key="news" className={classes.toolbarLink}>
+          <Link
+            to={'#'}
+            onClick={notifyNews}
+            key="news"
+            className={classes.toolbarLink}
+          >
             News
           </Link>
-          <Link to={'#'} key="poetry" className={classes.toolbarLink}>
+          <Link
+            to={'#'}
+            onClick={notifyPoetry}
+            key="poetry"
+            className={classes.toolbarLink}
+          >
             Poetry
           </Link>
         </Toolbar>

@@ -3,22 +3,34 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import { graphql, useStaticQuery, Link } from 'gatsby'
-import BackgroundImage from 'gatsby-background-image'
+import Img from 'gatsby-image'
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
-    position: 'relative',
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing(4),
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr',
+    },
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
-  overlay: {
-    position: 'absolute',
+  media: {
+    width: '100%',
+  },
+  editor: {
+    position: 'relative',
     top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: 'transparent',
+    left: '2px',
+    backgroundColor: '#1489cc',
+    width: 'fit-content',
+    padding: '0 2px',
+    [theme.breakpoints.down('sm')]: {
+      top: '2px',
+      left: 0,
+    },
   },
   mainFeaturedPostContent: {
     position: 'relative',
@@ -68,20 +80,17 @@ export default function MainFeaturedPost(props) {
     ? image.node.childImageSharp.fluid
     : null
   return (
-    <BackgroundImage fluid={mainImage}>
-      <div className={classes.overlay} />
-      <Grid container>
-        <Grid item md={6}>
+    <Paper elevation={1}>
+      <Grid container className={classes.mainFeaturedPost}>
+        <Grid item>
+          <Typography variant="h6" color="secondary" className={classes.editor}>
+            Editor's Pick
+          </Typography>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography
-              component="h1"
-              variant="h3"
-              color="inherit"
-              gutterBottom
-            >
+            <Typography variant="h4" color="inherit" gutterBottom>
               {title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
+            <Typography variant="h6" color="inherit" paragraph>
               {post.node.summary}
             </Typography>
             <Link to={post.node.slug} className={classes.continueReading}>
@@ -91,8 +100,11 @@ export default function MainFeaturedPost(props) {
             </Link>
           </div>
         </Grid>
+        <Grid item>
+          <Img fluid={mainImage} className={classes.media} />
+        </Grid>
       </Grid>
-    </BackgroundImage>
+    </Paper>
   )
 }
 

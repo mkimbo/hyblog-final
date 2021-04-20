@@ -3,17 +3,19 @@ import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Button from '@material-ui/core/Button'
-import Avatar from '@material-ui/core/Avatar'
+import { notify } from 'react-notify-toast'
 import Typography from '@material-ui/core/Typography'
-import icon from '../images/icon.png'
-
-import { Paper } from '@material-ui/core'
+import { Paper, Chip } from '@material-ui/core'
 import PopularArticle from './PopularArticle'
-import SubscriptionForm from './Subscribe'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import icon from '../images/icon.png'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import ListItemText from '@material-ui/core/ListItemText'
+import Avatar from '@material-ui/core/Avatar'
+import IconButton from '@material-ui/core/IconButton'
+import { FaFacebookF, FaTwitter } from 'react-icons/fa'
 
 const useStyles = makeStyles((theme) => ({
   sideGrid: {
@@ -29,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
   roboFonts: {
     fontFamily: 'Roboto, sans-serif',
   },
+  pages: {
+    display: 'flex',
+
+    flexWrap: 'wrap',
+  },
   category: {
     fontFamily: 'Montserrat, sans-serif',
     borderLeft: '4px solid #1489cc',
@@ -36,14 +43,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#1489cc',
   },
   categoryLink: {
-    padding: theme.spacing(1),
+    padding: '3px',
     fontFamily: 'Roboto, sans-serif',
     flexShrink: 0,
     color: '#1489cc',
     textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
+  },
+  categoryChip: {
+    fontFamily: 'Roboto, sans-serif',
+    cursor: 'pointer',
   },
   moreArticles: {
     float: 'right',
@@ -55,8 +63,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Sidebar() {
+export default function Sidebar(theme) {
   const classes = useStyles()
+  let myColor = {
+    background: '#ffffff',
+    text: '#1489cc',
+  }
+  const notifyNews = () => {
+    notify.show('News Section Coming Soon', 'custom', 5000, myColor)
+  }
+  const notifyPoetry = () => {
+    notify.show('Photo Poetry Coming Soon', 'custom', 5000, myColor)
+  }
+
   const data = useStaticQuery(graphql`
     query {
       allFlamelinkBlogPostContent {
@@ -149,24 +168,73 @@ export default function Sidebar() {
     <Grid item xs={12} md={4} className={classes.sideGrid}>
       <Paper elevation={1}>
         <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography>
-            {Array.from(new Set(categoryList))
-              .slice(0, 4)
-              .map((category) => (
-                <Link
-                  to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
-                  key={category}
+          <div>
+            <List dense>
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar aria-label="hyblog" src={icon}>
+                    H
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Typography className={classes.roboFonts} variant="h5">
+                      Hyblog
+                    </Typography>
+                  }
+                />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    href="https://facebook.com/Hyreads"
+                    color="inherit"
+                  >
+                    <FaFacebookF />
+                  </IconButton>
+                  <IconButton
+                    href="https://twitter.com/hyreads"
+                    color="inherit"
+                  >
+                    <FaTwitter />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
+          </div>
+          <div className={classes.pages}>
+            {Array.from(new Set(categoryList)).map((category) => (
+              <Link
+                to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
+                key={category}
+                color="primary"
+                className={classes.categoryLink}
+              >
+                <Chip
                   color="primary"
-                  className={classes.categoryLink}
-                >
-                  {category}
-                </Link>
-              ))}
-          </Typography>
-
-          <Typography>
-            <SubscriptionForm />
-          </Typography>
+                  label={category}
+                  className={classes.categoryChip}
+                  variant="outlined"
+                />
+              </Link>
+            ))}
+            <Link to={`#`} color="primary" className={classes.categoryLink}>
+              <Chip
+                className={classes.categoryChip}
+                onClick={notifyNews}
+                color="primary"
+                label="News"
+                variant="outlined"
+              />
+            </Link>
+            <Link to={`#`} color="primary" className={classes.categoryLink}>
+              <Chip
+                className={classes.categoryChip}
+                onClick={notifyPoetry}
+                color="primary"
+                label="Photo Poetry"
+                variant="outlined"
+              />
+            </Link>
+          </div>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>
           <Typography
@@ -174,7 +242,7 @@ export default function Sidebar() {
             className={classes.category}
             variant="h6"
           >
-            What people read
+            Most Popular
           </Typography>
 
           {postEdges.slice(0, 5).map((post, index) => {
