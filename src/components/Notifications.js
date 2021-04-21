@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/messaging'
 import 'firebase/firestore'
+import Button from '@material-ui/core/Button'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import firebaseConfig from '../firebase/firebaseConfig'
-import { IconButton } from '@material-ui/core'
+import { notify } from 'react-notify-toast'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    fontFamily: 'Roboto, sans-serif',
+  },
+}))
+
 const app = typeof window != 'undefined' ? firebase.app() : null
 // Add the public key generated from the console here.
 const messaging =
@@ -15,39 +25,26 @@ const messaging =
         messagingSenderId: '534749721390',
       })
     : null
-export const askForPermissionToReceiveNotifications = () => {
-  try {
-    messaging
-      .getToken({
-        vapidKey:
-          'BMecJpNN4bvzeZT_Oc99N7qUpwzUO8iWR5nIM59aaxGAuf7iR7O7GTx3y0qg-MqszfT1bfT3TO4cLAQ698Pnpkc',
-      })
-      .then((currentToken) => {
-        if (currentToken) {
-          app
-            .firestore()
-            .collection('subscriptions')
-            .doc(currentToken)
-            .set({
-              token: currentToken,
-            })
-            .catch((err) => console.log(err))
-        } else {
-          // Show permission request UI
-          console.log(
-            'No registration token available. Request permission to generate one.'
-          )
-          Notification.requestPermission()
-          // ...
-        }
-      })
-      .catch((err) => {
-        console.log('An error occurred while retrieving token..', err)
-        // ...
-      })
-  } catch (error) {
-    console.error(error)
+
+const hasNotificationPermission = async () => {
+  if (Notification.permission === 'granted') {
+    return true
+  } else if (Notification.permission !== 'denied') {
+    const permission = await Notification.requestPermission()
+    if (permission === 'granted') {
+      return true
+    }
   }
+  return false
+}
+
+const pushSupported = () => {
+  if (typeof window !== `undefined`) {
+    if ('PushManager' in window) {
+      return true
+    }
+  }
+  return false
 }
 
 if (typeof window !== 'undefined') {
@@ -78,10 +75,85 @@ if (typeof window !== 'undefined') {
 }
 
 function Notifications() {
+  const classes = useStyles()
+  const [subscribed, setSubscribed] = useState(false)
+  const [working, setWorking] = useState(false)
+  const createSubscription = async () => {
+    notify.hide()
+    const hasPermission = await hasNotificationPermission()
+    if (pushSupported() && hasPermission) {
+      setWorking(true)
+      messaging
+        .getToken({
+          vapidKey:
+            'BMecJpNN4bvzeZT_Oc99N7qUpwzUO8iWR5nIM59aaxGAuf7iR7O7GTx3y0qg-MqszfT1bfT3TO4cLAQ698Pnpkc',
+        })
+        .then((currentToken) => {
+          console.log(currentToken)
+          app
+            .firestore()
+            .collection('subscriptions')
+            .doc(currentToken)
+            .set({
+              token: currentToken,
+            })
+            .then(() => {
+              setSubscribed(true)
+              localStorage.setItem('pushToken', currentToken)
+
+              notify.show('Hyblog notifictions enabled.', 'success')
+            })
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(`Error getting token`, err))
+    } else {
+      notify.show('Notifications not allowed.', 'error')
+    }
+    setWorking(false)
+  }
+
+  const unsubscribe = async () => {
+    notify.hide()
+    if (pushSupported() && subscribed) {
+      setWorking(true)
+      const userToken = localStorage.getItem('pushToken')
+      app
+        .firestore()
+        .collection('subscriptions')
+        .doc(userToken)
+        .delete()
+        .then(() => {
+          localStorage.removeItem('pushToken')
+          notify.show('Hyblog notifications disabled', 'success')
+          setSubscribed(false)
+        })
+        .catch((err) => console.log(err))
+    }
+    setWorking(false)
+  }
+
+  useEffect(() => {
+    const status = localStorage.getItem('pushToken')
+    if (status) {
+      setSubscribed(true)
+    }
+  }, [])
+
+  const btnText = subscribed
+    ? 'Disable Hyblog notifications'
+    : 'Enable Hyblog notifications'
+  const callback = subscribed ? unsubscribe : createSubscription
   return (
-    <IconButton onClick={askForPermissionToReceiveNotifications}>
-      <NotificationsIcon color="secondary" />
-    </IconButton>
+    <Button
+      onClick={callback}
+      fullWidth
+      variant="contained"
+      color="primary"
+      className={classes.submit}
+      disabled={working}
+    >
+      {btnText}
+    </Button>
   )
 }
 

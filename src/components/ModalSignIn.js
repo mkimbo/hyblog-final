@@ -9,7 +9,7 @@ import Fade from '@material-ui/core/Fade'
 import Button from '@material-ui/core/Button'
 import { AuthContext } from '../context/auth/auth'
 import { Typography } from '@material-ui/core'
-import { askForPermissionToReceiveNotifications } from '../components/Notifications'
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -48,9 +48,6 @@ export default function ModalSignIn({ open, handleClose }) {
 
   const Signup = async () => {
     signUpwithGoogle(handleClose)
-    setTimeout(function () {
-      askForPermissionToReceiveNotifications()
-    }, 25000)
   }
 
   return (

@@ -86,7 +86,7 @@ export default function MainFeaturedPost(props) {
       <Grid container className={classes.mainFeaturedPost}>
         <Grid item>
           <Typography variant="h6" color="secondary" className={classes.editor}>
-            Editor's pick
+            Trending
           </Typography>
           <div className={classes.mainFeaturedPostContent}>
             <Typography variant="h4" color="inherit" gutterBottom>

@@ -6,7 +6,9 @@ import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
-import { askForPermissionToReceiveNotifications } from './Notifications'
+import Notifications, {
+  askForPermissionToReceiveNotifications,
+} from './Notifications'
 import { Dialog, CardContent } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
@@ -127,18 +129,10 @@ const SubscriptionForm = () => {
   const notifications = (
     <Grid item xs>
       <Typography variant="h6">
-        Simply allow browser notifications to get the latest articles instantly,
-        even while offline.
+        Simply allow us to send you notifications of the latest articles
+        instantly, even while offline.
       </Typography>
-      <Button
-        onClick={askForPermissionToReceiveNotifications}
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-      >
-        Allow Notifications
-      </Button>
+      <Notifications />
     </Grid>
   )
   return (

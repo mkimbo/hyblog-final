@@ -11,7 +11,7 @@ import MainFeaturedPost from '../components/MainFeaturedPost'
 import SEO from '../components/SEO/SEO'
 import Main from '../components/Main'
 import Sidebar from '../components/SideBar'
-import { askForPermissionToReceiveNotifications } from '../components/Notifications'
+
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -25,9 +25,7 @@ export default function Index({ data }) {
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
 
-  setTimeout(function () {
-    askForPermissionToReceiveNotifications()
-  }, 30000)
+
   const classes = useStyles()
   const pageTitle = 'The Latest'
   return (
