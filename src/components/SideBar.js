@@ -139,6 +139,10 @@ export default function Sidebar(theme) {
     categoryList.push(post.node.category)
     return null
   })
+  data.allFlamelinkQuestionAnswerContent.edges.map((post) => {
+    categoryList.push(post.node.category)
+    return null
+  })
   const Total = [...posts, ...questions]
   const Politics = Total.filter(
     (edge) => edge.node.category === 'Politics'

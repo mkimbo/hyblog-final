@@ -1,28 +1,30 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
-import Notifications, {
-  askForPermissionToReceiveNotifications,
-} from './Notifications'
-import { Dialog, CardContent } from '@material-ui/core'
+import CardContent from '@material-ui/core/CardContent'
 
 const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  gridForm: {
+    width: '100%',
+    display: 'grid',
+    gridGap: '5px',
+    gridTemplateColumns: '3fr 1fr',
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
     fontFamily: 'Roboto, sans-serif',
   },
-  dialogHeader: {
-    display: 'flex',
-    flexDirection: 'row',
+  newsletter: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
   },
   subscribe: {
     display: 'grid',
@@ -30,21 +32,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const SubscriptionForm = () => {
-  const [open, setOpen] = React.useState(false)
   const classes = useStyles()
   const [status, setStatus] = useState(null)
   const [email, setEmail] = useState('')
 
-  //FORM_URL should be the same as the form action url pointed out above
+  //FORM_URL to ConvertKit
   const FORM_URL = `https://app.convertkit.com/forms/2173054/subscriptions`
 
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = new FormData(e.target)
@@ -80,14 +74,6 @@ const SubscriptionForm = () => {
       method="post"
       onSubmit={handleSubmit}
     >
-      <Grid container>
-        <Grid item xs>
-          <Typography variant="h6">
-            Join our weekly newsletter to receive customized content right into
-            your mailbox!
-          </Typography>
-        </Grid>
-      </Grid>
       {status === 'SUCCESS' && (
         <Alert severity="success">
           Email sent! — confirm the subscription in your inbox
@@ -98,68 +84,40 @@ const SubscriptionForm = () => {
           Oops, Something went wrong! refresh the page and try again!
         </Alert>
       )}
-      <TextField
-        variant="outlined"
-        margin="normal"
-        onChange={handleInputChange}
-        value={email}
-        required
-        fullWidth
-        id="email"
-        label="Email Address"
-        name="email_address"
-        autoComplete="email"
-      />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-      >
-        Join Weekly Newsletter
-      </Button>
-      <Grid container>
-        <Grid item xs align="center">
-          <Typography variant="body2">OR</Typography>
-        </Grid>
-      </Grid>
+      <div className={classes.gridForm}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          onChange={handleInputChange}
+          value={email}
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email_address"
+          autoComplete="email"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          size="large"
+        >
+          Join
+        </Button>
+      </div>
     </form>
   )
-  const notifications = (
-    <Grid item xs>
-      <Typography variant="h6">
-        Simply allow us to send you notifications of the latest articles
-        instantly, even while offline.
-      </Typography>
-      <Notifications />
-    </Grid>
-  )
+
   return (
-    <div className={classes.subscribe}>
-      <Button
-        onClick={handleOpen}
-        fullWidth
-        variant="outlined"
-        color="secondary"
-        className={classes.submit}
-        size="small"
-      >
-        Subscribe
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="subscribe-dialog"
-      >
-        <Card elevation={0} className={classes.sidebarAboutBox}>
-          <CardContent>
-            {newsletter}
-            {notifications}
-          </CardContent>
-        </Card>
-      </Dialog>
-    </div>
+    <Card elevation={1} className={classes.newsletter}>
+      <Typography variant="h6">
+        <strong>Stay in the know</strong> with our weekly newsletter, the best
+        of Hyblog, delivered to your mail box every Tuesday.
+      </Typography>
+      <CardContent>{newsletter}</CardContent>
+    </Card>
   )
 }
 

@@ -1,8 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import firebase from 'firebase/app'
-import 'firebase/messaging'
-import 'firebase/firestore'
 import { makeStyles } from '@material-ui/core/styles'
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
@@ -25,12 +22,14 @@ export default function Index({ data }) {
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
 
-
   const classes = useStyles()
   const pageTitle = 'The Latest'
   return (
     <TopLayout>
-      <SEO />
+      <SEO
+        pageTitle={`Front Page`}
+        pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering each other for the betterment of society.`}
+      />
       <Container>
         <Notifications />
         <MainFeaturedPost postEdges={postEdges} />

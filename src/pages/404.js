@@ -1,80 +1,58 @@
 import { Link } from 'gatsby'
 import React from 'react'
-import NotListedLocationIcon from '@material-ui/icons/NotListedLocation'
 import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import TopLayout from '../components/TopLayout'
 
 const useStyles = makeStyles((theme) => ({
   homeRedirect: {
     textDecoration: 'none',
-    color: theme.palette.primary,
-    fontFamily: 'Roboto, sans-serif',
+    color: '#fff',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
   mainbox: {
-    backgroundColor: '#95c2de',
+    backgroundColor: '#1489cc',
     margin: 'auto',
     height: '600px',
-    width: '600px',
-    position: 'relative',
-  },
-
-  err: {
-    color: '#ffffff',
-    fontFamily: 'Cardo, sans-serif',
-    fonSize: '11rem',
-    position: 'absolute',
-    left: '20%',
-    top: '8%',
-  },
-
-  far: {
-    position: 'absolute',
-    fonSize: '8.5rem',
-    left: '42%',
-    top: '15%',
-    color: '#ffffff',
-  },
-
-  err2: {
-    color: '#ffffff',
-    fontFamily: 'Cardo, sans-serif',
-    fonSize: '11rem',
-    position: 'absolute',
-    left: '68%',
-    top: '8%',
+    textAlign: 'center',
   },
 
   msg: {
     textAlign: 'center',
     fontFamily: 'Cardo, sans-serif',
     fontSize: '1.6rem',
-    position: 'absolute',
-    left: '16%',
-    top: '45%',
-    width: '75%',
   },
 }))
 function NotFound() {
   const classes = useStyles()
   return (
-    <div className={classes.mainbox}>
-      <div className={classes.err}>4</div>
-      <NotListedLocationIcon color="primary" className={classes.far} />
-      <div className={classes.err2}>4</div>
-      <div className={classes.msg}>
-        Maybe this page moved? Got deleted? Is hiding out in quarantine? Never
-        existed in the first place?
-        <p>
-          Let's go
-          <Link className={classes.homeRedirect} to={`/`}>
-            home
-          </Link>
-          and try from there.
-        </p>
+    <TopLayout>
+      <div className={classes.mainbox}>
+        <Typography variant="h1" color="initial">
+          404
+        </Typography>
+        <Typography variant="h2" color="initial">
+          Page Not Found
+        </Typography>
+
+        <div className={classes.msg}>
+          <Typography variant="h6" color="initial">
+            Maybe this page moved? Got deleted? Is hiding out in quarantine?
+            Never existed in the first place?
+          </Typography>
+
+          <Typography variant="h6">
+            Let's start from the
+            <Link className={classes.homeRedirect} to={`/`}>
+              {' '}
+              Front Page
+            </Link>
+          </Typography>
+        </div>
       </div>
-    </div>
+    </TopLayout>
   )
 }
 

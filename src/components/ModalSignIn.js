@@ -1,7 +1,4 @@
 import React, { useContext } from 'react'
-import firebase from 'firebase/app'
-import 'firebase/messaging'
-import 'firebase/firestore'
 import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
@@ -44,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ModalSignIn({ open, handleClose }) {
   const classes = useStyles()
-  const { signUpwithGoogle, onSignInWithFacebook } = useContext(AuthContext)
+  const { signUpwithGoogle } = useContext(AuthContext)
 
   const Signup = async () => {
     signUpwithGoogle(handleClose)

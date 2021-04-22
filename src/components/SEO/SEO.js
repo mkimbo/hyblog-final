@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import SchemaOrg from './SchemaOrg'
 
-const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
+const SEO = ({ pageTitle, pageDescription, blog, postImage, isBlogPost }) => (
   <StaticQuery
     query={graphql`
       {
@@ -34,7 +34,7 @@ const SEO = ({ pageTitle, blog, postImage, isBlogPost }) => (
       const postMeta = blog ? blog : null
 
       const title = isBlogPost ? postMeta.title || postMeta.question : seo.title
-      const description = isBlogPost ? postMeta.summary : seo.description
+      const description = isBlogPost ? postMeta.summary : pageDescription
       const image = postImage
         ? `${seo.siteUrl}${postImage}`
         : `${seo.siteUrl}${seo.image}`
@@ -92,6 +92,7 @@ SEO.propTypes = {
 SEO.defaultProps = {
   isBlogPost: false,
   postTitle: null,
+  pageDescription: null,
   postImage: null,
   blog: null,
 }

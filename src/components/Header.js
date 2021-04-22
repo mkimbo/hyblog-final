@@ -14,7 +14,7 @@ import { AuthContext } from '../context/auth/auth'
 import { ModalContext } from '../context/modal/modal'
 import ModalSignIn from './ModalSignIn'
 import { notify } from 'react-notify-toast'
-import SubscriptionForm from './Subscribe'
+import Notifications from './Notifications'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,9 +115,21 @@ export default function Header(props) {
           }
         }
       }
+      allFlamelinkQuestionAnswerContent {
+        edges {
+          node {
+            id
+            category
+          }
+        }
+      }
     }
   `)
   data.allFlamelinkBlogPostContent.edges.map((post) => {
+    cat.push(post.node.category)
+    return null
+  })
+  data.allFlamelinkQuestionAnswerContent.edges.map((post) => {
     cat.push(post.node.category)
     return null
   })
@@ -126,7 +138,7 @@ export default function Header(props) {
       <ModalSignIn open={openLoginModal} handleClose={handleCloseLoginModal} />
       <div className={classes.root}>
         <Toolbar className={classes.toolbar}>
-          <SubscriptionForm />
+          <Notifications />
           <Link to={'/'} className={classes.toolbarTitle}>
             <Typography component="h2" variant="h5" color="secondary">
               {title}

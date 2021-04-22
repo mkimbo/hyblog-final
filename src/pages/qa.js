@@ -25,7 +25,10 @@ export default function Category({ data, pageContext }) {
   const pageTitle = 'Q & A'
   return (
     <TopLayout>
-      <SEO pageTitle={`Q & A`} />
+      <SEO
+        pageTitle={`Q & A`}
+        pageDescription={`Engage with Grand Philosopher by emailing your questions to grand_philosopher@hyblog.info`}
+      />
       <Container>
         <QAParticles title={pageTitle} />
         <Grid container spacing={5} className={classes.mainGrid}>

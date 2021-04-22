@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
+  title: {
+    color: '#000',
+  },
 }))
 
 export default function MainFeaturedPost(props) {
@@ -89,10 +92,10 @@ export default function MainFeaturedPost(props) {
             Trending
           </Typography>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography variant="h4" color="inherit" gutterBottom>
+            <Typography variant="h4" className={classes.title} gutterBottom>
               {title}
             </Typography>
-            <Typography variant="h6" color="inherit" paragraph>
+            <Typography variant="h6" className={classes.title} paragraph>
               {post.node.summary}
             </Typography>
             <Link to={post.node.slug} className={classes.continueReading}>

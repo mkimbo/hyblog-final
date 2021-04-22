@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper'
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'
 import { IconButton } from '@material-ui/core'
 import '../styles/footer.css'
-import SubscriptionForm from './Subscribe'
 
 function Copyright() {
   return (
@@ -118,9 +117,6 @@ export default function Footer() {
                       Authors
                     </Typography>
                   </InternalLink>
-                </li>
-                <li className={classes.listItem}>
-                  <SubscriptionForm />
                 </li>
               </ul>
             </Grid>

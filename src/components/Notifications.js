@@ -3,7 +3,6 @@ import firebase from 'firebase/app'
 import 'firebase/messaging'
 import 'firebase/firestore'
 import Button from '@material-ui/core/Button'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import firebaseConfig from '../firebase/firebaseConfig'
 import { notify } from 'react-notify-toast'
 import { makeStyles } from '@material-ui/core/styles'
@@ -106,8 +105,10 @@ function Notifications() {
             .catch((err) => console.log(err))
         })
         .catch((err) => console.log(`Error getting token`, err))
+    } else if (!pushSupported()) {
+      notify.show('Your browser doesnt support Notifications', 'error')
     } else {
-      notify.show('Notifications not allowed.', 'error')
+      notify.show('Allow notifications to proceed', 'error')
     }
     setWorking(false)
   }
@@ -139,16 +140,14 @@ function Notifications() {
     }
   }, [])
 
-  const btnText = subscribed
-    ? 'Disable Hyblog notifications'
-    : 'Enable Hyblog notifications'
+  const btnText = subscribed ? 'Subscribed' : 'Subscribe'
   const callback = subscribed ? unsubscribe : createSubscription
   return (
     <Button
       onClick={callback}
-      fullWidth
-      variant="contained"
-      color="primary"
+      size="small"
+      variant="outlined"
+      color="secondary"
       className={classes.submit}
       disabled={working}
     >

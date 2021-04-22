@@ -27,7 +27,7 @@ export default function Category({ data, pageContext }) {
   const pageTitle = pageContext.category
   return (
     <TopLayout>
-      <SEO pageTitle={`${pageTitle} Category`} />
+      <SEO pageTitle={pageTitle} pageDescription={`${pageTitle} Category`} />
       <Container>
         <MainParticles title={pageTitle} />
         <Grid container spacing={5} className={classes.mainGrid}>
