@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Main({ postEdges, title }) {
+export default function Main({ postEdges, title, author, category }) {
   const classes = useStyles()
   const [pageNumber, setPageNumber] = useState(1)
   const onPageChange = (event, page) => {
@@ -34,7 +34,7 @@ export default function Main({ postEdges, title }) {
   return (
     <Grid item xs={12} md={8}>
       <Typography variant="h5" gutterBottom ref={myRef}>
-        {`${title}`}
+        {title ? `${title}` : author ? `By ${author}` : `${category} Category`}
         <span>{pageNumber === 1 ? '' : ` page ${pageNumber}`}</span>
       </Typography>
       <Divider />
@@ -65,4 +65,11 @@ export default function Main({ postEdges, title }) {
 Main.propTypes = {
   posts: PropTypes.array,
   title: PropTypes.string,
+  author: PropTypes.string,
+  category: PropTypes.string,
+}
+Main.defaultProps = {
+  title: null,
+  author: null,
+  category: null,
 }

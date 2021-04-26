@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import EmailIcon from '@material-ui/icons/Email'
-import { Card, CardActions, CardContent, Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import LocalImage from './LocalImage'
+import EmailIcon from '@material-ui/icons/Email'
+import PreviewImage from './PreviewImage'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import { Card, CardActions, CardContent } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   mainParticles: {
@@ -18,17 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    height: '450px',
-  },
-  content: {
-    backgroundColor: '#1489cc',
-    padding: '0px 2px',
-  },
-  content2: {
-    backgroundColor: 'rgba(48, 48, 48, 0.8)',
-  },
-  contentCard: {
-    backgroundColor: 'transparent',
+    height: '400px',
   },
   overlay: {
     background: 'transparent',
@@ -37,24 +29,33 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
+  content: {
+    backgroundColor: '#1489cc',
+    padding: '0px 2px',
+  },
+  contentCard: {
+    backgroundColor: 'rgba(48, 48, 48, 0.8)',
+  },
   button: {
     fontFamily: 'Roboto, sans-serif',
   },
   flexActions: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
   profileImage: {
-    maxWidth: '150px',
-    maxHeight: '150px',
+    maxWidth: '100px',
+    maxHeight: '100px',
     margin: '2px auto',
+  },
+  contentCard: {
+    backgroundColor: 'rgba(48, 48, 48, 0.8)',
   },
   mainParticlesContent: {
     position: 'relative',
     textAlign: 'center',
-    minWidth: '250px',
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(6),
       paddingRight: 0,
@@ -62,14 +63,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function QAParticles(props) {
+export default function AuthorParticles({ author }) {
   const classes = useStyles()
-  const { title } = props
+
   return (
     <Paper className={classes.mainParticles}>
       <div>
         <Particles
-          height="450px"
+          height="400px"
           params={{
             fpsLimit: 60,
             interactivity: {
@@ -113,7 +114,10 @@ export default function QAParticles(props) {
         <Grid container className={classes.mainParticlesContent}>
           <Card className={classes.contentCard}>
             <div className={classes.profileImage}>
-              <LocalImage filename={`qaIcon`} alt={`QA Icon`} />
+              <PreviewImage
+                filename={author.avatar[0].localFile.name}
+                alt={author.name}
+              />
             </div>
             <CardContent>
               <Typography
@@ -121,29 +125,48 @@ export default function QAParticles(props) {
                 color="secondary"
                 className={classes.content}
               >
-                with Grand Philosospher
+                {author.name}
               </Typography>
-              <Typography
-                variant="subtitle1"
-                color="secondary"
-                className={classes.content2}
-              >
-                Let’s engage one another for a better world and just societies.
-                Email me your questions by clicking the button below or directly
-                through grand_philosospher@hyblog.info.
+              <Typography color="secondary" variant="subtitle1">
+                {author.tagline}
               </Typography>
             </CardContent>
             <CardActions className={classes.flexActions}>
+              {author.twitter ? (
+                <Button
+                  component="a"
+                  href={`https://twitter.com/${author.twitter}`}
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                  startIcon={<PersonAddIcon color="primary" />}
+                  size="small"
+                >
+                  Follow
+                </Button>
+              ) : (
+                <Button
+                  component="a"
+                  href={`https://facebook.com/${author.facebook}`}
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                  startIcon={<PersonAddIcon color="primary" />}
+                  size="small"
+                >
+                  Follow
+                </Button>
+              )}
               <Button
                 component="a"
-                href={`mailto:grand_philosospher@hyblog.info`}
-                variant="contained"
+                href={`mailto:${author.email}`}
+                variant="outlined"
                 color="primary"
                 className={classes.button}
-                startIcon={<EmailIcon color="secondary" />}
+                startIcon={<EmailIcon color="primary" />}
                 size="small"
               >
-                Email Your Question
+                Message
               </Button>
             </CardActions>
           </Card>
@@ -153,6 +176,6 @@ export default function QAParticles(props) {
   )
 }
 
-QAParticles.propTypes = {
+AuthorParticles.propTypes = {
   title: PropTypes.string,
 }

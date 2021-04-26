@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
 
-import MainParticles from '../components/MainParticles'
+import AuthorParticles from '../components/AuthorParticles'
 import SEO from '../components/SEO/SEO'
 import Main from '../components/Main'
 import Sidebar from '../components/SideBar'
@@ -18,20 +18,24 @@ const useStyles = makeStyles((theme) => ({
 export default function Category({ data, pageContext }) {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
-  const UsortedpostEdges = [...posts, ...questions]
-  const postEdges = UsortedpostEdges.slice().sort(
+  const author = data.flamelinkAuthorsContent
+  const UnsortedpostEdges = [...posts, ...questions]
+  const postEdges = UnsortedpostEdges.slice().sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
 
   const classes = useStyles()
-  const pageTitle = pageContext.category
+  const pageTitle = pageContext.author
   return (
     <TopLayout>
-      <SEO pageTitle={pageTitle} pageDescription={`${pageTitle} Category`} />
+      <SEO
+        pageTitle={`${pageTitle}`}
+        pageDescription={`Articles by ${pageTitle}`}
+      />
       <Container>
-        <MainParticles title={pageTitle} />
+        <AuthorParticles author={author} />
         <Grid container spacing={5} className={classes.mainGrid}>
-          <Main postEdges={postEdges} category={pageTitle} />
+          <Main postEdges={postEdges} author={pageTitle} />
           <Sidebar />
         </Grid>
       </Container>
@@ -40,10 +44,10 @@ export default function Category({ data, pageContext }) {
 }
 
 export const pageQuery = graphql`
-  query CategoryPage($category: String) {
+  query AuthorPage($author: String) {
     allFlamelinkBlogPostContent(
       limit: 2000
-      filter: { category: { eq: $category } }
+      filter: { author: { eq: $author } }
     ) {
       edges {
         node {
@@ -71,7 +75,7 @@ export const pageQuery = graphql`
     }
     allFlamelinkQuestionAnswerContent(
       limit: 2000
-      filter: { category: { eq: $category } }
+      filter: { author: { eq: $author } }
     ) {
       edges {
         node {
@@ -94,6 +98,18 @@ export const pageQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    flamelinkAuthorsContent(name: { eq: $author }) {
+      email
+      facebook
+      name
+      tagline
+      twitter
+      avatar {
+        localFile {
+          name
         }
       }
     }

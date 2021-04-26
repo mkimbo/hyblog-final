@@ -7,8 +7,7 @@ import Link from '@material-ui/core/Link'
 import DarkModeButton from './DarkModeButton'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import { FaFacebookF, FaTwitter } from 'react-icons/fa'
-import { IconButton } from '@material-ui/core'
+import { notify } from 'react-notify-toast'
 import '../styles/footer.css'
 
 function Copyright() {
@@ -19,7 +18,7 @@ function Copyright() {
         style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
       >
         <Typography
-          color="secondary"
+          color="primary"
           style={{ fontFamily: 'Roboto, sans-serif', textDecoration: 'none' }}
         >
           {'© '}HyBlog {new Date().getFullYear()}
@@ -43,12 +42,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     textAlign: 'center',
   },
-  iconsWrapper: {
-    height: 120,
-  },
+  iconsWrapper: {},
   icons: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
+    display: 'flex',
+    lexDirection: 'row',
   },
   icon: {
     width: 40,
@@ -88,33 +85,113 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer() {
   const classes = useStyles()
-
+  let myColor = {
+    background: '#ffffff',
+    text: '#1489cc',
+  }
+  const notifyNews = () => {
+    notify.show('News Section Coming Soon', 'custom', 5000, myColor)
+  }
+  const notifyPoetry = () => {
+    notify.show('Photo Poetry Coming Soon', 'custom', 5000, myColor)
+  }
   return (
     <div className="footer">
       <Paper elevation={3} component="footer" className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
+            <Grid item xs={12} sm={4} md={3} align="left">
+              <Typography
+                variant="h6"
+                marked="left"
+                className={classes.roboFonts}
+              >
+                About
+              </Typography>
+              <Typography variant="subtitle1" color="secondary">
+                Hyblog aims to create impactful conversations on real issues by
+                Educating Enlightening and Empowering each other for the
+                betterment of society.
+              </Typography>
+
+              <Copyright />
+            </Grid>
             <Grid item xs={6} sm={4} md={2}>
               <Typography
                 variant="h6"
                 marked="left"
-                gutterBottom
                 className={classes.roboFonts}
               >
-                Hyblog
+                By Categories
               </Typography>
               <ul className={classes.list}>
                 <li className={classes.listItem}>
                   <InternalLink
-                    color="primary"
-                    to={`#`}
+                    color="secondary"
+                    to={`/society`}
                     className={classes.cardoFonts}
                   >
                     <Typography
                       color="secondary"
                       className={classes.cardoFonts}
                     >
-                      Authors
+                      Society
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`/youth`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Youth
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`/education`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Education
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`/politics`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Politics
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
+                    to={`/africanacity`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Africanacity
                     </Typography>
                   </InternalLink>
                 </li>
@@ -124,49 +201,9 @@ export default function Footer() {
               <Typography
                 variant="h6"
                 marked="left"
-                gutterBottom
                 className={classes.roboFonts}
               >
-                About
-              </Typography>
-              <ul className={classes.list}>
-                <li className={classes.listItem}>
-                  <Link
-                    color="secondary"
-                    href="#"
-                    className={classes.cardoFonts}
-                  >
-                    Hyblog
-                  </Link>
-                </li>
-                <li className={classes.listItem}>
-                  <Link
-                    href="https://hyreads.com"
-                    className={classes.cardoFonts}
-                    color="secondary"
-                  >
-                    Hybra
-                  </Link>
-                </li>
-                <li className={classes.listItem}>
-                  <Link
-                    href="https://hyreads.com"
-                    className={classes.cardoFonts}
-                    color="secondary"
-                  >
-                    Hyreads
-                  </Link>
-                </li>
-              </ul>
-            </Grid>
-            <Grid item xs={6} sm={4} md={2}>
-              <Typography
-                variant="h6"
-                marked="left"
-                gutterBottom
-                className={classes.roboFonts}
-              >
-                Pages
+                By Content
               </Typography>
               <ul className={classes.list}>
                 <li className={classes.listItem}>
@@ -192,6 +229,7 @@ export default function Footer() {
                     <Typography
                       color="secondary"
                       className={classes.cardoFonts}
+                      onClick={notifyNews}
                     >
                       News
                     </Typography>
@@ -207,6 +245,7 @@ export default function Footer() {
                     <Typography
                       color="secondary"
                       className={classes.cardoFonts}
+                      onClick={notifyPoetry}
                     >
                       Photo Poetry
                     </Typography>
@@ -218,40 +257,55 @@ export default function Footer() {
               <Typography
                 variant="h6"
                 marked="left"
-                gutterBottom
                 className={classes.roboFonts}
               >
-                Dark
+                Social
+              </Typography>
+              <ul className={classes.list}>
+                <li className={classes.listItem}>
+                  <Link href="https://hyreads.com">
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Hyreads
+                    </Typography>
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link href="https://facebook.com/Hyreads">
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Facebook
+                    </Typography>
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link
+                    href="https://twitter.com/hyreads"
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Twitter
+                    </Typography>
+                  </Link>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={6} sm={4} md={2}>
+              <Typography
+                variant="h6"
+                marked="left"
+                className={classes.roboFonts}
+              >
+                Dark Mode
               </Typography>
               <DarkModeButton />
-            </Grid>
-            <Grid item xs={6} sm={4} md={3}>
-              <Grid
-                container
-                direction="column"
-                justify="flex-end"
-                className={classes.iconsWrapper}
-                spacing={2}
-              >
-                <Grid item className={classes.icons}>
-                  <IconButton
-                    href="https://facebook.com/Hyreads"
-                    className={classes.icon}
-                    color="inherit"
-                  >
-                    <FaFacebookF />
-                  </IconButton>
-                  <IconButton
-                    href="https://twitter.com/hyreads"
-                    className={classes.icon}
-                    color="inherit"
-                  >
-                    <FaTwitter />
-                  </IconButton>
-                  <Copyright />
-                </Grid>
-                <Grid item></Grid>
-              </Grid>
             </Grid>
           </Grid>
         </Container>

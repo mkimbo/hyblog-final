@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import icon from '../images/icon.png'
+import LocalImage from './LocalImage'
 import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
   mainParticles: {
     position: 'relative',
-    backgroundColor: 'transparent',
+    backgroundColor: '#303030',
     color: theme.palette.primary,
     marginBottom: theme.spacing(4),
     backgroundSize: 'cover',
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     height: '350px',
   },
+  icon: { maxWidth: '250px', maxHeight: '250px' },
   overlay: {
     background: 'transparent',
     position: 'absolute',
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   mainParticlesContent: {
     position: 'relative',
     textAlign: 'center',
+    minWidth: '250px',
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(6),
@@ -68,7 +70,7 @@ export default function MainParticles(props) {
                 opacity: 1,
                 width: 1,
               },
-              number: { value: 100 },
+              number: { value: 50 },
               move: {
                 enable: true,
               },
@@ -90,12 +92,8 @@ export default function MainParticles(props) {
         <Grid container>
           <Grid item md={12}>
             <div className={classes.mainParticlesContent}>
-              <img
-                src={icon}
-                style={{ maxWidth: '250px', maxHeight: '250px' }}
-                alt={title}
-                loading="lazy"
-              />
+              <LocalImage filename={`icon`} alt={`Hyblog Icon`} />
+
               <Typography
                 variant="h6"
                 color="secondary"

@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import Img from 'gatsby-image'
 
-const PreviewImage = ({ filename, alt }) => (
+const LocalImage = ({ filename, alt }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -32,16 +32,16 @@ const PreviewImage = ({ filename, alt }) => (
       const imageFluid = image.node.childImageSharp.fluid
       return (
         <div>
-          <Img style={{ borderRadius: '50%' }} alt={alt} fluid={imageFluid} />
+          <Img alt={alt} fluid={imageFluid} />
         </div>
       )
     }}
   />
 )
 
-PreviewImage.propTypes = {
+LocalImage.propTypes = {
   filename: PropTypes.string,
   alt: PropTypes.string,
 }
 
-export default PreviewImage
+export default LocalImage

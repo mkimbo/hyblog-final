@@ -22,7 +22,7 @@ export default function Category({ data, pageContext }) {
     .sort((a, b) => new Date(b.node.date) - new Date(a.node.date))
 
   const classes = useStyles()
-  const pageTitle = 'Q & A'
+  const pageTitle = 'Q & A Section'
   return (
     <TopLayout>
       <SEO

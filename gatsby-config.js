@@ -11,7 +11,7 @@ module.exports = {
   siteMetadata: {
     title: 'HyBlog - Official Hybra Blog',
     description: `
-      To Educate Enlighten and Empower each other for the betterment of society we must create conversations around the real issues.
+      Creating impactful conversations on real issues by Educating Enlightening and Empowering each other for the betterment of society.
     `,
     siteUrl: 'https://hyblog.info',
     image: '/assets/favicon.svg',

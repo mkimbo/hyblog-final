@@ -100,7 +100,7 @@ function Notifications() {
               setSubscribed(true)
               localStorage.setItem('pushToken', currentToken)
 
-              notify.show('Hyblog notifictions enabled.', 'success')
+              notify.show('Hyblog notifications enabled.', 'success')
             })
             .catch((err) => console.log(err))
         })

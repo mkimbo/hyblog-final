@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
   category: {
     textDecoration: 'none',
   },
+  author: {
+    textDecoration: 'underline',
+    color: '#1489cc',
+  },
 }))
 function ArticleMeta({ pageViews, postNode }) {
   const classes = useStyles()
@@ -28,7 +32,16 @@ function ArticleMeta({ pageViews, postNode }) {
       </Link>
       <Typography>{timeToRead}</Typography>
       <Typography>{`Published on ${datePublished}`}</Typography>
-      <Typography gutterBottom>{`by ${postNode.author}`}</Typography>
+
+      <Typography gutterBottom>
+        by{' '}
+        <Link
+          to={`/${postNode.author.replace(/\W+/g, '-').toLowerCase()}`}
+          className={classes.author}
+        >
+          {postNode.author}
+        </Link>
+      </Typography>
 
       <em style={{ fontFamily: 'Cardo, sans-serif' }}>
         {`(viewed ${pageViews} times)`}

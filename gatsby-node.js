@@ -38,6 +38,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const postPage = path.resolve('src/templates/blogPostTemplate.js')
   const questionPage = path.resolve('src/templates/questionAnswerTemplate.js')
   const categoryPage = path.resolve('src/templates/categoryTemplate.js')
+  const authorPage = path.resolve('src/templates/authorTemplate.js')
 
   const CreatePagesQueryResult = await graphql(
     `
@@ -75,7 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const categorySet = new Set()
-
+  const authorSet = new Set()
   const postsEdges =
     CreatePagesQueryResult.data.allFlamelinkBlogPostContent.edges
   const questionsEdges =
@@ -86,6 +87,7 @@ exports.createPages = async ({ graphql, actions }) => {
   categoryEdges.forEach((edge, index) => {
     if (edge.node.category) {
       categorySet.add(edge.node.category)
+      authorSet.add(edge.node.author)
     }
     const slug = edge.node.slug
     const viewer = `/${slug}`
@@ -123,6 +125,16 @@ exports.createPages = async ({ graphql, actions }) => {
       component: categoryPage,
       context: {
         category,
+      },
+    })
+  })
+
+  authorSet.forEach((author) => {
+    createPage({
+      path: `${_.kebabCase(author)}/`,
+      component: authorPage,
+      context: {
+        author,
       },
     })
   })
