@@ -28,8 +28,10 @@ const LocalImage = ({ filename, alt }) => (
       )
 
       if (!image) return null
+      const imageFluid = image.node.childImageSharp
+        ? image.node.childImageSharp.fluid
+        : null
 
-      const imageFluid = image.node.childImageSharp.fluid
       return (
         <div>
           <Img alt={alt} fluid={imageFluid} />

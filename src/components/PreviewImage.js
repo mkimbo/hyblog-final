@@ -28,8 +28,9 @@ const PreviewImage = ({ filename, alt }) => (
       )
 
       if (!image) return null
-
-      const imageFluid = image.node.childImageSharp.fluid
+      const imageFluid = image.node.childImageSharp
+        ? image.node.childImageSharp.fluid
+        : null
       return (
         <div>
           <Img style={{ borderRadius: '50%' }} alt={alt} fluid={imageFluid} />
