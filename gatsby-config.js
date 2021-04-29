@@ -7,8 +7,6 @@ const config = {
   siteGATrackingID: 'UA-188439956-1',
 }
 
-const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|categories)).*$/
-
 module.exports = {
   siteMetadata: {
     title: 'HyBlog - Official Hybra Blog',
@@ -103,20 +101,14 @@ module.exports = {
                 siteUrl
               }
             }
-            allSitePage(
-              filter: {
-                path: {
-                  regex: "${regexExcludeRobots}"
-                }
-              }
-            ) {
+            allSitePage{
               edges {
                 node {
                   path
                 }
               }
             }
-        }`,
+          }`,
       },
     },
     {
