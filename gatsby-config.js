@@ -90,27 +90,7 @@ module.exports = {
         pageSize: 10000,
       },
     },
-    {
-      resolve: 'gatsby-plugin-sitemap',
-      options: {
-        output: '/sitemap.xml',
-        query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage{
-              edges {
-                node {
-                  path
-                }
-              }
-            }
-          }`,
-      },
-    },
+
     {
       resolve: `gatsby-plugin-firebase-messaging`,
       options: {
