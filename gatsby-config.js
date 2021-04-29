@@ -7,6 +7,8 @@ const config = {
   siteGATrackingID: 'UA-188439956-1',
 }
 
+const regexExcludeRobots = /^(?!\/(dev-404-page|404|offline-plugin-app-shell-fallback|categories)).*$/
+
 module.exports = {
   siteMetadata: {
     title: 'HyBlog - Official Hybra Blog',
@@ -88,6 +90,33 @@ module.exports = {
         startDate: `30daysAgo`,
         endDate: `today`,
         pageSize: 10000,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        output: '/sitemap.xml',
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage(
+              filter: {
+                path: {
+                  regex: "${regexExcludeRobots}"
+                }
+              }
+            ) {
+              edges {
+                node {
+                  path
+                }
+              }
+            }
+        }`,
       },
     },
     {

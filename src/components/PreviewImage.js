@@ -14,7 +14,7 @@ const PreviewImage = ({ filename, alt }) => (
               name
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid_tracedSVG
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

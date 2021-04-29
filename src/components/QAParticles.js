@@ -121,7 +121,7 @@ export default function QAParticles(props) {
                 color="secondary"
                 className={classes.content}
               >
-                with Grand Philosospher
+                with Grand Philosopher
               </Typography>
               <Typography
                 variant="subtitle1"
@@ -130,20 +130,20 @@ export default function QAParticles(props) {
               >
                 Let’s engage one another for a better world and just societies.
                 Email me your questions by clicking the button below or directly
-                through grand_philosospher@hyblog.info.
+                through grand_philosopher@hyblog.info.
               </Typography>
             </CardContent>
             <CardActions className={classes.flexActions}>
               <Button
                 component="a"
-                href={`mailto:grand_philosospher@hyblog.info`}
+                href={`mailto:grand_philosopher@hyblog.info`}
                 variant="contained"
                 color="primary"
                 className={classes.button}
                 startIcon={<EmailIcon color="secondary" />}
                 size="small"
               >
-                Email Your Question
+                Mail Your Question
               </Button>
             </CardActions>
           </Card>

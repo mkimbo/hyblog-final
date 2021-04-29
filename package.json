@@ -48,6 +48,7 @@
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-plugin-scroll-reveal": "0.0.7",
     "gatsby-plugin-sharp": "^2.5.3",
+    "gatsby-plugin-sitemap": "^4.0.0",
     "gatsby-plugin-twitter": "^2.2.1",
     "gatsby-remark-images": "^3.2.1",
     "gatsby-remark-numbered-footnotes": "^1.0.1",

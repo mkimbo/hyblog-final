@@ -116,7 +116,7 @@ export default function Footer() {
 
               <Copyright />
             </Grid>
-            <Grid item xs={6} sm={4} md={2}>
+            <Grid item xs={6} sm={4} md={2} align="left">
               <Typography
                 variant="h6"
                 marked="left"
@@ -197,7 +197,7 @@ export default function Footer() {
                 </li>
               </ul>
             </Grid>
-            <Grid item xs={6} sm={4} md={2}>
+            <Grid item xs={6} sm={4} md={2} align="left">
               <Typography
                 variant="h6"
                 marked="left"
@@ -253,7 +253,7 @@ export default function Footer() {
                 </li>
               </ul>
             </Grid>
-            <Grid item xs={6} sm={4} md={2}>
+            <Grid item xs={6} sm={4} md={2} align="left">
               <Typography
                 variant="h6"
                 marked="left"
@@ -297,7 +297,7 @@ export default function Footer() {
                 </li>
               </ul>
             </Grid>
-            <Grid item xs={6} sm={4} md={2}>
+            <Grid item xs={6} sm={4} md={2} align="left">
               <Typography
                 variant="h6"
                 marked="left"

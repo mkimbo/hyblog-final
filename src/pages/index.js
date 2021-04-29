@@ -27,8 +27,7 @@ export default function Index({ data }) {
   return (
     <TopLayout>
       <SEO
-        pageTitle={`Front Page`}
-        pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering each other for the betterment of society.`}
+        pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.`}
       />
       <Container>
         <Notifications />
