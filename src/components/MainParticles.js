@@ -92,7 +92,7 @@ export default function MainParticles(props) {
         <Grid container>
           <Grid item md={12}>
             <div className={classes.mainParticlesContent}>
-              <LocalImage filename={`icon`} alt={`Hyblog Icon`} />
+              <LocalImage filename={`Hycon`} alt={`Hyblog Icon`} />
 
               <Typography
                 variant="h6"

@@ -11,9 +11,9 @@ module.exports = {
   siteMetadata: {
     title: 'HyBlog - Official Hybra Blog',
     description: `
-      Creating impactful conversations on real issues by Educating Enlightening and Empowering each other for the betterment of society.
+      Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.
     `,
-    siteUrl: 'https://hyblog.info',
+    siteUrl: 'https://hyblog.info/',
     image: '/assets/favicon.svg',
     author: {
       name: 'Hyblog Admin',
@@ -131,7 +131,7 @@ module.exports = {
         background_color: `#1489cc`,
         theme_color: `#1489cc`,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`,
+        icon: `src/images/Hycon.png`,
       },
     },
     `gatsby-plugin-material-ui`,

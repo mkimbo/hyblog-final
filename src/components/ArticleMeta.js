@@ -43,9 +43,9 @@ function ArticleMeta({ pageViews, postNode }) {
         </Link>
       </Typography>
 
-      <em style={{ fontFamily: 'Cardo, sans-serif' }}>
+      {/** <em style={{ fontFamily: 'Cardo, sans-serif' }}>
         {`(viewed ${pageViews} times)`}
-      </em>
+      </em>*/}
       <ShareLinks postNode={postNode} />
     </Grid>
   )
