@@ -11,7 +11,6 @@ const PreviewImage = ({ filename, alt }) => (
           edges {
             node {
               absolutePath
-              name
               childImageSharp {
                 fluid {
                   ...GatsbyImageSharpFluid
@@ -33,7 +32,12 @@ const PreviewImage = ({ filename, alt }) => (
         : null
       return (
         <div>
-          <Img style={{ borderRadius: '50%' }} alt={alt} fluid={imageFluid} />
+          <Img
+            style={{ borderRadius: '50%' }}
+            alt={alt}
+            backgroundColor="#303030"
+            fluid={imageFluid}
+          />
         </div>
       )
     }}

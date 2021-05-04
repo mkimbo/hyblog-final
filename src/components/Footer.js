@@ -142,6 +142,20 @@ export default function Footer() {
                 <li className={classes.listItem}>
                   <InternalLink
                     color="secondary"
+                    to={`/covid-19`}
+                    className={classes.cardoFonts}
+                  >
+                    <Typography
+                      color="secondary"
+                      className={classes.cardoFonts}
+                    >
+                      Covid 19
+                    </Typography>
+                  </InternalLink>
+                </li>
+                <li className={classes.listItem}>
+                  <InternalLink
+                    color="secondary"
                     to={`/youth`}
                     className={classes.cardoFonts}
                   >

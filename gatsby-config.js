@@ -14,14 +14,14 @@ module.exports = {
       Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.
     `,
     siteUrl: 'https://hyblog.info/',
-    image: '/assets/favicon.svg',
+    image: '/assets/Hycon.png',
     author: {
       name: 'Hyblog Admin',
     },
     organization: {
       name: 'Hybra, Inc.',
       url: 'https://hyreads.com',
-      logo: '/assets/favicon.svg',
+      logo: '/assets/Hycon.png',
     },
     social: {
       twitter: '@hyreads',
@@ -126,7 +126,7 @@ module.exports = {
       options: {
         name: `HyBlog - Official Hybra Blog`,
         short_name: `HyBlog`,
-        description: `To Educate Enlighten and Empower each other for the betterment of society we must create conversations around the real issues.`,
+        description: `Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.`,
         start_url: `/`,
         background_color: `#1489cc`,
         theme_color: `#1489cc`,

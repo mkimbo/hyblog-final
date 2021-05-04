@@ -50,7 +50,7 @@ exports.sendNewPostNotification = functions.firestore
       notification: {
         title: postData.title ? postData.title : postData.question,
         body: postData.summary,
-        icon: `https://hyblog.info/assets/icon.png`,
+        icon: `https://hyblog.info/assets/Hycon.png`,
         click_action: `https://hyblog.info/${postData.slug}/`,
       },
     }

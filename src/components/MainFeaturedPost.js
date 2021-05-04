@@ -43,14 +43,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   continueReading: {
+    color: '#1489cc',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
-  title: {
-    color: '#000',
-  },
+  title: {},
 }))
 
 export default function MainFeaturedPost(props) {

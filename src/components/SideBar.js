@@ -150,6 +150,9 @@ export default function Sidebar(theme) {
   const Society = Total.filter((edge) => edge.node.category === 'Society').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
+  const Covid = Total.filter((edge) => edge.node.category === 'Covid 19').sort(
+    (a, b) => new Date(b.node.date) - new Date(a.node.date)
+  )
   const Youth = Total.filter((edge) => edge.node.category === 'Youth').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
@@ -275,6 +278,22 @@ export default function Sidebar(theme) {
           })}
           <Link to={`/society`} className={classes.moreArticles}>
             <Typography color="primary">more on society...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
+            Covid-19 Pandemic
+          </Typography>
+
+          {Covid.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/covid-19`} className={classes.moreArticles}>
+            <Typography color="primary">more on the pandemic...</Typography>
           </Link>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>

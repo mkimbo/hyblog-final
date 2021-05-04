@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Hidden from '@material-ui/core/Hidden'
-import { formatDistance } from 'date-fns'
+import { formatDistanceStrict } from 'date-fns'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -77,7 +77,7 @@ export default function ArticlePreview({ blog }) {
   const startDate = new Date()
   const cover = blog.node.coverImage[0].localFile.name
   const endDate = new Date(blog.node.date)
-  const distanceInWords = formatDistance(endDate, startDate, {
+  const distanceInWords = formatDistanceStrict(endDate, startDate, {
     addSuffix: true,
   })
   const data = useStaticQuery(graphql`

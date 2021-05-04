@@ -66,7 +66,7 @@ export default function ModalSignIn({ open, handleClose }) {
             Sign In
           </Typography>
           <Typography variant="body1" component="p">
-            Sign In and allow notifications.
+            Sign In and dont forget to Subscribe.
           </Typography>
           <Button
             onClick={Signup}
