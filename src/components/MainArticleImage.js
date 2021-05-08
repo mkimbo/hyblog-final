@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    maxHeight: '500px',
+    height: '450px',
+    [theme.breakpoints.down('sm')]: {
+      height: '350px',
+    },
   },
   overlay: {
     position: 'absolute',
@@ -58,7 +61,11 @@ export default function MainArticleImage({ post }) {
     : null
   return (
     <Card className={classes.mainArticleImage}>
-      <Img fluid={mainImage} />
+      <Img
+        fluid={mainImage}
+        style={{ height: '100%', width: '100%' }}
+        imgStyle={{ objectFit: 'fill' }}
+      />
     </Card>
   )
 }

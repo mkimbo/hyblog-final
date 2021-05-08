@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'
 import { Card, CardActions, CardContent, Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-import LocalImage from './LocalImage'
+import CategoryArt from './CategoryArt'
 
 const useStyles = makeStyles((theme) => ({
   mainParticles: {
@@ -113,7 +113,7 @@ export default function QAParticles(props) {
         <Grid container className={classes.mainParticlesContent}>
           <Card className={classes.contentCard}>
             <div className={classes.profileImage}>
-              <LocalImage filename={`qaIcon`} alt={`QA Icon`} />
+              <CategoryArt filename={`qaIcon`} alt={`QA Icon`} />
             </div>
             <CardContent>
               <Typography

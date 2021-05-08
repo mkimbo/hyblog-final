@@ -162,11 +162,7 @@ export default function ArticlePreview({ blog }) {
               variant="subtitle1"
               color="textPrimary"
             >
-              <Typography
-                variant="body"
-                color="textPrimary"
-                className={classes.title}
-              >
+              <Typography color="textPrimary" className={classes.title}>
                 Continue reading...
               </Typography>
             </Link>

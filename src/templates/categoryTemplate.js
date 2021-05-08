@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Category({ data, pageContext }) {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
+  const category = data.flamelinkCategoriesContent
   const UsortedpostEdges = [...posts, ...questions]
   const postEdges = UsortedpostEdges.slice().sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
@@ -27,9 +28,9 @@ export default function Category({ data, pageContext }) {
   const pageTitle = pageContext.category
   return (
     <TopLayout>
-      <SEO pageTitle={pageTitle} pageDescription={`${pageTitle} Category`} />
+      <SEO pageTitle={pageTitle} pageDescription={category.tagline} />
       <Container>
-        <MainParticles title={pageTitle} />
+        <MainParticles category={category} />
         <Grid container spacing={5} className={classes.mainGrid}>
           <Main postEdges={postEdges} category={pageTitle} />
           <Sidebar />
@@ -92,6 +93,20 @@ export const pageQuery = graphql`
                   srcWebp
                 }
               }
+            }
+          }
+        }
+      }
+    }
+    flamelinkCategoriesContent(title: { eq: $category }) {
+      title
+      tagline
+      coverArt {
+        localFile {
+          name
+          childImageSharp {
+            fluid(maxHeight: 450, quality: 90) {
+              ...GatsbyImageSharpFluid_tracedSVG
             }
           }
         }

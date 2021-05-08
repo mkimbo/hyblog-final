@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link, graphql, useStaticQuery, navigate } from 'gatsby'
+import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -190,35 +191,59 @@ export default function Header(props) {
           variant="dense"
           className={classes.toolbarSecondary}
         >
-          <Link to={'/qa'} className={classes.toolbarLink}>
-            Q & A
-          </Link>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ ease: 'easeIn' }}
+          >
+            <Link to={'/qa'} className={classes.toolbarLink}>
+              Q & A
+            </Link>
+          </motion.div>
           {Array.from(new Set(cat)).map((category) => (
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ ease: 'easeIn' }}
+            >
+              <Link
+                to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
+                key={category}
+                color="secondary"
+                className={classes.toolbarLink}
+              >
+                {category}
+              </Link>
+            </motion.div>
+          ))}
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ ease: 'easeIn' }}
+          >
             <Link
-              to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
-              key={category}
-              color="secondary"
+              to={'#'}
+              onClick={notifyNews}
+              key="news"
               className={classes.toolbarLink}
             >
-              {category}
+              News
             </Link>
-          ))}
-          <Link
-            to={'#'}
-            onClick={notifyNews}
-            key="news"
-            className={classes.toolbarLink}
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ ease: 'easeIn' }}
           >
-            News
-          </Link>
-          <Link
-            to={'#'}
-            onClick={notifyPoetry}
-            key="poetry"
-            className={classes.toolbarLink}
-          >
-            Poetry
-          </Link>
+            <Link
+              to={'#'}
+              onClick={notifyPoetry}
+              key="poetry"
+              className={classes.toolbarLink}
+            >
+              Poetry
+            </Link>
+          </motion.div>
         </Toolbar>
       </div>
     </React.Fragment>
