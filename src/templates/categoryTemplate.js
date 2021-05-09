@@ -19,8 +19,8 @@ export default function Category({ data, pageContext }) {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
   const category = data.flamelinkCategoriesContent
-  const UsortedpostEdges = [...posts, ...questions]
-  const postEdges = UsortedpostEdges.slice().sort(
+  const UnsortedpostEdges = [...posts, ...questions]
+  const postEdges = UnsortedpostEdges.slice().sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
 

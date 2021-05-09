@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MainParticles(props) {
   const classes = useStyles()
   const { category } = props
+  console.log(category.coverArt[0].localFile.name)
   return (
     <Paper className={classes.mainParticles}>
       <Img

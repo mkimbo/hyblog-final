@@ -30,7 +30,7 @@ export default function Category({ data, pageContext }) {
         pageDescription={`Engage with Grand Philosopher by emailing your questions to grand_philosopher@hyblog.info`}
       />
       <Container>
-        <QAParticles title={pageTitle} />
+        <QAParticles />
         <Grid container spacing={5} className={classes.mainGrid}>
           <Main postEdges={postEdges} title={pageTitle} />
           <Sidebar />

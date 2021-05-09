@@ -5,52 +5,43 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
 import Hidden from '@material-ui/core/Hidden'
 import { formatDistanceStrict } from 'date-fns'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    height: '190px',
     margin: '10px 0',
     boxShadow: 'none',
     alignItems: 'center',
     borderBottom: `1px solid ${theme.palette.divider}`,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: '3px 0',
+      height: '120px',
     },
     '&:hover': {
       boxShadow:
         '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
     },
   },
-  media: {
-    width: '220px',
-    [theme.breakpoints.down('xs')]: {
-      width: '100px',
-
-      margin: '0px',
-    },
-  },
   imageButton: {
-    width: '220px',
-    height: '170px',
-    margin: 'auto 5px',
-    [theme.breakpoints.down('xs')]: {
-      width: '100px',
-      height: '100px',
-      margin: '5px 1px',
+    minWidth: '230px',
+    height: '190px',
+    margin: '0px',
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '120px',
+      height: '120px',
     },
   },
   continueReading: {
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
+      textDecorationColor: theme.palette.text.primary,
     },
   },
-  cardBody: {
-    [theme.breakpoints.down('xs')]: {
-      margin: '5px 0px',
-    },
+  details: {
+    paddingLeft: '8px',
   },
   date: {
     letterSpacing: '1.3px',
@@ -58,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontFamily: "'Roboto', sans-serif",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '15px',
+    },
   },
   excerpt: {
     fontSize: '15px',
@@ -106,20 +100,13 @@ export default function ArticlePreview({ blog }) {
     <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
       <Card className={classes.root}>
         <div className={classes.imageButton}>
-          <Img fluid={mainImage} className={classes.media} />
+          <Img
+            fluid={mainImage}
+            style={{ height: '100%', width: '100%' }}
+            imgStyle={{ objectFit: 'fill' }}
+          />
         </div>
-
-        <CardContent className={classes.cardBody}>
-          <Hidden xsDown>
-            <Typography
-              className={classes.date}
-              variant="body2"
-              color="textSecondary"
-              component="p"
-            >
-              {blog.node.category}
-            </Typography>
-          </Hidden>
+        <div className={classes.details}>
           <Typography
             className={classes.date}
             variant="body2"
@@ -167,7 +154,7 @@ export default function ArticlePreview({ blog }) {
               </Typography>
             </Link>
           </Hidden>
-        </CardContent>
+        </div>
       </Card>
     </div>
   )

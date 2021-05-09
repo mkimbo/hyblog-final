@@ -44,7 +44,7 @@ export default function MainArticleImage({ post }) {
             absolutePath
             name
             childImageSharp {
-              fluid(maxHeight: 400) {
+              fluid(maxHeight: 450, quality: 90) {
                 ...GatsbyImageSharpFluid_tracedSVG
               }
             }

@@ -150,15 +150,12 @@ export default function Sidebar(theme) {
   const Society = Total.filter((edge) => edge.node.category === 'Society').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
-  const Covid = Total.filter((edge) => edge.node.category === 'Covid 19').sort(
+  const Covid = Total.filter((edge) => edge.node.category === 'COVID').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
   const Youth = Total.filter((edge) => edge.node.category === 'Youth').sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
-  const African = Total.filter(
-    (edge) => edge.node.category === 'Africanacity'
-  ).sort((a, b) => new Date(b.node.date) - new Date(a.node.date))
   const Viewedposts = Total.map((post) => {
     const slugId = `/${post.node.slug}`
     const currentPageViews = Allviews.find(
@@ -270,6 +267,22 @@ export default function Sidebar(theme) {
             className={classes.category}
             variant="h6"
           >
+            Covid 19 - Stay Safe
+          </Typography>
+
+          {Covid.slice(0, 2).map((post, index) => {
+            return <PopularArticle blog={post} key={index} />
+          })}
+          <Link to={`/covid-19`} className={classes.moreArticles}>
+            <Typography color="primary">more on the pandemic...</Typography>
+          </Link>
+        </Card>
+        <Card elevation={0} className={classes.sidebarAboutBox}>
+          <Typography
+            color="secondary"
+            className={classes.category}
+            variant="h6"
+          >
             Society & Lifestyle
           </Typography>
 
@@ -286,22 +299,6 @@ export default function Sidebar(theme) {
             className={classes.category}
             variant="h6"
           >
-            Covid-19 Pandemic
-          </Typography>
-
-          {Covid.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
-          })}
-          <Link to={`/covid-19`} className={classes.moreArticles}>
-            <Typography color="primary">more on the pandemic...</Typography>
-          </Link>
-        </Card>
-        <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography
-            color="secondary"
-            className={classes.category}
-            variant="h6"
-          >
             Youth Check
           </Typography>
 
@@ -310,22 +307,6 @@ export default function Sidebar(theme) {
           })}
           <Link to={`/youth`} className={classes.moreArticles}>
             <Typography color="primary">more on youth...</Typography>
-          </Link>
-        </Card>
-        <Card elevation={0} className={classes.sidebarAboutBox}>
-          <Typography
-            color="secondary"
-            className={classes.category}
-            variant="h6"
-          >
-            African Affairs
-          </Typography>
-
-          {African.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
-          })}
-          <Link to={`/africanacity`} className={classes.moreArticles}>
-            <Typography color="primary">more african affairs...</Typography>
           </Link>
         </Card>
         <Card elevation={0} className={classes.sidebarAboutBox}>

@@ -15,7 +15,7 @@ const WEBHOOK_URL =
 
 exports.useWildcard = functions.firestore
   .document('fl_content/{fl_id}')
-  .onWrite((change, context) => {
+  .onCreate((change, context) => {
     if (WEBHOOK_URL) {
       console.log('Gatsby build request will be sent')
 

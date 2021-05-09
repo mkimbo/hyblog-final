@@ -1,6 +1,5 @@
 import React from 'react'
 import Particles from 'react-tsparticles'
-import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -49,9 +48,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '100px',
     margin: '2px auto',
   },
-  contentCard: {
-    backgroundColor: 'rgba(48, 48, 48, 0.8)',
-  },
+
   mainParticlesContent: {
     position: 'relative',
     textAlign: 'center',
@@ -65,7 +62,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AuthorParticles({ author }) {
   const classes = useStyles()
-
+  const authorPhoto = author ? author.avatar[0].localFile.name : null
+  const authorName = author ? author.name : null
+  const authorTagline = author ? author.tagline : null
+  const authorTwitter = author ? author.twitter : null
+  const authorFacebook = author ? author.facebook : null
+  const authorEmail = author ? author.email : null
   return (
     <Paper className={classes.mainParticles}>
       <div>
@@ -114,10 +116,7 @@ export default function AuthorParticles({ author }) {
         <Grid container className={classes.mainParticlesContent}>
           <Card className={classes.contentCard}>
             <div className={classes.profileImage}>
-              <PreviewImage
-                filename={author.avatar[0].localFile.name}
-                alt={author.name}
-              />
+              <PreviewImage filename={authorPhoto} alt={authorName} />
             </div>
             <CardContent>
               <Typography
@@ -125,17 +124,17 @@ export default function AuthorParticles({ author }) {
                 color="secondary"
                 className={classes.content}
               >
-                {author.name}
+                {authorName}
               </Typography>
               <Typography color="secondary" variant="subtitle1">
-                {author.tagline}
+                {authorTagline}
               </Typography>
             </CardContent>
             <CardActions className={classes.flexActions}>
-              {author.twitter ? (
+              {authorTwitter ? (
                 <Button
                   component="a"
-                  href={`https://twitter.com/${author.twitter}`}
+                  href={`https://twitter.com/${authorTwitter}`}
                   variant="outlined"
                   color="primary"
                   className={classes.button}
@@ -147,7 +146,7 @@ export default function AuthorParticles({ author }) {
               ) : (
                 <Button
                   component="a"
-                  href={`https://facebook.com/${author.facebook}`}
+                  href={`https://facebook.com/${authorFacebook}`}
                   variant="outlined"
                   color="primary"
                   className={classes.button}
@@ -159,7 +158,7 @@ export default function AuthorParticles({ author }) {
               )}
               <Button
                 component="a"
-                href={`mailto:${author.email}`}
+                href={`mailto:${authorEmail}`}
                 variant="outlined"
                 color="primary"
                 className={classes.button}
@@ -174,8 +173,4 @@ export default function AuthorParticles({ author }) {
       </div>
     </Paper>
   )
-}
-
-AuthorParticles.propTypes = {
-  title: PropTypes.string,
 }

@@ -53,9 +53,9 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     color: '#ffffff',
     textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
+  },
+  toolbarText: {
+    width: 'fit-content',
   },
   login: {
     margin: '0px 5px',
@@ -192,23 +192,23 @@ export default function Header(props) {
           className={classes.toolbarSecondary}
         >
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            transition={{ ease: 'easeIn' }}
+            transition={{ ease: 'easeOut' }}
           >
             <Link to={'/qa'} className={classes.toolbarLink}>
-              Q & A
+              Q&A
             </Link>
           </motion.div>
           {Array.from(new Set(cat)).map((category) => (
             <motion.div
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
-              transition={{ ease: 'easeIn' }}
+              transition={{ ease: 'easeOut' }}
+              key={category}
             >
               <Link
                 to={`/${category.replace(/\W+/g, '-').toLowerCase()}`}
-                key={category}
                 color="secondary"
                 className={classes.toolbarLink}
               >
@@ -217,9 +217,9 @@ export default function Header(props) {
             </motion.div>
           ))}
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            transition={{ ease: 'easeIn' }}
+            transition={{ ease: 'easeOut' }}
           >
             <Link
               to={'#'}
@@ -231,9 +231,9 @@ export default function Header(props) {
             </Link>
           </motion.div>
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            transition={{ ease: 'easeIn' }}
+            transition={{ ease: 'easeOut' }}
           >
             <Link
               to={'#'}

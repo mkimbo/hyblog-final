@@ -93,7 +93,7 @@ export default function MainArticleContent({ postNode, title, pageViews }) {
         }
       })
       .catch((err) => console.log(err))
-  }, [])
+  }, [postNode.slug])
   return (
     <Grid item xs={12} md={8}>
       <ArticleMeta postNode={postNode} pageViews={pageViews} />

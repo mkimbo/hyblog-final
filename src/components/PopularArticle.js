@@ -5,11 +5,11 @@ import Img from 'gatsby-image'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    height: '100px',
     margin: '20px 0',
     boxShadow: 'none',
     alignItems: 'center',
@@ -18,21 +18,17 @@ const useStyles = makeStyles((theme) => ({
       margin: '3px 0',
     },
   },
-  media: {
-    width: '100px',
-    margin: '0px',
-  },
   imageButton: {
-    width: '100px',
-    height: '80px',
+    minWidth: '110px',
+    height: '100px',
     margin: '0px',
   },
-
-  cardBody: {
-    margin: '0px',
+  details: {
+    paddingLeft: '6px',
   },
   title: {
     fontFamily: "'Roboto', sans-serif",
+    fontSize: '15px',
   },
   author: {
     fontFamily: "'Roboto', sans-serif",
@@ -69,10 +65,14 @@ export default function PopularArticle({ blog }) {
     <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
       <Card className={classes.root}>
         <div className={classes.imageButton}>
-          <Img fluid={mainImage} className={classes.media} />
+          <Img
+            fluid={mainImage}
+            style={{ height: '100%', width: '100%' }}
+            imgStyle={{ objectFit: 'fill' }}
+          />
         </div>
 
-        <CardContent className={classes.cardBody}>
+        <div className={classes.details}>
           <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>
             <Typography
               component="h5"
@@ -89,7 +89,7 @@ export default function PopularArticle({ blog }) {
           >
             {`By ${blog.node.author}`}
           </Typography>
-        </CardContent>
+        </div>
       </Card>
     </div>
   )

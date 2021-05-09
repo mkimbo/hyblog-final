@@ -47,7 +47,7 @@ function NotFound() {
             Let's start from the
             <Link className={classes.homeRedirect} to={`/`}>
               {' '}
-              Front Page
+              Home Page
             </Link>
           </Typography>
         </div>

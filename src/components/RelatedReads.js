@@ -25,7 +25,7 @@ const RelatedReads = ({ articles }) => {
   return (
     <Grid container className={classes.root}>
       <Typography variant="h5" gutterBottom>
-        Similar Articles
+        You'll Also Like
       </Typography>
       <Grid item xs={12} className={classes.similarArticles}>
         {articles.map((article, i) => (

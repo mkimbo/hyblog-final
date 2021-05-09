@@ -75,8 +75,8 @@ exports.createPages = async ({ graphql, actions }) => {
     throw CreatePagesQueryResult.errors
   }
 
-  const categorySet = new Set()
-  const authorSet = new Set()
+  const categoryList = []
+  const authorList = []
   const postsEdges =
     CreatePagesQueryResult.data.allFlamelinkBlogPostContent.edges
   const questionsEdges =
@@ -84,11 +84,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const categoryEdges = [...postsEdges, ...questionsEdges]
 
-  categoryEdges.forEach((edge, index) => {
-    if (edge.node.category) {
-      categorySet.add(edge.node.category)
-      authorSet.add(edge.node.author)
-    }
+  postsEdges.forEach((edge) => {
+    categoryList.push(edge.node.category)
+    authorList.push(edge.node.author)
     const slug = edge.node.slug
     const viewer = `/${slug}`
 
@@ -97,14 +95,14 @@ exports.createPages = async ({ graphql, actions }) => {
       component: postPage,
       context: {
         slug: edge.node.slug,
-        next: index === postsEdges.length - 1 ? null : postsEdges[index + 1],
-        prev: index === 0 ? null : postsEdges[index - 1],
         viewer: viewer,
       },
     })
   })
 
-  questionsEdges.forEach((edge, index) => {
+  questionsEdges.forEach((edge) => {
+    categoryList.push(edge.node.category)
+    authorList.push(edge.node.author)
     const slug = edge.node.slug
     const viewer = `/${slug}`
     createPage({
@@ -112,16 +110,14 @@ exports.createPages = async ({ graphql, actions }) => {
       component: questionPage,
       context: {
         slug: edge.node.slug,
-        next: index === postsEdges.length - 1 ? null : postsEdges[index + 1],
-        prev: index === 0 ? null : postsEdges[index - 1],
         viewer: viewer,
       },
     })
   })
 
-  categorySet.forEach((category) => {
+  Array.from(new Set(categoryList)).forEach((category) => {
     createPage({
-      path: `${_.kebabCase(category)}/`,
+      path: `/${_.kebabCase(category)}/`,
       component: categoryPage,
       context: {
         category,
@@ -129,9 +125,9 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  authorSet.forEach((author) => {
+  Array.from(new Set(authorList)).forEach((author) => {
     createPage({
-      path: `${_.kebabCase(author)}/`,
+      path: `/${_.kebabCase(author)}/`,
       component: authorPage,
       context: {
         author,

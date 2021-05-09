@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }))
-export default function BlogPostTemplate({ data, pageContext }) {
+export default function BlogPostTemplate({ data }) {
   const classes = useStyles()
   const postNode = data.flamelinkBlogPostContent
   const pageViews = data.pageViews ? data.pageViews.totalCount : 0

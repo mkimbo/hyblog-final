@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }))
-export default function QATemplate({ data, pageContext }) {
+export default function QATemplate({ data }) {
   const classes = useStyles()
   const postNode = data.flamelinkQuestionAnswerContent
   const pageViews = data.pageViews ? data.pageViews.totalCount : 0

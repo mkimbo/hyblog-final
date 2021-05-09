@@ -62,9 +62,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function QAParticles(props) {
+export default function QAParticles() {
   const classes = useStyles()
-  const { title } = props
+
   return (
     <Paper className={classes.mainParticles}>
       <div>
@@ -115,6 +115,7 @@ export default function QAParticles(props) {
             <div className={classes.profileImage}>
               <CategoryArt filename={`qaIcon`} alt={`QA Icon`} />
             </div>
+
             <CardContent>
               <Typography
                 variant="h6"
