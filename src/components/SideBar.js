@@ -273,7 +273,7 @@ export default function Sidebar(theme) {
           {Covid.slice(0, 2).map((post, index) => {
             return <PopularArticle blog={post} key={index} />
           })}
-          <Link to={`/covid-19`} className={classes.moreArticles}>
+          <Link to={`/covid`} className={classes.moreArticles}>
             <Typography color="primary">more on the pandemic...</Typography>
           </Link>
         </Card>

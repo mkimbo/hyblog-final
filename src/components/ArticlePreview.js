@@ -133,7 +133,7 @@ export default function ArticlePreview({ blog }) {
           >
             {`By ${blog.node.author}`}
           </Typography>
-          <Hidden xsDown>
+          <Hidden mdDown>
             <Typography
               className={classes.excerpt}
               variant="body2"
