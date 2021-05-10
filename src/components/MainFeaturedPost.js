@@ -14,14 +14,26 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       display: 'grid',
       gridTemplateColumns: '1fr',
+      height: 'fit-content',
     },
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(1),
-    backgroundColor: '#f2f5fa',
+    backgroundColor: '#303030',
+    height: '400px',
   },
   media: {
-    width: '100%',
+    height: '400px',
+    [theme.breakpoints.down('sm')]: {
+      height: '300px',
+    },
   },
+  details: {
+    height: '400px',
+    [theme.breakpoints.down('sm')]: {
+      height: '350px',
+    },
+  },
+
   editor: {
     position: 'relative',
     top: 0,
@@ -49,13 +61,21 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
-  title: {},
+  title: {
+    [theme.breakpoints.up('md')]: {
+      fontSize: '30px',
+    },
+  },
+  text: {
+    [theme.breakpoints.up('md')]: {
+      fontSize: '18px',
+    },
+  },
 }))
 
 export default function MainFeaturedPost(props) {
   const classes = useStyles()
-  const { postEdges } = props
-  const post = postEdges[0]
+  const { post } = props
   const cover = post.node.coverImage[0].localFile
     ? post.node.coverImage[0].localFile.name
     : null
@@ -86,15 +106,24 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper elevation={1}>
       <Grid container className={classes.mainFeaturedPost}>
-        <Grid item>
+        <div className={classes.details}>
           <Typography variant="h6" color="secondary" className={classes.editor}>
             Trending
           </Typography>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography variant="h4" className={classes.title} gutterBottom>
+            <Typography
+              color="secondary"
+              variant="h5"
+              className={classes.title}
+            >
               {title}
             </Typography>
-            <Typography variant="h6" className={classes.title} paragraph>
+            <Typography
+              color="secondary"
+              variant="subtitle1"
+              className={classes.text}
+              paragraph
+            >
               {post.node.summary}
             </Typography>
             <Link to={post.node.slug} className={classes.continueReading}>
@@ -103,10 +132,14 @@ export default function MainFeaturedPost(props) {
               </Typography>
             </Link>
           </div>
-        </Grid>
-        <Grid item>
-          <Img fluid={mainImage} className={classes.media} />
-        </Grid>
+        </div>
+        <div className={classes.media}>
+          <Img
+            fluid={mainImage}
+            style={{ height: '100%', width: '100%' }}
+            imgStyle={{ objectFit: 'fill' }}
+          />
+        </div>
       </Grid>
     </Paper>
   )

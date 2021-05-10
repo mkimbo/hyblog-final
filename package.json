@@ -67,6 +67,7 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^3.9.0",
     "react-instantsearch-dom": "^5.7.0",
+    "react-material-ui-carousel": "^2.2.6",
     "react-notify-toast": "^0.5.1",
     "react-scroll-up-button": "^1.6.4",
     "react-share": "^4.3.1",

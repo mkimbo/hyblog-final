@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Carousel from 'react-material-ui-carousel'
 import { makeStyles } from '@material-ui/core/styles'
 import TopLayout from '../components/TopLayout'
 import { Container, Grid } from '@material-ui/core'
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Index({ data }) {
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
+  const Allviews = data.allPageViews.edges
   const UnsortedpostEdges = [...posts, ...questions]
   const postEdges = UnsortedpostEdges.slice().sort(
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
@@ -24,14 +26,30 @@ export default function Index({ data }) {
 
   const classes = useStyles()
   const pageTitle = 'The Latest'
+  const Viewedposts = postEdges.map((post) => {
+    const slugId = `/${post.node.slug}`
+    const currentPageViews = Allviews.find(
+      (filteredPageView) => filteredPageView.node.id === slugId
+    )
+    return {
+      ...post,
+      pageViews: currentPageViews ? currentPageViews.node.totalCount : 0,
+    }
+  })
+
+  const Trending = Viewedposts.sort((a, b) => b.pageViews - a.pageViews)
   return (
     <TopLayout>
       <SEO
-        pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.`}
+        pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.`}
       />
       <Container>
         <Notifications />
-        <MainFeaturedPost postEdges={postEdges} />
+        <Carousel interval={7000}>
+          {Trending.slice(0, 4).map((post, i) => (
+            <MainFeaturedPost key={i} post={post} />
+          ))}
+        </Carousel>
         <Grid container spacing={5} className={classes.mainGrid}>
           <Main postEdges={postEdges} title={pageTitle} />
           <Sidebar />
@@ -92,6 +110,14 @@ export const pageQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    allPageViews {
+      edges {
+        node {
+          totalCount
+          id
         }
       }
     }

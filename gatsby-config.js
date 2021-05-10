@@ -11,7 +11,7 @@ module.exports = {
   siteMetadata: {
     title: 'HyBlog - Official Hybra Blog',
     description: `
-      Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.
+      Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.
     `,
     siteUrl: 'https://hyblog.info/',
     image: '/assets/Hycon.png',
@@ -119,7 +119,7 @@ module.exports = {
       options: {
         name: `HyBlog - Official Hybra Blog`,
         short_name: `HyBlog`,
-        description: `Creating impactful conversations on real issues by Educating Enlightening and Empowering one other for the betterment of society.`,
+        description: `Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.`,
         start_url: `/`,
         background_color: `#1489cc`,
         theme_color: `#1489cc`,
