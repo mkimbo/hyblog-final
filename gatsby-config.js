@@ -13,7 +13,7 @@ module.exports = {
     description: `
       Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.
     `,
-    siteUrl: 'https://hyblog.info/',
+    siteUrl: 'https://hyblog.info',
     image: '/assets/Hycon.png',
     author: {
       name: 'Hyblog Admin',

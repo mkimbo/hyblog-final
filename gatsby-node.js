@@ -106,7 +106,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const slug = edge.node.slug
     const viewer = `/${slug}`
     createPage({
-      path: `/${slug}/`,
+      path: `/${slug}`,
       component: questionPage,
       context: {
         slug: edge.node.slug,
@@ -117,7 +117,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   Array.from(new Set(categoryList)).forEach((category) => {
     createPage({
-      path: `/${_.kebabCase(category)}/`,
+      path: `/${_.kebabCase(category)}`,
       component: categoryPage,
       context: {
         category,
@@ -127,7 +127,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   Array.from(new Set(authorList)).forEach((author) => {
     createPage({
-      path: `/${_.kebabCase(author)}/`,
+      path: `/${_.kebabCase(author)}`,
       component: authorPage,
       context: {
         author,
