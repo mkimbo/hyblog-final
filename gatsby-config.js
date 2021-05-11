@@ -34,6 +34,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-sitemap',
     {
       resolve: `gatsby-source-filesystem`,
       options: {

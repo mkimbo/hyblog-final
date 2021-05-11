@@ -52,7 +52,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Roboto, sans-serif',
     flexShrink: 0,
     color: '#ffffff',
+    transition: 'border-bottom 0.2s ease-in',
     textDecoration: 'none',
+    '&:hover': {
+      borderBottom: 'solid 2px #fff',
+    },
   },
   toolbarText: {
     width: 'fit-content',
