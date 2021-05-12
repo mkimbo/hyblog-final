@@ -3,13 +3,14 @@ import firebase from 'firebase/app'
 import 'firebase/messaging'
 import 'firebase/firestore'
 import Button from '@material-ui/core/Button'
+import { CircularProgress } from '@material-ui/core'
 import firebaseConfig from '../firebase/firebaseConfig'
 import { notify } from 'react-notify-toast'
 import { makeStyles } from '@material-ui/core/styles'
+import { Fragment } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   submit: {
-    margin: theme.spacing(3, 0, 2),
     fontFamily: 'Roboto, sans-serif',
   },
 }))
@@ -101,6 +102,7 @@ function Notifications() {
               localStorage.setItem('pushToken', currentToken)
 
               notify.show('Hyblog notifications enabled.', 'success')
+              setWorking(false)
             })
             .catch((err) => console.log(err))
         })
@@ -110,7 +112,6 @@ function Notifications() {
     } else {
       notify.show('Allow notifications to proceed', 'error')
     }
-    setWorking(false)
   }
 
   const unsubscribe = async () => {
@@ -142,17 +143,28 @@ function Notifications() {
 
   const btnText = subscribed ? 'Subscribed' : 'Subscribe'
   const callback = subscribed ? unsubscribe : createSubscription
+  console.log(working)
   return (
-    <Button
-      onClick={callback}
-      size="small"
-      variant="outlined"
-      color="secondary"
-      className={classes.submit}
-      disabled={working}
-    >
-      {btnText}
-    </Button>
+    <Fragment>
+      {working ? (
+        <CircularProgress
+          size={22}
+          color="secondary"
+          className={classes.submit}
+        />
+      ) : (
+        <Button
+          onClick={callback}
+          size="small"
+          variant="outlined"
+          color="secondary"
+          className={classes.submit}
+          disabled={working}
+        >
+          {btnText}
+        </Button>
+      )}
+    </Fragment>
   )
 }
 

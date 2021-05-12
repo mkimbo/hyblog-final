@@ -4,7 +4,14 @@ import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import SchemaOrg from './SchemaOrg'
 
-const SEO = ({ pageTitle, pageDescription, blog, postImage, isBlogPost }) => (
+const SEO = ({
+  pageTitle,
+  pageSlug,
+  pageDescription,
+  blog,
+  postImage,
+  isBlogPost,
+}) => (
   <StaticQuery
     query={graphql`
       {
@@ -33,19 +40,19 @@ const SEO = ({ pageTitle, pageDescription, blog, postImage, isBlogPost }) => (
     render={({ site: { siteMetadata: seo } }) => {
       const postMeta = blog ? blog : null
 
-      const title = isBlogPost ? postMeta.title || postMeta.question : seo.title
+      const title = pageTitle ? `${pageTitle} | ${seo.title}` : seo.title
       const description = isBlogPost ? postMeta.summary : pageDescription
-      const image = postImage
-        ? `${seo.siteUrl}${postImage}`
-        : `${seo.siteUrl}${seo.image}`
-      const url = postMeta ? `${seo.siteUrl}/${postMeta.slug}/` : seo.siteUrl
+      const image = postImage ? `${seo.siteUrl}${postImage}` : `${seo.image}`
+      const url = postMeta
+        ? `${seo.siteUrl}/${postMeta.slug}/`
+        : `${seo.siteUrl}${pageSlug}`
       const datePublished = isBlogPost ? postMeta.date : false
       const author = isBlogPost ? postMeta.author : seo.author.name
       return (
         <React.Fragment>
-          <Helmet>
+          <Helmet htmlAttributes={{ lang: `en` }}>
             {/* General tags */}
-            <title>{pageTitle ? `${pageTitle} | ${seo.title}` : title}</title>
+            <title>{title}</title>
             <meta name="description" content={description} />
             <meta name="image" content={image} />
             <link rel="canonical" href={url} />
@@ -95,6 +102,7 @@ SEO.defaultProps = {
   pageDescription: null,
   postImage: null,
   blog: null,
+  pageSlug: null,
 }
 
 export default SEO

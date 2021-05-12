@@ -14,7 +14,7 @@ module.exports = {
       Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.
     `,
     siteUrl: 'https://hyblog.info',
-    image: '/assets/Hycon.png',
+    image: 'https://hyblog.info/assets/Hycon.png',
     author: {
       name: 'Hyblog Admin',
     },
@@ -34,7 +34,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-advanced-sitemap',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -68,7 +68,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
-        color: `blue`,
+        color: `white`,
         showSpinner: false,
       },
     },

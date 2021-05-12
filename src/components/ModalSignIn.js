@@ -92,7 +92,7 @@ export default function ModalSignIn({ open, handleClose }) {
           </Button>
           <Button
             className={classes.button}
-            Disabled
+            disabled
             startIcon={
               <div
                 dangerouslySetInnerHTML={{

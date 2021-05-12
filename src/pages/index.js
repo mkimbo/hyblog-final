@@ -41,6 +41,7 @@ export default function Index({ data }) {
   return (
     <TopLayout>
       <SEO
+        pageSlug=""
         pageDescription={`Creating impactful conversations on real issues by Educating Enlightening and Empowering one another for the betterment of society.`}
       />
       <Container>

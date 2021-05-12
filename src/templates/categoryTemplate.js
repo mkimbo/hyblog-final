@@ -28,7 +28,11 @@ export default function Category({ data, pageContext }) {
   const pageTitle = pageContext.category
   return (
     <TopLayout>
-      <SEO pageTitle={pageTitle} pageDescription={category.tagline} />
+      <SEO
+        pageTitle={pageTitle}
+        pageDescription={category.tagline}
+        pageSlug={`/${pageTitle.replace(/\W+/g, '-').toLowerCase()}`}
+      />
       <Container>
         <MainParticles category={category} />
         <Grid container spacing={5} className={classes.mainGrid}>

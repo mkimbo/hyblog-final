@@ -30,7 +30,8 @@ export default function Category({ data, pageContext }) {
     <TopLayout>
       <SEO
         pageTitle={`${pageTitle}`}
-        pageDescription={`Articles by ${pageTitle}`}
+        pageDescription={author?.tagline}
+        pageSlug={`/${pageTitle?.replace(/\W+/g, '-').toLowerCase()}`}
       />
       <Container>
         <AuthorParticles author={author} />

@@ -26,6 +26,7 @@ export default function Category({ data, pageContext }) {
   return (
     <TopLayout>
       <SEO
+        pageSlug="qa"
         pageTitle={`Q & A`}
         pageDescription={`Engage with Grand Philosopher by emailing your questions to grand_philosopher@hyblog.info`}
       />
