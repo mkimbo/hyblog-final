@@ -129,9 +129,8 @@ export default function QAParticles() {
                 color="secondary"
                 className={classes.content2}
               >
-                Let’s engage one another for a better world and just societies.
-                Email me your questions by clicking the button below or directly
-                through grand_philosopher@hyblog.info.
+                Engage with Grand Philosopher on Hyblog. Mail your questions to
+                grand_philosopher@hyblog.info or using the button below.
               </Typography>
             </CardContent>
             <CardActions className={classes.flexActions}>

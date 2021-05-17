@@ -3,14 +3,16 @@ import { Link, graphql, useStaticQuery, navigate } from 'gatsby'
 import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
+import {
+  IconButton,
+  Typography,
+  Button,
+  Menu,
+  MenuItem,
+  Avatar,
+  Toolbar,
+} from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import Avatar from '@material-ui/core/Avatar'
 import { AuthContext } from '../context/auth/auth'
 import { ModalContext } from '../context/modal/modal'
 import ModalSignIn from './ModalSignIn'
@@ -77,7 +79,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(false)
-  const { title } = props
+
+  const { title, open, setOpen } = props
   let myColor = {
     background: '#ffffff',
     text: '#1489cc',
@@ -152,6 +155,7 @@ export default function Header(props) {
           <IconButton>
             <SearchIcon color="secondary" />
           </IconButton>
+
           {state.isAuthenticated && !state.isLoading ? (
             <>
               <div

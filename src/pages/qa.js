@@ -28,7 +28,7 @@ export default function Category({ data, pageContext }) {
       <SEO
         pageSlug="qa"
         pageTitle={`Q & A`}
-        pageDescription={`Engage with Grand Philosopher by emailing your questions to grand_philosopher@hyblog.info`}
+        pageDescription={`Engage with Grand Philosopher. Mail your questions to grand_philosopher@hyblog.info`}
       />
       <Container>
         <QAParticles />

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    height: '400px',
+    height: '430px',
   },
   overlay: {
     background: 'transparent',
@@ -72,7 +72,7 @@ export default function AuthorParticles({ author }) {
     <Paper className={classes.mainParticles}>
       <div>
         <Particles
-          height="400px"
+          height="430px"
           params={{
             fpsLimit: 60,
             interactivity: {

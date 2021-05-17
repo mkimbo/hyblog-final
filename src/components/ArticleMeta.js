@@ -1,8 +1,7 @@
 import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, Button } from '@material-ui/core'
 import ShareLinks from './ShareLinks'
 import { format } from 'date-fns'
-import { Button } from '@material-ui/core'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 

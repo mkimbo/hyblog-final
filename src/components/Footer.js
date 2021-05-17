@@ -1,13 +1,16 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link as InternalLink } from 'gatsby'
-import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
-import DarkModeButton from './DarkModeButton'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import { notify } from 'react-notify-toast'
+import {
+  Switch,
+  Paper,
+  Grid,
+  Link,
+  Typography,
+  Container,
+} from '@material-ui/core'
+
 import '../styles/footer.css'
 
 function Copyright() {
@@ -83,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Footer() {
+export default function Footer({ darkState, handleThemeChange }) {
   const classes = useStyles()
   let myColor = {
     background: '#ffffff',
@@ -106,12 +109,12 @@ export default function Footer() {
                 marked="left"
                 className={classes.roboFonts}
               >
-                About
+                Hyblog is all about
               </Typography>
               <Typography variant="subtitle1" color="secondary">
-                Hyblog aims to create impactful conversations on real issues by
-                Educating Enlightening and Empowering each other for the
-                betterment of society.
+                Creating impactful conversations on real issues by Educating
+                Enlightening and Empowering one another for the betterment of
+                society.
               </Typography>
 
               <Copyright />
@@ -317,9 +320,9 @@ export default function Footer() {
                 marked="left"
                 className={classes.roboFonts}
               >
-                Dark Mode
+                Read Mode
               </Typography>
-              <DarkModeButton />
+              <Switch checked={darkState} onChange={handleThemeChange} />
             </Grid>
           </Grid>
         </Container>

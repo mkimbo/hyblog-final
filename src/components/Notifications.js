@@ -143,7 +143,6 @@ function Notifications() {
 
   const btnText = subscribed ? 'Subscribed' : 'Subscribe'
   const callback = subscribed ? unsubscribe : createSubscription
-  console.log(working)
   return (
     <Fragment>
       {working ? (
