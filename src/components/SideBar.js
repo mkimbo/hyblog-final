@@ -1,21 +1,27 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
+import { withStyles, makeStyles } from '@material-ui/core/styles'
 import { graphql, useStaticQuery, Link } from 'gatsby'
-import Card from '@material-ui/core/Card'
 import { notify } from 'react-notify-toast'
-import Typography from '@material-ui/core/Typography'
-import { Paper, Chip } from '@material-ui/core'
-import PopularArticle from './PopularArticle'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import icon from '../images/Hycon.png'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'
+import {
+  Paper,
+  Chip,
+  ListItem,
+  List,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  Avatar,
+  IconButton,
+  Typography,
+  Card,
+  Grid,
+  Tooltip,
+} from '@material-ui/core'
+
+import LatestInCategory from './LatestInCategory'
+import PopularArticle from './PopularArticle'
+import icon from '../images/Hycon.png'
 
 const useStyles = makeStyles((theme) => ({
   sideGrid: {
@@ -42,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '5px',
     backgroundColor: '#1489cc',
   },
+
   categoryLink: {
     padding: '3px',
     fontFamily: 'Roboto, sans-serif',
@@ -63,6 +70,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const AutoTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.type === 'dark' ? '#fff' : '#303030',
+    color: theme.palette.type === 'dark' ? '#303030' : '#fff',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+    fontWeight: 'bold',
+  },
+}))(Tooltip)
 export default function Sidebar(theme) {
   const classes = useStyles()
   let myColor = {
@@ -176,7 +192,7 @@ export default function Sidebar(theme) {
             <List dense>
               <ListItem>
                 <ListItemAvatar>
-                  <Avatar aria-label="hyblog" src={icon}>
+                  <Avatar aria-label="hyblog" alt="hyblog" src={icon}>
                     H
                   </Avatar>
                 </ListItemAvatar>
@@ -191,12 +207,14 @@ export default function Sidebar(theme) {
                   <IconButton
                     href="https://facebook.com/Hyreads"
                     color="inherit"
+                    alt="Hyblog facebook account"
                   >
                     <FaFacebookF />
                   </IconButton>
                   <IconButton
                     href="https://twitter.com/hyreads"
                     color="inherit"
+                    alt="Hyblog twitter account"
                   >
                     <FaTwitter />
                   </IconButton>
@@ -205,13 +223,24 @@ export default function Sidebar(theme) {
             </List>
           </div>
           <div className={classes.pages}>
-            <Link to={`/qa`} color="primary" className={classes.categoryLink}>
-              <Chip
-                className={classes.categoryChip}
-                color="primary"
-                label="Q & A"
-                variant="outlined"
-              />
+            <Link
+              to={`/qa`}
+              color="primary"
+              className={classes.categoryLink}
+              alt="question and answer"
+            >
+              <AutoTooltip
+                title="Do you have any question you would like answered in detail as an article? Let's Engage through the Grand Philosopher Question & Answer"
+                arrow
+                placement="top"
+              >
+                <Chip
+                  className={classes.categoryChip}
+                  color="primary"
+                  label="Q & A"
+                  variant="outlined"
+                />
+              </AutoTooltip>
             </Link>
             {Array.from(new Set(categoryList)).map((category) => (
               <Link
@@ -219,32 +248,53 @@ export default function Sidebar(theme) {
                 key={category}
                 color="primary"
                 className={classes.categoryLink}
+                alt={category}
               >
-                <Chip
-                  color="primary"
-                  label={category}
-                  className={classes.categoryChip}
-                  variant="outlined"
-                />
+                <AutoTooltip
+                  title={`${category} Category`}
+                  arrow
+                  placement="top"
+                >
+                  <Chip
+                    color="primary"
+                    label={category}
+                    className={classes.categoryChip}
+                    variant="outlined"
+                  />
+                </AutoTooltip>
               </Link>
             ))}
-            <Link to={`#`} color="primary" className={classes.categoryLink}>
-              <Chip
-                className={classes.categoryChip}
-                onClick={notifyNews}
-                color="primary"
-                label="News"
-                variant="outlined"
-              />
+            <Link
+              to={`#`}
+              color="primary"
+              className={classes.categoryLink}
+              alt="hyblog news"
+            >
+              <AutoTooltip title="The Hyblog Newsflash" arrow placement="top">
+                <Chip
+                  className={classes.categoryChip}
+                  onClick={notifyNews}
+                  color="primary"
+                  label="News"
+                  variant="outlined"
+                />
+              </AutoTooltip>
             </Link>
-            <Link to={`#`} color="primary" className={classes.categoryLink}>
-              <Chip
-                className={classes.categoryChip}
-                onClick={notifyPoetry}
-                color="primary"
-                label="Photo Poetry"
-                variant="outlined"
-              />
+            <Link
+              to={`#`}
+              color="primary"
+              className={classes.categoryLink}
+              alt="photo poetry"
+            >
+              <AutoTooltip title="Poetry in Picture" arrow placement="top">
+                <Chip
+                  className={classes.categoryChip}
+                  onClick={notifyPoetry}
+                  color="primary"
+                  label="Photo Poetry"
+                  variant="outlined"
+                />
+              </AutoTooltip>
             </Link>
           </div>
         </Card>
@@ -257,7 +307,7 @@ export default function Sidebar(theme) {
             Most Popular
           </Typography>
 
-          {postEdges.slice(0, 5).map((post, index) => {
+          {postEdges.slice(0, 7).map((post, index) => {
             return <PopularArticle blog={post} key={index} />
           })}
         </Card>
@@ -271,7 +321,7 @@ export default function Sidebar(theme) {
           </Typography>
 
           {Covid.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
+            return <LatestInCategory blog={post} key={index} />
           })}
           <Link to={`/covid`} className={classes.moreArticles}>
             <Typography color="primary">more on the pandemic...</Typography>
@@ -287,7 +337,7 @@ export default function Sidebar(theme) {
           </Typography>
 
           {Society.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
+            return <LatestInCategory blog={post} key={index} />
           })}
           <Link to={`/society`} className={classes.moreArticles}>
             <Typography color="primary">more on society...</Typography>
@@ -303,7 +353,7 @@ export default function Sidebar(theme) {
           </Typography>
 
           {Youth.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
+            return <LatestInCategory blog={post} key={index} />
           })}
           <Link to={`/youth`} className={classes.moreArticles}>
             <Typography color="primary">more on youth...</Typography>
@@ -319,7 +369,7 @@ export default function Sidebar(theme) {
           </Typography>
 
           {Politics.slice(0, 2).map((post, index) => {
-            return <PopularArticle blog={post} key={index} />
+            return <LatestInCategory blog={post} key={index} />
           })}
           <Link to={`/politics`} className={classes.moreArticles}>
             <Typography color="primary">more on politics...</Typography>

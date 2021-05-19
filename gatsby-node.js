@@ -127,7 +127,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   Array.from(new Set(authorList)).forEach((author) => {
     createPage({
-      path: `/${_.kebabCase(author)}`,
+      path: `/writers/${_.kebabCase(author)}`,
       component: authorPage,
       context: {
         author,

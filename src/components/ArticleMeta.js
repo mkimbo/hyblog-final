@@ -35,7 +35,7 @@ function ArticleMeta({ pageViews, postNode }) {
       <Typography gutterBottom>
         by{' '}
         <Link
-          to={`/${postNode.author.replace(/\W+/g, '-').toLowerCase()}`}
+          to={`/writers/${postNode.author.replace(/\W+/g, '-').toLowerCase()}`}
           className={classes.author}
         >
           {postNode.author}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import { Link as InternalLink } from 'gatsby'
 import { notify } from 'react-notify-toast'
 import {
@@ -9,6 +9,7 @@ import {
   Link,
   Typography,
   Container,
+  Tooltip,
 } from '@material-ui/core'
 
 import '../styles/footer.css'
@@ -31,7 +32,39 @@ function Copyright() {
     </React.Fragment>
   )
 }
-
+const AntSwitch = withStyles((theme) => ({
+  root: {
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: 'flex',
+  },
+  switchBase: {
+    padding: 2,
+    color: theme.palette.grey[500],
+    '&$checked': {
+      transform: 'translateX(12px)',
+      color: theme.palette.common.white,
+      '& + $track': {
+        opacity: 1,
+        backgroundColor: theme.palette.primary.main,
+        borderColor: theme.palette.primary.main,
+      },
+    },
+  },
+  thumb: {
+    width: 12,
+    height: 12,
+    boxShadow: 'none',
+  },
+  track: {
+    border: `1px solid ${theme.palette.grey[500]}`,
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor: theme.palette.common.white,
+  },
+  checked: {},
+}))(Switch)
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -109,7 +142,7 @@ export default function Footer({ darkState, handleThemeChange }) {
                 marked="left"
                 className={classes.roboFonts}
               >
-                Hyblog is all about
+                Hyblog
               </Typography>
               <Typography variant="subtitle1" color="secondary">
                 Creating impactful conversations on real issues by Educating
@@ -322,7 +355,28 @@ export default function Footer({ darkState, handleThemeChange }) {
               >
                 Read Mode
               </Typography>
-              <Switch checked={darkState} onChange={handleThemeChange} />
+              <Typography component="div">
+                <Grid
+                  component="label"
+                  container
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Grid item>Off</Grid>
+                  <Grid item>
+                    <Tooltip
+                      title={darkState ? 'Energy Saver🙂' : 'Save Energy🙂'}
+                    >
+                      <AntSwitch
+                        checked={darkState}
+                        onChange={handleThemeChange}
+                        name="read mode"
+                      />
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>On</Grid>
+                </Grid>
+              </Typography>
             </Grid>
           </Grid>
         </Container>

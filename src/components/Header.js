@@ -11,6 +11,7 @@ import {
   MenuItem,
   Avatar,
   Toolbar,
+  Tooltip,
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import { AuthContext } from '../context/auth/auth'
@@ -80,7 +81,7 @@ export default function Header(props) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(false)
 
-  const { title, open, setOpen } = props
+  const { title } = props
   let myColor = {
     background: '#ffffff',
     text: '#1489cc',
@@ -152,7 +153,7 @@ export default function Header(props) {
               {title}
             </Typography>
           </Link>
-          <IconButton>
+          <IconButton alt="search icon">
             <SearchIcon color="secondary" />
           </IconButton>
 
@@ -183,15 +184,17 @@ export default function Header(props) {
               </Menu>
             </>
           ) : (
-            <Button
-              onClick={handleOpenLoginModal}
-              variant="outlined"
-              className={classes.login}
-              color="secondary"
-              size="small"
-            >
-              Login
-            </Button>
+            <Tooltip title="Login with your Google Account">
+              <Button
+                onClick={handleOpenLoginModal}
+                variant="outlined"
+                className={classes.login}
+                color="secondary"
+                size="small"
+              >
+                Login
+              </Button>
+            </Tooltip>
           )}
         </Toolbar>
         <Toolbar

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import CardContent from '@material-ui/core/CardContent'
+import { notify } from 'react-notify-toast'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -36,6 +37,15 @@ const SubscriptionForm = () => {
   const [status, setStatus] = useState(null)
   const [email, setEmail] = useState('')
 
+  function remindSubscriber() {
+    setTimeout(() => {
+      notify.show(
+        'Hello, please confirm the subscription sent to your mailbox, Thank You🙂.',
+        'success'
+      )
+    }, 45000)
+  }
+
   //FORM_URL to ConvertKit
   const FORM_URL = `https://app.convertkit.com/forms/2173054/subscriptions`
 
@@ -54,6 +64,8 @@ const SubscriptionForm = () => {
       const json = await response.json()
       if (json.status === 'success') {
         setStatus('SUCCESS')
+        remindSubscriber()
+
         return
       }
     } catch (err) {
@@ -76,7 +88,8 @@ const SubscriptionForm = () => {
     >
       {status === 'SUCCESS' && (
         <Alert severity="success">
-          Email sent! — confirm the subscription in your inbox
+          Success! — Please confirm the subscription in your mailbox in about 30
+          seconds.
         </Alert>
       )}
       {status === 'ERROR' && (

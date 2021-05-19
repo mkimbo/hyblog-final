@@ -25,7 +25,7 @@ export default function Index({ data }) {
   )
 
   const classes = useStyles()
-  const pageTitle = 'The Latest'
+  const pageTitle = 'Hyblog Latest'
   const Viewedposts = postEdges.map((post) => {
     const slugId = `/${post.node.slug}`
     const currentPageViews = Allviews.find(
@@ -46,8 +46,8 @@ export default function Index({ data }) {
       />
       <Container>
         <Notifications />
-        <Carousel interval={7000}>
-          {Trending.slice(0, 4).map((post, i) => (
+        <Carousel indicators={false} interval={9000}>
+          {Trending.slice(3, 7).map((post, i) => (
             <MainFeaturedPost key={i} post={post} />
           ))}
         </Carousel>

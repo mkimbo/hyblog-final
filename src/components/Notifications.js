@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/messaging'
 import 'firebase/firestore'
 import Button from '@material-ui/core/Button'
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress, Tooltip } from '@material-ui/core'
 import firebaseConfig from '../firebase/firebaseConfig'
 import { notify } from 'react-notify-toast'
 import { makeStyles } from '@material-ui/core/styles'
-import { Fragment } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -101,14 +100,17 @@ function Notifications() {
               setSubscribed(true)
               localStorage.setItem('pushToken', currentToken)
 
-              notify.show('Hyblog notifications enabled.', 'success')
+              notify.show('Hyblog notifications enabled🛎.', 'success')
               setWorking(false)
             })
             .catch((err) => console.log(err))
         })
         .catch((err) => console.log(`Error getting token`, err))
     } else if (!pushSupported()) {
-      notify.show('Your browser doesnt support Notifications', 'error')
+      notify.show(
+        'Your browser doesnt support Notifications, Try Chrome or Opera',
+        'error'
+      )
     } else {
       notify.show('Allow notifications to proceed', 'error')
     }
@@ -142,6 +144,9 @@ function Notifications() {
   }, [])
 
   const btnText = subscribed ? 'Subscribed' : 'Subscribe'
+  const tooltipText = subscribed
+    ? 'Disable Hyblog Notifications'
+    : 'Enable Hyblog Notifications'
   const callback = subscribed ? unsubscribe : createSubscription
   return (
     <Fragment>
@@ -152,16 +157,18 @@ function Notifications() {
           className={classes.submit}
         />
       ) : (
-        <Button
-          onClick={callback}
-          size="small"
-          variant="outlined"
-          color="secondary"
-          className={classes.submit}
-          disabled={working}
-        >
-          {btnText}
-        </Button>
+        <Tooltip title={tooltipText}>
+          <Button
+            onClick={callback}
+            size="small"
+            variant="outlined"
+            color="secondary"
+            className={classes.submit}
+            disabled={working}
+          >
+            {btnText}
+          </Button>
+        </Tooltip>
       )}
     </Fragment>
   )
