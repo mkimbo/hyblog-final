@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import { Typography, Grid, Paper, Button } from '@material-ui/core'
+import { Typography, Grid, Paper, Button, Hidden } from '@material-ui/core'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { motion } from 'framer-motion'
@@ -9,15 +9,11 @@ import { motion } from 'framer-motion'
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',
-    height: '450px',
+    height: '400px',
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
-      minHeight: '63vh',
-    },
-    boxShadow:
-      '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
+    width: '100%',
   },
   overlay: {
     position: 'absolute',
@@ -88,14 +84,16 @@ export default function MainFeaturedPost(props) {
       />
       <div className={classes.overlay}>
         <Grid container>
-          <Grid item md={7}>
+          <Grid item md={11}>
             <div className={classes.mainFeaturedPostContent}>
               <motion.div
                 initial={{
-                  y: -200,
+                  y: -10,
+                  opacity: 0,
                 }}
                 animate={{
                   y: 0,
+                  opacity: 1,
                 }}
                 transition={{
                   type: 'spring',
@@ -103,7 +101,7 @@ export default function MainFeaturedPost(props) {
                 }}
               >
                 <Typography
-                  variant="h3"
+                  variant="h4"
                   color="inherit"
                   gutterBottom
                   className={classes.title}
@@ -126,9 +124,11 @@ export default function MainFeaturedPost(props) {
                   duration: 0.7,
                 }}
               >
-                <Typography variant="h6" color="inherit" paragraph>
-                  {post.node.summary}
-                </Typography>
+                <Hidden mdDown>
+                  <Typography variant="h6" color="inherit" paragraph>
+                    {post.node.summary}
+                  </Typography>
+                </Hidden>
               </motion.div>
               <motion.div
                 initial={{
@@ -143,7 +143,7 @@ export default function MainFeaturedPost(props) {
                 }}
               >
                 <Link to={post.node.slug} className={classes.continueReading}>
-                  <Button variant="contained" color="primary">
+                  <Button variant="outlined" color="primary">
                     Read More
                   </Button>
                 </Link>

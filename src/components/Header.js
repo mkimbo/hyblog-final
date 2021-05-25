@@ -149,7 +149,12 @@ export default function Header(props) {
         <Toolbar className={classes.toolbar}>
           <Notifications />
           <Link to={'/'} className={classes.toolbarTitle}>
-            <Typography component="h2" variant="h5" color="secondary">
+            <Typography
+              style={{ fontFamily: 'Roboto, sans-serif' }}
+              component="h2"
+              variant="h5"
+              color="secondary"
+            >
               {title}
             </Typography>
           </Link>

@@ -64,9 +64,8 @@ export const pageQuery = graphql`
             localFile {
               name
               childImageSharp {
-                fluid(webpQuality: 10) {
-                  tracedSVG
-                  srcWebp
+                fluid {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
@@ -92,9 +91,8 @@ export const pageQuery = graphql`
             localFile {
               name
               childImageSharp {
-                fluid(webpQuality: 10) {
-                  tracedSVG
-                  srcWebp
+                fluid {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

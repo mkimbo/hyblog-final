@@ -29,7 +29,7 @@ export default function PopularArticle({ blog }) {
   const classes = useStyles()
 
   return (
-    <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
+    <div>
       <Card className={classes.root}>
         <div className={classes.details}>
           <Link to={`/${blog.node.slug}`} style={{ textDecoration: 'none' }}>

@@ -61,9 +61,8 @@ export default (props) => (
                 localFile {
                   name
                   childImageSharp {
-                    fluid(webpQuality: 10) {
-                      tracedSVG
-                      srcWebp
+                    fluid {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
@@ -88,7 +87,7 @@ export default (props) => (
                   name
                   childImageSharp {
                     fluid {
-                      srcWebp
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }

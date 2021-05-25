@@ -106,9 +106,8 @@ export default function Sidebar(theme) {
               localFile {
                 name
                 childImageSharp {
-                  fluid(webpQuality: 10) {
-                    tracedSVG
-                    srcWebp
+                  fluid {
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }
@@ -129,7 +128,7 @@ export default function Sidebar(theme) {
                 name
                 childImageSharp {
                   fluid {
-                    srcWebp
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }
@@ -333,7 +332,7 @@ export default function Sidebar(theme) {
             className={classes.category}
             variant="h6"
           >
-            Society & Lifestyle
+            Society Section
           </Typography>
 
           {Society.slice(0, 2).map((post, index) => {

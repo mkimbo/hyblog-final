@@ -13,8 +13,7 @@ admin.initializeApp()
 const WEBHOOK_URL =
   'https://api.netlify.com/build_hooks/60795e33a46e67b672c3d83f'
 
-{
-  /**exports.useWildcard = functions.firestore
+exports.useWildcard = functions.firestore
   .document('fl_content/{fl_id}')
   .onCreate((change, context) => {
     if (WEBHOOK_URL) {
@@ -25,7 +24,6 @@ const WEBHOOK_URL =
       })
     }
   })
-
 
 exports.sendNewPostNotification = functions.firestore
   .document('fl_content/{fl_id}')
@@ -88,5 +86,3 @@ exports.sendNewPostNotification = functions.firestore
 
     return Promise.all(tokensToRemove)
   })
- */
-}

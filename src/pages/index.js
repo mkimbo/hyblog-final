@@ -1,21 +1,26 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Carousel from 'react-material-ui-carousel'
-import { makeStyles } from '@material-ui/core/styles'
-import TopLayout from '../components/TopLayout'
-import { Container, Grid } from '@material-ui/core'
 import Notifications from 'react-notify-toast'
-import MainFeaturedPost from '../components/MainFeaturedPost'
+import { Container, Grid, Hidden } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
 import SEO from '../components/SEO/SEO'
-import Main from '../components/Main'
-import Sidebar from '../components/SideBar'
+import LatestFeed from '../components/LatestFeed'
+import Hero from '../components/Hero/Hero'
+import TopLayout from '../components/TopLayout'
+import Feed2 from '../components/Feed2'
+import Feed3 from '../components/Feed3'
+import HomeSideBar from '../components/HomeSideBar'
 
 const useStyles = makeStyles((theme) => ({
-  mainGrid: {
-    marginTop: theme.spacing(3),
+  sideGrid: {
+    [theme.breakpoints.down('sm')]: {
+      order: 3,
+    },
   },
 }))
 export default function Index({ data }) {
+  const classes = useStyles()
   const posts = data.allFlamelinkBlogPostContent.edges
   const questions = data.allFlamelinkQuestionAnswerContent.edges
   const Allviews = data.allPageViews.edges
@@ -24,8 +29,6 @@ export default function Index({ data }) {
     (a, b) => new Date(b.node.date) - new Date(a.node.date)
   )
 
-  const classes = useStyles()
-  const pageTitle = 'Hyblog Latest'
   const Viewedposts = postEdges.map((post) => {
     const slugId = `/${post.node.slug}`
     const currentPageViews = Allviews.find(
@@ -37,7 +40,7 @@ export default function Index({ data }) {
     }
   })
 
-  const Trending = Viewedposts.sort((a, b) => b.pageViews - a.pageViews)
+  const mostViewed = Viewedposts.sort((a, b) => b.pageViews - a.pageViews)
   return (
     <TopLayout>
       <SEO
@@ -46,14 +49,19 @@ export default function Index({ data }) {
       />
       <Container>
         <Notifications />
-        <Carousel indicators={false} interval={9000}>
-          {Trending.slice(3, 7).map((post, i) => (
-            <MainFeaturedPost key={i} post={post} />
-          ))}
-        </Carousel>
-        <Grid container spacing={5} className={classes.mainGrid}>
-          <Main postEdges={postEdges} title={pageTitle} />
-          <Sidebar />
+        <Hero postEdges={mostViewed} />
+        <LatestFeed postEdges={postEdges} />
+        <Grid container>
+          <Grid item xs={12} md={7} className={classes.sideGrid}>
+            <Feed2 postEdges={mostViewed} />
+            <Feed3 postEdges={mostViewed} />
+          </Grid>
+          <Hidden smDown>
+            <Grid item xs={12} md={1}></Grid>
+          </Hidden>
+          <Grid item xs={12} md={4}>
+            <HomeSideBar postEdges={mostViewed} />
+          </Grid>
         </Grid>
       </Container>
     </TopLayout>
@@ -80,9 +88,8 @@ export const pageQuery = graphql`
             localFile {
               name
               childImageSharp {
-                fluid(webpQuality: 10) {
-                  tracedSVG
-                  srcWebp
+                fluid {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
@@ -101,12 +108,13 @@ export const pageQuery = graphql`
           slug
           author
           summary
+          tags
           coverImage {
             localFile {
               name
               childImageSharp {
                 fluid {
-                  srcWebp
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

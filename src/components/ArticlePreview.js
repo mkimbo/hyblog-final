@@ -1,23 +1,21 @@
 import React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import Hidden from '@material-ui/core/Hidden'
+import { Typography, Card, Hidden } from '@material-ui/core'
 import { formatDistanceStrict } from 'date-fns'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: '190px',
+    height: '160px',
     margin: '10px 0',
     boxShadow: 'none',
     alignItems: 'center',
     borderBottom: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.down('sm')]: {
       margin: '3px 0',
-      height: '120px',
+      height: '105px',
     },
     '&:hover': {
       boxShadow:
@@ -26,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   imageButton: {
     minWidth: '230px',
-    height: '190px',
+    height: '160px',
     margin: '0px',
     [theme.breakpoints.down('sm')]: {
       minWidth: '120px',
-      height: '120px',
+      height: '105px',
     },
   },
   continueReading: {
@@ -69,39 +67,17 @@ const useStyles = makeStyles((theme) => ({
 export default function ArticlePreview({ blog }) {
   const classes = useStyles()
   const startDate = new Date()
-  const cover = blog.node.coverImage[0].localFile.name
   const endDate = new Date(blog.node.date)
   const distanceInWords = formatDistanceStrict(endDate, startDate, {
     addSuffix: true,
   })
-  const data = useStaticQuery(graphql`
-    query {
-      allFile {
-        edges {
-          node {
-            absolutePath
-            childImageSharp {
-              fluid(maxWidth: 800, maxHeight: 500) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const image = data.allFile.edges.find((n) =>
-    n.node.absolutePath.includes(cover)
-  )
-  const mainImage = image.node.childImageSharp
-    ? image.node.childImageSharp.fluid
-    : null
+
   return (
     <div data-sal="slide-up" data-sal-easing="ease" data-sal-duration="700">
       <Card className={classes.root}>
         <div className={classes.imageButton}>
           <Img
-            fluid={mainImage}
+            fluid={blog.node.coverImage[0].localFile.childImageSharp.fluid}
             style={{ height: '100%', width: '100%' }}
             imgStyle={{ objectFit: 'fill' }}
           />
@@ -142,7 +118,6 @@ export default function ArticlePreview({ blog }) {
             >
               {blog.node.summary}
             </Typography>
-
             <Link
               className={classes.continueReading}
               to={`/${blog.node.slug}`}

@@ -1,31 +1,52 @@
 import React, { useState } from 'react'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
+import {
+  Typography,
+  Grid,
+  Card,
+  Button,
+  TextField,
+  ListItem,
+  List,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
-import CardContent from '@material-ui/core/CardContent'
 import { notify } from 'react-notify-toast'
+import EmailIcon from '@material-ui/icons/Email'
+import SendIcon from '@material-ui/icons/Send'
+import icon from '../images/Hycon.png'
 
 const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
   },
   gridForm: {
     width: '100%',
     display: 'grid',
     gridGap: '5px',
     gridTemplateColumns: '3fr 1fr',
+    marginTop: '10px',
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    width: '100%',
+    height: '100%',
     fontFamily: 'Roboto, sans-serif',
   },
+  enter: {
+    width: '100%',
+    height: '100%',
+    color: '#fff',
+  },
   newsletter: {
-    padding: theme.spacing(2),
+    padding: '10px',
     textAlign: 'center',
+    backgroundColor: '#1489cc',
   },
   subscribe: {
     display: 'grid',
@@ -100,11 +121,12 @@ const SubscriptionForm = () => {
       <div className={classes.gridForm}>
         <TextField
           variant="outlined"
-          margin="normal"
           onChange={handleInputChange}
           value={email}
           required
           fullWidth
+          className={classes.enter}
+          color="secondary"
           id="email"
           label="Email Address"
           name="email_address"
@@ -117,7 +139,7 @@ const SubscriptionForm = () => {
           className={classes.submit}
           size="large"
         >
-          Join
+          <SendIcon color="secondary" style={{ verticalAlign: 'middle' }} />
         </Button>
       </div>
     </form>
@@ -125,11 +147,36 @@ const SubscriptionForm = () => {
 
   return (
     <Card elevation={1} className={classes.newsletter}>
-      <Typography variant="h6">
-        <strong>Stay in the know</strong> with our weekly newsletter, the best
-        of Hyblog, delivered to your mail box every Tuesday.
-      </Typography>
-      <CardContent>{newsletter}</CardContent>
+      <div>
+        <List dense>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar
+                className={classes.large}
+                aria-label="hyblog"
+                alt="hyblog"
+                src={icon}
+              >
+                H
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={
+                <Typography className={classes.roboFonts} variant="h5">
+                  Hyblog Email NewsLetter
+                </Typography>
+              }
+            />
+          </ListItem>
+        </List>
+      </div>
+      <Grid align="center">
+        <EmailIcon style={{ fontSize: '60px' }} color="secondary" />
+        <Typography variant="subtitle1" color="secondary">
+          Keep Updated. Subscribe to Our Weekly Newsletter.
+        </Typography>
+      </Grid>
+      <Grid>{newsletter}</Grid>
     </Card>
   )
 }

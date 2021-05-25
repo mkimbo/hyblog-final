@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import Img from 'gatsby-image'
 import { makeStyles } from '@material-ui/core/styles'
@@ -38,35 +38,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SimilarArticle({ blog }) {
-  const cover = blog.node.coverImage[0].localFile.name
   const classes = useStyles()
-  const data = useStaticQuery(graphql`
-    query {
-      allFile {
-        edges {
-          node {
-            absolutePath
-            childImageSharp {
-              fluid(maxWidth: 800, maxHeight: 500) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const image = data.allFile.edges.find((n) =>
-    n.node.absolutePath.includes(cover)
-  )
-  const mainImage = image.node.childImageSharp
-    ? image.node.childImageSharp.fluid
-    : null
+
   return (
     <Card className={classes.root}>
       <div className={classes.imageButton}>
         <Img
-          fluid={mainImage}
+          fluid={blog.node.coverImage[0].localFile.childImageSharp.fluid}
           style={{ height: '100%', width: '100%' }}
           imgStyle={{ objectFit: 'fill' }}
         />

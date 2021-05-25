@@ -3,8 +3,7 @@ import { graphql } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 
 import TopLayout from '../components/TopLayout'
-import { Container, Grid } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography'
+import { Container, Grid, Typography, Hidden } from '@material-ui/core'
 import MainArticleImage from '../components/MainArticleImage'
 import SEO from '../components/SEO/SEO'
 import MainArticleContent from '../components/MainArticleContent'
@@ -43,7 +42,9 @@ export default function QATemplate({ data }) {
             title={pageTitle}
             pageViews={pageViews}
           />
-          <Sidebar />
+          <Hidden smDown>
+            <Sidebar />
+          </Hidden>
         </Grid>
       </Container>
     </TopLayout>
@@ -65,8 +66,8 @@ export const pageQuery = graphql`
         localFile {
           name
           childImageSharp {
-            fluid {
-              srcWebp
+            fluid(maxHeight: 450, quality: 90) {
+              ...GatsbyImageSharpFluid_tracedSVG
             }
           }
         }
