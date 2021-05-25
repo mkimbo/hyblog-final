@@ -99,47 +99,7 @@ function Hero({ postEdges }) {
     <Paper elevation={0} className={classes.hero}>
       <Grid className={classes.intro}>
         <Typography variant="h1" className={classes.title}>
-          <motion.span
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.7,
-            }}
-          >
-            Educate.
-          </motion.span>
-          <motion.span
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.7,
-              duration: 0.7,
-            }}
-          >
-            Enlighten.
-          </motion.span>
-          <motion.span
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 1.2,
-              duration: 0.6,
-            }}
-          >
-            Empower.
-          </motion.span>
+          Educate. Enlighten. Empower.
         </Typography>
         <Typography variant="subtitle1" paragraph>
           Impactful Conversations by Society for Society.
@@ -149,28 +109,14 @@ function Hero({ postEdges }) {
       <Grid className={classes.intro2}>
         <Grid className={classes.featured}>
           <div className={classes.mainFeaturedPostContent}>
-            <motion.div
-              initial={{
-                y: 10,
-                opacity: 0,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.7,
-              }}
+            <Typography
+              variant="h6"
+              color="secondary"
+              gutterBottom
+              className={classes.weekly}
             >
-              <Typography
-                variant="h6"
-                color="secondary"
-                gutterBottom
-                className={classes.weekly}
-              >
-                Featured Story
-              </Typography>
-            </motion.div>
+              Featured Story
+            </Typography>
             <div className={classes.tags}>
               {post.tags.map((tag, index) => {
                 return (
@@ -186,48 +132,17 @@ function Hero({ postEdges }) {
                 )
               })}
             </div>
-            <motion.div
-              initial={{
-                y: 10,
-                opacity: 0,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.7,
-              }}
+            <Typography
+              variant="h5"
+              color="inherit"
+              gutterBottom
+              className={classes.postTitle}
             >
-              <Typography
-                variant="h5"
-                color="inherit"
-                gutterBottom
-                className={classes.postTitle}
-              >
-                {title}
-              </Typography>
-            </motion.div>
-
-            <motion.div
-              initial={{
-                x: -10,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              transition={{
-                delay: 0.2,
-                duration: 0.7,
-              }}
-            >
-              <Typography variant="subtitle1" color="inherit" paragraph>
-                {post.summary}
-              </Typography>
-            </motion.div>
-
+              {title}
+            </Typography>
+            <Typography variant="subtitle1" color="inherit" paragraph>
+              {post.summary}
+            </Typography>
             <motion.div
               initial={{
                 opacity: 0,
@@ -236,7 +151,7 @@ function Hero({ postEdges }) {
                 opacity: 1,
               }}
               transition={{
-                delay: 0.5,
+                delay: 0.3,
                 duration: 0.8,
               }}
             >
