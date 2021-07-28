@@ -61,7 +61,6 @@ export const pageQuery = graphql`
                 fluid {
                   ...GatsbyImageSharpFluid
                 }
-                }
               }
             }
           }
